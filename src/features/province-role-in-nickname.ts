@@ -23,6 +23,6 @@ export class ProvinceRoleInNickname extends MemberUpdateFeatureBase {
     await newMember.setNickname(newNickname);
 
     // Notify member
-    await newMember.send(`Wah, kamu mendapatkan role ${newRole.name}, karenanya nickname kamu sekarang menjadi ${newNickname}! 🥳`);
+    await newMember.send(`Wah, ternyata kamu dari provinsi ${newRole.name} ya, kalo gitu nickname kamu sekarang menjadi ${newNickname}! 🥳`);
   }
 }
