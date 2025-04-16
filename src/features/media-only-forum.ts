@@ -34,5 +34,8 @@ export class MediaOnlyForum extends ThreadFeatureBase {
 
     // Hapus postingan
     await channel.delete();
+
+    // Kirim reminder
+    await post.author.send(`Halo Adventurer 😊, Untuk membuat postingan di channel ${channel.parent.name} kamu perlu mnyertakan foto atau video ya. Maaf, postingan kamu sebelumnya terpaksa aku hapus ya 😢.`)
   }
 }
