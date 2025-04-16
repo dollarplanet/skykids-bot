@@ -36,6 +36,6 @@ export class MediaOnlyForum extends ThreadFeatureBase {
     await channel.delete();
 
     // Kirim reminder
-    await post.author.send(`Halo ${post.author.displayName} 😊, Untuk membuat postingan di channel ${channel.parent.name}, kamu perlu mnyertakan foto atau video. Maaf, postingan kamu sebelumnya terpaksa aku hapus ya 😢.`)
+    await post.author.send(`Halo ${post.author.displayName} 😊, Untuk membuat postingan di channel ${channel.parent.name}, kamu perlu menyertakan foto atau video. Maaf, postingan kamu sebelumnya terpaksa aku hapus ya 😢.`)
   }
 }
