@@ -5,7 +5,7 @@ export class MemberJoinListener extends ListenerBase {
   public async registerFeatures() {
     try {
       this.client.on(Events.GuildMemberAdd, async (member) => {
-        await member.send("Selamat datang adventurer 👋, mari berpetualang bersama 🥳");
+        await member.send(`Halo ${member.displayName} 👋, selamat datang di server Skykids, mari berpetualang bersama 🥳`);
       });
     } catch {}
   }
