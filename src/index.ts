@@ -1,8 +1,12 @@
 import { Client, GatewayIntentBits } from "discord.js";
 import dotenv from "dotenv";
-import { ThreadListener } from "./listeners/thread-listener";
+import { ThreadCreateListener } from "./listeners/thread-create-listener";
 import { MediaOnlyForum } from "./features/media-only-forum";
-import { MemberJoinListener } from "./listeners/member-join-listener";
+import { MemberAddListener } from "./listeners/member-add-listener";
+import { DirectWelcomeMessage } from "./features/direct-welcome-message";
+import { MemberUpdateListener } from "./listeners/member-update-listener";
+import { ProvinceRoleInNickname } from "./features/province-role-in-nickname";
+import { ProvinceRoleNicknameRemove } from "./features/province-role-nickname-remove";
 
 // Load environment variables
 dotenv.config();
@@ -17,14 +21,23 @@ const client = new Client({intents: [
 ]});
 
 // Register thread listeners
-const threadListener = new ThreadListener(client);
+const threadListener = new ThreadCreateListener(client);
 threadListener.registerFeatures([
   new MediaOnlyForum()
 ]);
 
-// Register member join listener
-const memberJoinListener = new MemberJoinListener(client);
-memberJoinListener.registerFeatures();
+// Register member add listener
+const memberAddListener = new MemberAddListener(client);
+memberAddListener.registerFeatures([
+  new DirectWelcomeMessage()
+]);
+
+// Register member update listener
+const memberUpdateListener = new MemberUpdateListener(client);
+memberUpdateListener.registerFeatures([
+  new ProvinceRoleInNickname(),
+  new ProvinceRoleNicknameRemove(),
+]);
 
 // Login
 client.login(process.env.DISCORD_TOKEN)

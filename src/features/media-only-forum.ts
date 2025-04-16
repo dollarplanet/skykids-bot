@@ -5,7 +5,7 @@ export class MediaOnlyForum extends ThreadFeatureBase {
   // Register channel here
   private channelIds: string[] = process.env.MEDIA_ONLY_CHANNELS!.split(" ");
 
-  public async action(channel: AnyThreadChannel) {
+  public async action(channel: AnyThreadChannel, _: boolean) {
     // Cek channel harus type forum
     if (channel.parent?.type !== ChannelType.GuildForum) return;
 
@@ -36,6 +36,6 @@ export class MediaOnlyForum extends ThreadFeatureBase {
     await channel.delete();
 
     // Kirim reminder
-    await post.author.send(`Halo ${post.author.displayName} 😊, Untuk membuat postingan di channel ${channel.parent.name}, kamu perlu menyertakan foto atau video. Maaf, postingan kamu sebelumnya terpaksa aku hapus ya 😢.`)
+    await post.author.send(`Halo ${post.author.globalName} 😊, Untuk membuat postingan di channel ${channel.parent.name}, kamu perlu menyertakan foto atau video, dan tidak boleh menyertakan jenis file lainnya. Maaf, postingan kamu sebelumnya terpaksa aku hapus ya 😢.`)
   }
 }
