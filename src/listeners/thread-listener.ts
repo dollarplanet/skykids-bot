@@ -1,6 +1,6 @@
 import { Client, Events } from "discord.js";
 import { ListenerBase } from "./listener-base";
-import { FeatureBase, ThreadFeatureBase } from "../features/feature-base";
+import { ThreadFeatureBase } from "../features/feature-base";
 
 export class ThreadListener extends ListenerBase {
   public constructor(client: Client) {

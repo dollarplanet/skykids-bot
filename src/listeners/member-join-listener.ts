@@ -1,5 +1,4 @@
-import { Events, GuildMember } from "discord.js";
-import { FeatureBase } from "../features/feature-base";
+import { Events } from "discord.js";
 import { ListenerBase } from "./listener-base";
 
 export class MemberJoinListener extends ListenerBase {

@@ -1,4 +1,4 @@
-import { Client, Events, GatewayIntentBits } from "discord.js";
+import { Client, GatewayIntentBits } from "discord.js";
 import dotenv from "dotenv";
 import { ThreadListener } from "./listeners/thread-listener";
 import { MediaOnlyForum } from "./features/media-only-forum";
