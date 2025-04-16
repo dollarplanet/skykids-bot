@@ -3,14 +3,7 @@ import { ThreadFeatureBase } from "./feature-base";
 
 export class MediaOnlyForum extends ThreadFeatureBase {
   // Register channel here
-  private channelIds: string[] = [
-    "1361927984193212537", // test-forum
-    "1361376771932557535", // sky-catwalk
-    "1361382262968422521", // game-showoff
-    "1361379367464472681", // video-kocak
-    "1361379866167087135", // video-sad
-    "1361880918524039239", // jedag-jedug
-  ]
+  private channelIds: string[] = process.env.MEDIA_ONLY_CHANNELS!.split(" ");
 
   public async action(channel: AnyThreadChannel) {
     // Cek channel harus type forum
