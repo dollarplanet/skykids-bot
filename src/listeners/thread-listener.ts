@@ -9,9 +9,11 @@ export class ThreadListener extends ListenerBase {
 
   public async registerFeatures(features: ThreadFeatureBase[]): Promise<void> {
     this.client.on(Events.ThreadCreate, async (channel) => {
-      for (const feature of features) {
-        await feature.action(channel)
-      }
+      try {
+        for (const feature of features) {
+          await feature.action(channel)
+        }
+      } catch {}
     })
   }
 }
