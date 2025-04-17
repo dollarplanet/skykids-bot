@@ -9,6 +9,7 @@ import { ProvinceRoleInNickname } from "./features/province-role-in-nickname";
 import { ProvinceRoleNicknameRemove } from "./features/province-role-nickname-remove";
 import { MessageCreateListener } from "./listeners/message-create-listener";
 import { DailyQuestionForward } from "./features/daily-question-forward";
+import { AddRoleOnMemberJoin } from "./features/add-role-on-member-join";
 
 // Load environment variables
 dotenv.config();
@@ -32,6 +33,7 @@ threadListener.registerFeatures([
 const memberAddListener = new MemberAddListener(client);
 memberAddListener.registerFeatures([
   new DirectWelcomeMessage(),
+  new AddRoleOnMemberJoin(),
 ]);
 
 // Register member update listener
