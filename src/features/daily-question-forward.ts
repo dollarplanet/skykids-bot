@@ -1,6 +1,5 @@
 import { OmitPartialGroupDMChannel, Message, MessageCreateOptions } from "discord.js";
 import { MessageCreateFeatureBase } from "./feature-base";
-import { readFileSync } from "fs";
 
 export class DailyQuestionForward extends MessageCreateFeatureBase {
   private dailyQuestionChannelId = "1362320556162158603";
@@ -18,14 +17,9 @@ export class DailyQuestionForward extends MessageCreateFeatureBase {
     const elderChannel = data.guild?.channels.cache.get(this.elderChannelId);
     if (!elderChannel) return;
 
-    // Decoration image
-    const decorImage = readFileSync("./assets/question-decor.jpg")
-
     // Payload
     const payload: MessageCreateOptions = {
-      files: [
-        decorImage
-      ]
+      content: "🤔",
     }
 
     // Kirim pesan ke elder channel
