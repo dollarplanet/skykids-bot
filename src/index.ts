@@ -11,6 +11,8 @@ import { MessageCreateListener } from "./listeners/message-create-listener";
 import { DailyQuestionForward } from "./features/daily-question-forward";
 import { AddRoleOnMemberJoin } from "./features/add-role-on-member-join";
 import { WelcomeBannerForward } from "./features/welcome-banner-forward";
+import { MemberRemoveListener } from "./listeners/member-remove-listener";
+import { GoodbyMessageAndDm } from "./features/goodby-message-and-dm";
 
 // Load environment variables
 dotenv.config();
@@ -49,6 +51,12 @@ const messageCreateListener = new MessageCreateListener(client);
 messageCreateListener.registerFeatures([
   new DailyQuestionForward(),
   new WelcomeBannerForward(),
+]);
+
+// Register remove member listener
+const memberRemoveListener = new MemberRemoveListener(client);
+memberRemoveListener.registerFeatures([
+  new GoodbyMessageAndDm(),
 ]);
 
 // Login
