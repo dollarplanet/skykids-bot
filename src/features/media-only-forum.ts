@@ -1,16 +1,14 @@
 import { AnyThreadChannel, ChannelType } from "discord.js";
 import { ThreadFeatureBase } from "./feature-base";
+import { mediaOnlyChannelList } from "../utils/media-only-channels";
 
 export class MediaOnlyForum extends ThreadFeatureBase {
-  // Register channel here
-  private channelIds: string[] = process.env.MEDIA_ONLY_CHANNELS!.split(" ");
-
   public async action(channel: AnyThreadChannel, _: boolean) {
     // Cek channel harus type forum
     if (channel.parent?.type !== ChannelType.GuildForum) return;
 
     // Channel id harus terdaftar di list
-    if (!this.channelIds.includes(channel.parent?.id)) return;
+    if (!mediaOnlyChannelList.includes(channel.parent?.id)) return;
 
     // Dapetin postingan
     const messages = await channel.messages.fetch();
