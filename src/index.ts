@@ -10,6 +10,7 @@ import { ProvinceRoleNicknameRemove } from "./features/province-role-nickname-re
 import { MessageCreateListener } from "./listeners/message-create-listener";
 import { DailyQuestionForward } from "./features/daily-question-forward";
 import { AddRoleOnMemberJoin } from "./features/add-role-on-member-join";
+import { WelcomeBannerForward } from "./features/welcome-banner-forward";
 
 // Load environment variables
 dotenv.config();
@@ -47,6 +48,7 @@ memberUpdateListener.registerFeatures([
 const messageCreateListener = new MessageCreateListener(client);
 messageCreateListener.registerFeatures([
   new DailyQuestionForward(),
+  new WelcomeBannerForward(),
 ]);
 
 // Login
