@@ -1,4 +1,4 @@
-import { AnyThreadChannel, GuildMember, PartialGuildMember } from "discord.js";
+import { AnyThreadChannel, GuildMember, Message, OmitPartialGroupDMChannel, PartialGuildMember } from "discord.js";
 
 export abstract class FeatureBase {}
 
@@ -12,4 +12,8 @@ export abstract class MemberAddFeatureBase extends FeatureBase {
 
 export abstract class MemberUpdateFeatureBase extends FeatureBase {
   public abstract action(oldMember: GuildMember | PartialGuildMember, newMember: GuildMember): Promise<void>;
+}
+
+export abstract class MessageCreateFeatureBase extends FeatureBase {
+  public abstract action(data: OmitPartialGroupDMChannel<Message<boolean>>): Promise<void>;
 }

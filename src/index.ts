@@ -7,6 +7,8 @@ import { DirectWelcomeMessage } from "./features/direct-welcome-message";
 import { MemberUpdateListener } from "./listeners/member-update-listener";
 import { ProvinceRoleInNickname } from "./features/province-role-in-nickname";
 import { ProvinceRoleNicknameRemove } from "./features/province-role-nickname-remove";
+import { MessageCreateListener } from "./listeners/message-create-listener";
+import { DailyQuestionTranslate } from "./features/daily-question-translate";
 
 // Load environment variables
 dotenv.config();
@@ -23,13 +25,13 @@ const client = new Client({intents: [
 // Register thread listeners
 const threadListener = new ThreadCreateListener(client);
 threadListener.registerFeatures([
-  new MediaOnlyForum()
+  new MediaOnlyForum(),
 ]);
 
 // Register member add listener
 const memberAddListener = new MemberAddListener(client);
 memberAddListener.registerFeatures([
-  new DirectWelcomeMessage()
+  new DirectWelcomeMessage(),
 ]);
 
 // Register member update listener
@@ -37,6 +39,12 @@ const memberUpdateListener = new MemberUpdateListener(client);
 memberUpdateListener.registerFeatures([
   new ProvinceRoleInNickname(),
   new ProvinceRoleNicknameRemove(),
+]);
+
+// Register message create listener
+const messageCreateListener = new MessageCreateListener(client);
+messageCreateListener.registerFeatures([
+  new DailyQuestionTranslate(),
 ]);
 
 // Login
