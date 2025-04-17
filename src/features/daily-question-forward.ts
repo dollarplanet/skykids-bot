@@ -2,9 +2,9 @@ import { OmitPartialGroupDMChannel, Message, MessageCreateOptions } from "discor
 import { MessageCreateFeatureBase } from "./feature-base";
 import { readFileSync } from "fs";
 
-export class DailyQuestionTranslate extends MessageCreateFeatureBase {
+export class DailyQuestionForward extends MessageCreateFeatureBase {
   private dailyQuestionChannelId = "1362320556162158603";
-  private elderChannelId = "1331317627645202482";
+  private elderChannelId = "1360874619661324368";
 
   public async action(data: OmitPartialGroupDMChannel<Message<boolean>>) {
     // Harus dari channel daily question

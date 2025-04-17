@@ -8,7 +8,7 @@ import { MemberUpdateListener } from "./listeners/member-update-listener";
 import { ProvinceRoleInNickname } from "./features/province-role-in-nickname";
 import { ProvinceRoleNicknameRemove } from "./features/province-role-nickname-remove";
 import { MessageCreateListener } from "./listeners/message-create-listener";
-import { DailyQuestionTranslate } from "./features/daily-question-translate";
+import { DailyQuestionForward } from "./features/daily-question-forward";
 
 // Load environment variables
 dotenv.config();
@@ -44,7 +44,7 @@ memberUpdateListener.registerFeatures([
 // Register message create listener
 const messageCreateListener = new MessageCreateListener(client);
 messageCreateListener.registerFeatures([
-  new DailyQuestionTranslate(),
+  new DailyQuestionForward(),
 ]);
 
 // Login
