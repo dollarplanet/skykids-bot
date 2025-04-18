@@ -1,4 +1,4 @@
-import { Client, Events, GatewayIntentBits } from "discord.js";
+import { Client, GatewayIntentBits } from "discord.js";
 import dotenv from "dotenv";
 import { ThreadCreateListener } from "./listeners/thread-create-listener";
 import { MediaOnlyForum } from "./features/media-only-forum";
@@ -13,9 +13,10 @@ import { AddRoleOnMemberJoin } from "./features/add-role-on-member-join";
 import { WelcomeBannerForward } from "./features/welcome-banner-forward";
 import { MemberRemoveListener } from "./listeners/member-remove-listener";
 import { GoodbyMessageAndDm } from "./features/goodby-message-and-dm";
-import { joinVoiceChannel, createAudioPlayer, NoSubscriberBehavior, createAudioResource, StreamType } from "@discordjs/voice";
-import { createReadStream } from "fs";
-import { join } from "path";
+import { ClientReadyListener } from "./listeners/client-ready-listener";
+import { JoinAuroraConcert } from "./features/join-aurora-concert";
+import { VoiceStateUpdateListener } from "./listeners/voice-state-update-listener";
+import { PlayAuroraPlaylist } from "./features/play-aurora-playlist";
 
 // Load environment variables
 dotenv.config();
@@ -31,6 +32,12 @@ const client = new Client({
     GatewayIntentBits.GuildVoiceStates,
   ]
 });
+
+// Register client ready listener
+const clientReadyListener = new ClientReadyListener(client);
+clientReadyListener.registerFeatures([
+  new JoinAuroraConcert(),
+]);
 
 // Register thread listeners
 const threadListener = new ThreadCreateListener(client);
@@ -65,43 +72,11 @@ memberRemoveListener.registerFeatures([
   new GoodbyMessageAndDm(),
 ]);
 
-client.on(Events.ClientReady, async () => {
-  const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
-  const channelId = "1362351596675137687";
-  const guildId = "1301594669461016627";
-
-  while (true) {
-    await delay(10000);
-    const channel = client.channels.cache.get(channelId);
-    if (!channel) continue;
-    if (!channel.isVoiceBased()) break;
-
-    const connection = joinVoiceChannel({
-      guildId: guildId,
-      channelId: channelId,
-      adapterCreator: channel.guild.voiceAdapterCreator
-    })
-
-    const runaway = createAudioResource(createReadStream(join("assets", "aurora", "runaway.opus")), {
-      inputType: StreamType.OggOpus,
-    });
-
-    await delay(5000);
-
-    const player = createAudioPlayer({
-      behaviors: {
-        noSubscriber: NoSubscriberBehavior.Play,
-      },
-    });
-
-    connection.subscribe(player);
-    player.play(runaway);
-
-
-    break;
-  }
-
-});
+// Register voice state update listener
+const voiceStateUpdateListener = new VoiceStateUpdateListener(client);
+voiceStateUpdateListener.registerFeatures([
+  new PlayAuroraPlaylist()
+]);
 
 // Login
 client.login(process.env.DISCORD_TOKEN)
