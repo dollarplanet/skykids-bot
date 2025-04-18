@@ -17,10 +17,6 @@ export function auroraPlayer(): AudioPlayer {
       // Mainkan lagu berikutnya
       auroraPlayerHolder?.play(nextSong());
     });
-
-    auroraPlayerHolder.on(AudioPlayerStatus.AutoPaused, () => {
-      console.log("AutoPaused");
-    });
   }
 
   return auroraPlayerHolder
