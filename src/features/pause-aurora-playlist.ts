@@ -1,13 +1,11 @@
 import { Collection, GuildMember, VoiceState } from "discord.js";
 import { VoiceStateUpdateFeatureBase } from "./feature-base";
-import { nextSong } from "../aurora/queue";
-import { auroraPlayer, auroraPlayerStatus } from "../aurora/player-singleton";
-import { AudioPlayerStatus } from "@discordjs/voice";
+import { auroraPlayer } from "../aurora/player-singleton";
 
-export class PlayAuroraPlaylist extends VoiceStateUpdateFeatureBase {
+export class PauseAuroraPlaylist extends VoiceStateUpdateFeatureBase {
   public async action(oldState: VoiceState, newState: VoiceState) {
     const channelId = "1362720685654278254";
-    const skykidsOfficialId = "1361696187844923412";    
+    const skykidsOfficialId = "1361696187844923412";
     const stateChannelId = oldState.channelId ?? newState.channelId;
 
     // Harus channel aurora
@@ -20,16 +18,10 @@ export class PlayAuroraPlaylist extends VoiceStateUpdateFeatureBase {
     // Dapatkan member di channel
     const members = channel.members as Collection<string, GuildMember>;
 
-    // Skykids Official harus ada di channel
-    if (!members.has(skykidsOfficialId)) return;
+    // Member lebih dari 1 dan ada skykids official, return
+    if (members.size >= 2 && members.has(skykidsOfficialId)) return;
 
-    // Member harus lebih dari 1
-    if (members.size < 2) return;
-
-    // Return kalo musik sedang berjalan
-    if (auroraPlayerStatus() === AudioPlayerStatus.Playing) return;
-
-    // Mainkan musik
-    auroraPlayer().play(nextSong());
+    // Pause musik
+    auroraPlayer().pause();
   }
 }

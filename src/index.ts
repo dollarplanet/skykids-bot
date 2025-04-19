@@ -17,6 +17,7 @@ import { ClientReadyListener } from "./listeners/client-ready-listener";
 import { JoinAuroraConcert } from "./features/join-aurora-concert";
 import { VoiceStateUpdateListener } from "./listeners/voice-state-update-listener";
 import { PlayAuroraPlaylist } from "./features/play-aurora-playlist";
+import { PauseAuroraPlaylist } from "./features/pause-aurora-playlist";
 
 // Load environment variables
 dotenv.config();
@@ -75,7 +76,8 @@ memberRemoveListener.registerFeatures([
 // Register voice state update listener
 const voiceStateUpdateListener = new VoiceStateUpdateListener(client);
 voiceStateUpdateListener.registerFeatures([
-  new PlayAuroraPlaylist()
+  new PlayAuroraPlaylist(),
+  new PauseAuroraPlaylist(),
 ]);
 
 // Login
