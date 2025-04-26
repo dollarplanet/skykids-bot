@@ -1,4 +1,3 @@
-import { Client, GatewayIntentBits } from "discord.js";
 import dotenv from "dotenv";
 import { ThreadCreateListener } from "./listeners/thread-create-listener";
 import { MediaOnlyForum } from "./features/media-only-forum";
@@ -18,67 +17,62 @@ import { JoinAuroraConcert } from "./features/join-aurora-concert";
 import { VoiceStateUpdateListener } from "./listeners/voice-state-update-listener";
 import { PlayAuroraPlaylist } from "./features/play-aurora-playlist";
 import { PauseAuroraPlaylist } from "./features/pause-aurora-playlist";
+import { DynamicVoiceChannelState } from "./features/dynamic-voice-channel-state";
+import { discord } from "./singleton/client-singleton";
+import { startCron } from "./cron/runner";
 
 // Load environment variables
 dotenv.config();
 
-// Create a new client instance
-const client = new Client({
-  intents: [
-    GatewayIntentBits.Guilds,
-    GatewayIntentBits.GuildMembers,
-    GatewayIntentBits.GuildPresences,
-    GatewayIntentBits.GuildMessages,
-    GatewayIntentBits.MessageContent,
-    GatewayIntentBits.GuildVoiceStates,
-  ]
-});
-
 // Register client ready listener
-const clientReadyListener = new ClientReadyListener(client);
+const clientReadyListener = new ClientReadyListener(discord());
 clientReadyListener.registerFeatures([
   new JoinAuroraConcert(),
 ]);
 
 // Register thread listeners
-const threadListener = new ThreadCreateListener(client);
+const threadListener = new ThreadCreateListener(discord());
 threadListener.registerFeatures([
   new MediaOnlyForum(),
 ]);
 
 // Register member add listener
-const memberAddListener = new MemberAddListener(client);
+const memberAddListener = new MemberAddListener(discord());
 memberAddListener.registerFeatures([
   new DirectWelcomeMessage(),
   new AddRoleOnMemberJoin(),
 ]);
 
 // Register member update listener
-const memberUpdateListener = new MemberUpdateListener(client);
+const memberUpdateListener = new MemberUpdateListener(discord());
 memberUpdateListener.registerFeatures([
   new ProvinceRoleInNickname(),
   new ProvinceRoleNicknameRemove(),
 ]);
 
 // Register message create listener
-const messageCreateListener = new MessageCreateListener(client);
+const messageCreateListener = new MessageCreateListener(discord());
 messageCreateListener.registerFeatures([
   new DailyQuestionForward(),
   new WelcomeBannerForward(),
 ]);
 
 // Register remove member listener
-const memberRemoveListener = new MemberRemoveListener(client);
+const memberRemoveListener = new MemberRemoveListener(discord());
 memberRemoveListener.registerFeatures([
   new GoodbyMessageAndDm(),
 ]);
 
 // Register voice state update listener
-const voiceStateUpdateListener = new VoiceStateUpdateListener(client);
+const voiceStateUpdateListener = new VoiceStateUpdateListener(discord());
 voiceStateUpdateListener.registerFeatures([
   new PlayAuroraPlaylist(),
   new PauseAuroraPlaylist(),
+  new DynamicVoiceChannelState(),
 ]);
 
 // Login
-client.login(process.env.DISCORD_TOKEN)
+discord().login(process.env.DISCORD_TOKEN)
+
+// Start cron job
+startCron();
