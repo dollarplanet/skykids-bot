@@ -20,6 +20,7 @@ import { PauseAuroraPlaylist } from "./features/pause-aurora-playlist";
 import { DynamicVoiceChannelState } from "./features/dynamic-voice-channel-state";
 import { discord } from "./singleton/client-singleton";
 import { startCron } from "./cron/runner";
+import { ChangeNicknameChannel } from "./features/change-nickname-channel";
 
 // Load environment variables
 dotenv.config();
@@ -55,6 +56,7 @@ const messageCreateListener = new MessageCreateListener(discord());
 messageCreateListener.registerFeatures([
   new DailyQuestionForward(),
   new WelcomeBannerForward(),
+  new ChangeNicknameChannel(),
 ]);
 
 // Register remove member listener
