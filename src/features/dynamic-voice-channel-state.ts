@@ -18,13 +18,17 @@ export class DynamicVoiceChannelState extends VoiceStateUpdateFeatureBase {
     const channel = await newState.guild.channels.fetch(channelId, { force: true });
     if (!channel) return;
 
+    // Dapatkan instance member ter update
+    if (!newState.member) return;
+    const member = await newState.member.fetch(true) ?? newState.member;
+
     // Update global state
     if (isJoin) {
       if (newState.member === null) return;
       MemberVoiceGlobalState.add(new MemberVoiceState(
         dayjs(),
-        newState.member.user.id,
-        capitalize((newState.member.user.displayName ?? newState.member.user.globalName) ?? newState.member.user.username),
+        member.id,
+        capitalize(member.nickname ?? member.user.displayName ?? member.user.globalName ?? member.user.username),
       ));
     } else {
       if (oldState.member === null) return;
