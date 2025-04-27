@@ -13,7 +13,6 @@ import { WelcomeBannerForward } from "./features/welcome-banner-forward";
 import { MemberRemoveListener } from "./listeners/member-remove-listener";
 import { GoodbyMessageAndDm } from "./features/goodby-message-and-dm";
 import { ClientReadyListener } from "./listeners/client-ready-listener";
-import { JoinAuroraConcert } from "./features/join-aurora-concert";
 import { VoiceStateUpdateListener } from "./listeners/voice-state-update-listener";
 import { PlayAuroraPlaylist } from "./features/play-aurora-playlist";
 import { PauseAuroraPlaylist } from "./features/pause-aurora-playlist";
@@ -21,6 +20,7 @@ import { DynamicVoiceChannelState } from "./features/dynamic-voice-channel-state
 import { discord } from "./singleton/client-singleton";
 import { startCron } from "./cron/runner";
 import { ChangeNicknameChannel } from "./features/change-nickname-channel";
+import { SetStatus } from "./features/set-status";
 
 // Load environment variables
 dotenv.config();
@@ -28,7 +28,7 @@ dotenv.config();
 // Register client ready listener
 const clientReadyListener = new ClientReadyListener(discord());
 clientReadyListener.registerFeatures([
-  new JoinAuroraConcert(),
+  new SetStatus(),
 ]);
 
 // Register thread listeners
