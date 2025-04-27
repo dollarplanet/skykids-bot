@@ -24,7 +24,7 @@ export class DynamicVoiceChannelState extends VoiceStateUpdateFeatureBase {
       MemberVoiceGlobalState.add(new MemberVoiceState(
         dayjs(),
         newState.member.user.id,
-        capitalize(newState.member.user.globalName ?? newState.member.user.username)
+        capitalize((newState.member.user.displayName ?? newState.member.user.globalName) ?? newState.member.user.username),
       ));
     } else {
       if (oldState.member === null) return;
