@@ -1,7 +1,7 @@
 import { OmitPartialGroupDMChannel, Message, MessageCreateOptions } from "discord.js";
-import { MessageCreateFeatureBase } from "./feature-base";
+import { MessageCreateListener } from "../base/message-create-listener";
 
-export class DailyQuestionForward extends MessageCreateFeatureBase {
+export class DailyQuestionForward extends MessageCreateListener {
   private dailyQuestionChannelId = "1362320556162158603";
   private elderChannelId = "1362338943005229137";
 

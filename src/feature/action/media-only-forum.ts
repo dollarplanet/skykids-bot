@@ -1,8 +1,8 @@
 import { AnyThreadChannel, ChannelType } from "discord.js";
-import { ThreadFeatureBase } from "./feature-base";
-import { mediaOnlyChannelList } from "../utils/media-only-channels";
+import { mediaOnlyChannelList } from "../../utils/media-only-channels";
+import { ThreadCreateListener } from "../base/thread-create-listener";
 
-export class MediaOnlyForum extends ThreadFeatureBase {
+export class MediaOnlyForum extends ThreadCreateListener {
   public async action(channel: AnyThreadChannel, _: boolean) {
     // Cek channel harus type forum
     if (channel.parent?.type !== ChannelType.GuildForum) return;

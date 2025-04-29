@@ -1,8 +1,8 @@
 import { Message, MessageCreateOptions, OmitPartialGroupDMChannel } from "discord.js";
-import { MessageCreateFeatureBase } from "./feature-base";
+import { MessageCreateListener } from "../base/message-create-listener";
 
 
-export class WelcomeBannerForward extends MessageCreateFeatureBase {
+export class WelcomeBannerForward extends MessageCreateListener {
   private botWelcomeChannelId = "1360680484102738012";
   private welcomeChannelId = "1362375074270675074";
 

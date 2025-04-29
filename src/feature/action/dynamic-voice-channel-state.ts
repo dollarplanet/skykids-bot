@@ -1,11 +1,11 @@
 import { VoiceState } from "discord.js";
-import { VoiceStateUpdateFeatureBase } from "./feature-base";
-import { MemberVoiceGlobalState } from "../utils/member-voice-global-state";
-import { MemberVoiceState } from "../utils/member-voice-state";
+import { MemberVoiceGlobalState } from "../../utils/member-voice-global-state";
+import { MemberVoiceState } from "../../utils/member-voice-state";
 import dayjs from "dayjs";
-import { capitalize } from "../utils/capitalize";
+import { capitalize } from "../../utils/capitalize";
+import { VoiceStateUpdateListener } from "../base/voice-state-update-listener";
 
-export class DynamicVoiceChannelState extends VoiceStateUpdateFeatureBase {
+export class DynamicVoiceChannelState extends VoiceStateUpdateListener {
   public async action(oldState: VoiceState, newState: VoiceState) {
     const channelId = "1361398803445579987"; // Dynamic voice channel name
     const stateChannelId = oldState.channelId ?? newState.channelId;

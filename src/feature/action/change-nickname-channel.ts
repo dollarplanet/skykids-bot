@@ -1,8 +1,8 @@
 import { OmitPartialGroupDMChannel, Message } from "discord.js";
-import { MessageCreateFeatureBase } from "./feature-base";
-import { provinceRoles } from "../utils/nickname-role-list";
+import { provinceRoles } from "../../utils/nickname-role-list";
+import { MessageCreateListener } from "../base/message-create-listener";
 
-export class ChangeNicknameChannel extends MessageCreateFeatureBase {
+export class ChangeNicknameChannel extends MessageCreateListener {
   public async action(data: OmitPartialGroupDMChannel<Message<boolean>>) {
     const channelId = "1365998319687434280";
     const adventurerRoleId = "1360285795159642242";

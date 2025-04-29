@@ -1,7 +1,7 @@
 import { GuildMember, PartialGuildMember } from "discord.js";
-import { MemberRemoveFeatureBase } from "./feature-base";
+import { GuildMemberRemoveListener } from "../base/guild-member-remove-listener";
 
-export class GoodbyMessageAndDm extends MemberRemoveFeatureBase{
+export class GoodbyMessageAndDm extends GuildMemberRemoveListener{
   private goodbyChannelId = "1362379775079088329";
 
   public async action(member: GuildMember | PartialGuildMember) {

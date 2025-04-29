@@ -1,8 +1,8 @@
 import { Collection, GuildMember, VoiceState } from "discord.js";
-import { VoiceStateUpdateFeatureBase } from "./feature-base";
-import { auroraPlayer } from "../aurora/player-singleton";
+import { auroraPlayer } from "../../aurora/player-singleton";
+import { VoiceStateUpdateListener } from "../base/voice-state-update-listener";
 
-export class PauseAuroraPlaylist extends VoiceStateUpdateFeatureBase {
+export class PauseAuroraPlaylist extends VoiceStateUpdateListener {
   public async action(oldState: VoiceState, newState: VoiceState) {
     const channelId = "1362720685654278254";
     const skykidsOfficialId = "1361696187844923412";

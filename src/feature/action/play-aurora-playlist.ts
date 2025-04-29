@@ -1,10 +1,10 @@
 import { Collection, GuildMember, VoiceState } from "discord.js";
-import { VoiceStateUpdateFeatureBase } from "./feature-base";
-import { nextSong } from "../aurora/queue";
-import { auroraPlayer, auroraPlayerStatus } from "../aurora/player-singleton";
+import { nextSong } from "../../aurora/queue";
+import { auroraPlayer, auroraPlayerStatus } from "../../aurora/player-singleton";
 import { AudioPlayerStatus } from "@discordjs/voice";
+import { VoiceStateUpdateListener } from "../base/voice-state-update-listener";
 
-export class PlayAuroraPlaylist extends VoiceStateUpdateFeatureBase {
+export class PlayAuroraPlaylist extends VoiceStateUpdateListener {
   public async action(oldState: VoiceState, newState: VoiceState) {
     const channelId = "1362720685654278254";
     const skykidsOfficialId = "1361696187844923412";    

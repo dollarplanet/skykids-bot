@@ -1,9 +1,9 @@
 import { Client } from "discord.js";
-import { ClientReadyFeatureBase } from "./feature-base";
 import { joinVoiceChannel } from "@discordjs/voice";
-import { auroraPlayer } from "../aurora/player-singleton";
+import { auroraPlayer } from "../../aurora/player-singleton";
+import { ClientReadyListener } from "../base/client-ready-listener";
 
-export class JoinAuroraConcert extends ClientReadyFeatureBase {
+export class JoinAuroraConcert extends ClientReadyListener {
   public async action(client: Client) {
     const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
     const channelId = "1362720685654278254";

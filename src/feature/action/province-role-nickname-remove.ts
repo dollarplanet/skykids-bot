@@ -1,8 +1,8 @@
 import { GuildMember, PartialGuildMember } from "discord.js";
-import { MemberUpdateFeatureBase } from "./feature-base";
-import { provinceRoles } from "../utils/nickname-role-list";
+import { provinceRoles } from "../../utils/nickname-role-list";
+import { GuildMemberUpdateListener } from "../base/guild-member-update-listener";
 
-export class ProvinceRoleNicknameRemove extends MemberUpdateFeatureBase {
+export class ProvinceRoleNicknameRemove extends GuildMemberUpdateListener {
   public async action(oldMember: GuildMember | PartialGuildMember, newMember: GuildMember) {
     // Return kalo role ditambah
     if (oldMember.roles.cache.size < newMember.roles.cache.size) return;
