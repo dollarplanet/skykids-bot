@@ -1,5 +1,5 @@
-export abstract class ListenerBase {
-  protected abstract registerListener(): void;
+export class ListenerBase {
+  protected registerListener(): void {};
 
   constructor() {
     this.registerListener();

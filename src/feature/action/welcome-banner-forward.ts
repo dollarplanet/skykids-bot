@@ -7,21 +7,25 @@ export class WelcomeBannerForward extends MessageCreateListener {
   private welcomeChannelId = "1362375074270675074";
 
   public async action(data: OmitPartialGroupDMChannel<Message<boolean>>) {
-    // Pesan harus berasal dari bot welcome channel
-    if (data.channelId !== this.botWelcomeChannelId) return;
+    try {
+      // Pesan harus berasal dari bot welcome channel
+      if (data.channelId !== this.botWelcomeChannelId) return;
 
-    // Mendapatkan real welcome channel
-    const welcomeChannel = data.guild?.channels.cache.get(this.welcomeChannelId);
-    if (!welcomeChannel) return;
-    
-    // Kirim pesan ke welcome channel
-    if (welcomeChannel.isSendable()) {
-      const payload: MessageCreateOptions = {
-        content: data.content,
-        files: data.attachments.map(attachement => attachement.url),
+      // Mendapatkan real welcome channel
+      const welcomeChannel = data.guild?.channels.cache.get(this.welcomeChannelId);
+      if (!welcomeChannel) return;
+
+      // Kirim pesan ke welcome channel
+      if (welcomeChannel.isSendable()) {
+        const payload: MessageCreateOptions = {
+          content: data.content,
+          files: data.attachments.map(attachement => attachement.url),
+        }
+
+        await welcomeChannel.send(payload)
       }
-      
-      await welcomeChannel.send(payload)
+    } catch {
+      //
     }
   }
 }

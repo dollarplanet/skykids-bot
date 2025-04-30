@@ -4,25 +4,29 @@ import { GuildMemberUpdateListener } from "../base/guild-member-update-listener"
 
 export class ProvinceRoleInNickname extends GuildMemberUpdateListener {
   public async action(oldMember: GuildMember | PartialGuildMember, newMember: GuildMember) {
-    // Return kalo role dikurangi
-    if (oldMember.roles.cache.size > newMember.roles.cache.size) return;
+    try {
+      // Return kalo role dikurangi
+      if (oldMember.roles.cache.size > newMember.roles.cache.size) return;
 
-    // Return kalo role tetap sama
-    if (oldMember.roles.cache.size === newMember.roles.cache.size) return;
+      // Return kalo role tetap sama
+      if (oldMember.roles.cache.size === newMember.roles.cache.size) return;
 
-    // Cari role yang baru ditambahkan
-    const newRole = newMember.roles.cache.find(role => !oldMember.roles.cache.has(role.id));
-    if (!newRole) return;
+      // Cari role yang baru ditambahkan
+      const newRole = newMember.roles.cache.find(role => !oldMember.roles.cache.has(role.id));
+      if (!newRole) return;
 
-    // Harus bagian dari role provinsi
-    if (!provinceRoles.includes(newRole.id)) return;
+      // Harus bagian dari role provinsi
+      if (!provinceRoles.includes(newRole.id)) return;
 
-    const newNickname = `${newRole.name} ${oldMember.user.globalName}`;
+      const newNickname = `${newRole.name} ${oldMember.user.globalName}`;
 
-    // Edit nickname
-    await newMember.setNickname(newNickname);
+      // Edit nickname
+      await newMember.setNickname(newNickname);
 
-    // Notify member
-    await newMember.send(`Wah, ternyata kamu dari provinsi ${newRole.name} ya, kalo gitu nickname kamu sekarang menjadi ${newNickname}! 🥳`);
+      // Notify member
+      await newMember.send(`Wah, ternyata kamu dari provinsi ${newRole.name} ya, kalo gitu nickname kamu sekarang menjadi ${newNickname}! 🥳`);
+    } catch {
+      //
+    }
   }
 }

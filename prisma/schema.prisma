@@ -3,7 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../src/prisma"
+  output   = "../node_modules/@prisma/xxx-client"
 }
 
 datasource db {
@@ -61,95 +61,3 @@ enum featureEnum {
 model activeFeature {
   name featureEnum @id
 }
-
-// enum listenerEnum {
-//   applicationCommandPermissionsUpdate
-//   autoModerationActionExecution
-//   autoModerationRuleCreate
-//   autoModerationRuleDelete
-//   autoModerationRuleUpdate
-//   ready
-//   entitlementCreate
-//   entitlementDelete
-//   entitlementUpdate
-//   guildAuditLogEntryCreate
-//   guildAvailable
-//   guildCreate
-//   guildDelete
-//   guildUpdate
-//   guildUnavailable
-//   guildMemberAdd
-//   guildMemberRemove
-//   guildMemberUpdate
-//   guildMemberAvailable
-//   guildMembersChunk
-//   guildIntegrationsUpdate
-//   roleCreate
-//   roleDelete
-//   inviteCreate
-//   inviteDelete
-//   roleUpdate
-//   emojiCreate
-//   emojiDelete
-//   emojiUpdate
-//   guildBanAdd
-//   guildBanRemove
-//   channelCreate
-//   channelDelete
-//   channelUpdate
-//   channelPinsUpdate
-//   messageCreate
-//   messageDelete
-//   messageUpdate
-//   messageDeleteBulk
-//   messagePollVoteAdd
-//   messagePollVoteRemove
-//   messageReactionAdd
-//   messageReactionRemove
-//   messageReactionRemoveAll
-//   messageReactionRemoveEmoji
-//   threadCreate
-//   threadDelete
-//   threadUpdate
-//   threadListSync
-//   threadMemberUpdate
-//   threadMembersUpdate
-//   userUpdate
-//   presenceUpdate
-//   voiceChannelEffectSend
-//   voiceServerUpdate
-//   voiceStateUpdate
-//   typingStart
-//   webhookUpdate
-//   interactionCreate
-//   error
-//   warn
-//   debug
-//   cacheSweep
-//   shardDisconnect
-//   shardError
-//   shardReconnecting
-//   shardReady
-//   shardResume
-//   invalidated
-//   raw
-//   stageInstanceCreate
-//   stageInstanceUpdate
-//   stageInstanceDelete
-//   subscriptionCreate
-//   subscriptionUpdate
-//   subscriptionDelete
-//   stickerCreate
-//   stickerDelete
-//   stickerUpdate
-//   guildScheduledEventCreate
-//   guildScheduledEventUpdate
-//   guildScheduledEventDelete
-//   guildScheduledEventUserAdd
-//   guildScheduledEventUserRemove
-// }
-
-// model listener {
-//   name          listenerEnum    @id
-//   activeFeature activeFeature[]
-// }

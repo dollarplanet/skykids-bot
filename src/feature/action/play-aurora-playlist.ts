@@ -6,30 +6,34 @@ import { VoiceStateUpdateListener } from "../base/voice-state-update-listener";
 
 export class PlayAuroraPlaylist extends VoiceStateUpdateListener {
   public async action(oldState: VoiceState, newState: VoiceState) {
-    const channelId = "1362720685654278254";
-    const skykidsOfficialId = "1361696187844923412";    
-    const stateChannelId = oldState.channelId ?? newState.channelId;
+    try {
+      const channelId = "1362720685654278254";
+      const skykidsOfficialId = "1361696187844923412";
+      const stateChannelId = oldState.channelId ?? newState.channelId;
 
-    // Harus channel aurora
-    if (stateChannelId !== channelId) return;
+      // Harus channel aurora
+      if (stateChannelId !== channelId) return;
 
-    // Dapatkan channel
-    const channel = await newState.guild.channels.fetch(channelId, { force: true });
-    if (!channel) return;
+      // Dapatkan channel
+      const channel = await newState.guild.channels.fetch(channelId, { force: true });
+      if (!channel) return;
 
-    // Dapatkan member di channel
-    const members = channel.members as Collection<string, GuildMember>;
+      // Dapatkan member di channel
+      const members = channel.members as Collection<string, GuildMember>;
 
-    // Skykids Official harus ada di channel
-    if (!members.has(skykidsOfficialId)) return;
+      // Skykids Official harus ada di channel
+      if (!members.has(skykidsOfficialId)) return;
 
-    // Member harus lebih dari 1
-    if (members.size < 2) return;
+      // Member harus lebih dari 1
+      if (members.size < 2) return;
 
-    // Return kalo musik sedang berjalan
-    if (auroraPlayerStatus() === AudioPlayerStatus.Playing) return;
+      // Return kalo musik sedang berjalan
+      if (auroraPlayerStatus() === AudioPlayerStatus.Playing) return;
 
-    // Mainkan musik
-    auroraPlayer().play(nextSong());
+      // Mainkan musik
+      auroraPlayer().play(nextSong());
+    } catch {
+      //
+    }
   }
 }
