@@ -2,6 +2,7 @@ import { OmitPartialGroupDMChannel, Message } from "discord.js";
 import { provinceRoles } from "../../utils/nickname-role-list";
 import { MessageCreateListener } from "../base/message-create-listener";
 import { isFeatureDisabled } from "../../utils/is-feature-disabled";
+import { prisma } from "../../singleton/prisma-singleton";
 
 export class ChangeNicknameChannel extends MessageCreateListener {
   public async action(data: OmitPartialGroupDMChannel<Message<boolean>>) {
@@ -9,11 +10,19 @@ export class ChangeNicknameChannel extends MessageCreateListener {
       // Cek fitur dimatikan
       if (await isFeatureDisabled("ChangeNicknameChannel")) return;
 
-      const channelId = "1365998319687434280";
-      const adventurerRoleId = "1360285795159642242";
+      // Dapatkan config
+      const config = await prisma.config.findUnique({
+        where: {
+          id: 1,
+        },
+        select: {
+          changeNicknameChannel: true
+        }
+      })
+      if (!config) return;
 
       // Harus dari channel change nickname
-      if (data.channelId !== channelId) return;
+      if (data.channelId !== config.changeNicknameChannel) return;
 
       // Harus bukan bot
       if (data.author.bot) return;
@@ -27,16 +36,10 @@ export class ChangeNicknameChannel extends MessageCreateListener {
         await data.reply("Nickname harus antara 2-32 karakter!");
         return;
       }
-
-      // Harus ada role adventurer
-      if (!data.member) return;
-      if (!data.member.roles.cache.has(adventurerRoleId)) {
-        await data.reply("Kamu harus memiliki role Adventurer!");
-        return;
-      };
-
+      
       // Dapatkan role provinsi
       let provinceRole: string | undefined;
+      if (!data.member) return;
       data.member.roles.cache.forEach(role => {
         if (provinceRoles.includes(role.id)) {
           provinceRole = role.name;

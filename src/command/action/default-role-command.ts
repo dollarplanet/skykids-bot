@@ -1,6 +1,6 @@
 import { ActionRowBuilder, ComponentType, Interaction, MessageFlags, RoleSelectMenuBuilder } from "discord.js";
 import { CommandBase } from "./command-base";
-import { prisma } from "../singleton/prisma-singleton";
+import { prisma } from "../../singleton/prisma-singleton";
 
 export class DefaultRoleCommand extends CommandBase {
   protected name: string = "default-role";

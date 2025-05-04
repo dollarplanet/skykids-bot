@@ -1,13 +1,15 @@
 import { Interaction } from "discord.js";
 import { InteractionCreateListener } from "../feature/base/interaction-create-listener";
-import { CommandBase } from "./command-base";
-import { DefaultRoleCommand } from "./default-role-command";
-import { PingCommand } from "./ping-command";
+import { CommandBase } from "./action/command-base";
+import { DefaultRoleCommand } from "./action/default-role-command";
+import { PingCommand } from "./action/ping-command";
+import { ChangeNicknameChannelCommand } from "./action/change-nickname-channel-command";
 
 export class CommandInteractionHandler extends InteractionCreateListener {
   static readonly commands: CommandBase[] = [
     new DefaultRoleCommand(),
     new PingCommand(),
+    new ChangeNicknameChannelCommand(),
   ]
 
   public async action(interaction: Interaction) {

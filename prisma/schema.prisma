@@ -32,3 +32,8 @@ model activeFeature {
 model defaultRole {
   roleId String @id
 }
+
+model config {
+  id                    Int     @id @default(1)
+  changeNicknameChannel String?
+}
