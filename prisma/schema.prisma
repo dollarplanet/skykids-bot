@@ -35,17 +35,18 @@ model defaultRole {
 }
 
 model config {
-  id                    Int     @id @default(1)
-  changeNicknameChannel String?
-  triviaChannel         String?
-  triviaEnglishChannel  String?
+  id                     Int     @id @default(1)
+  changeNicknameChannel  String?
+  triviaChannel          String?
+  triviaEnglishChannel   String?
+  triviaIndonesiaChannel String?
 }
 
 model trivia {
   id               Int                @id @default(autoincrement())
   category         String?
   question         String
-  questionIndo     String
+  questionIndo     String?
   correctAnswer    String
   optionOne        String
   optionTwo        String?

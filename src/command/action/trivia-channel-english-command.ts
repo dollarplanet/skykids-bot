@@ -2,9 +2,9 @@ import { ActionRowBuilder, ChannelSelectMenuBuilder, ChannelType, ComponentType,
 import { CommandBase } from "./command-base";
 import { prisma } from "../../singleton/prisma-singleton";
 
-export class TriviaChannelCommand extends CommandBase {
-  protected name: string = "trivia-channel";
-  protected description: string = "Atur channel untuk daily trivia";
+export class TriviaChannelEnglishCommand extends CommandBase {
+  protected name: string = "english-trivia-channel";
+  protected description: string = "Atur channel untuk daily trivia english";
 
   public async action(interaction: Interaction) {
     // Cek apakah pisa di reply

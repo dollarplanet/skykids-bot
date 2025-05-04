@@ -1,7 +1,7 @@
 import { Interaction, MessageFlags } from "discord.js";
 import { CommandBase } from "./command-base";
-import { triviaHandler } from "../../cron/trivia-handler";
 import { isFeatureDisabled } from "../../utils/is-feature-disabled";
+import { triviaEnglish } from "../../cron/trivia-english";
 
 export class GetTriviaCommand extends CommandBase {
   protected name: string = "get-trivia";
@@ -22,7 +22,7 @@ export class GetTriviaCommand extends CommandBase {
       };
 
       // Generate trivia
-      triviaHandler();
+      triviaEnglish();
 
       interaction.reply({
         content: "Trivia sedang diproses",

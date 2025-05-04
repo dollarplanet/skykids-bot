@@ -7,6 +7,8 @@ import { ChangeNicknameChannelCommand } from "./action/change-nickname-channel-c
 import { ActiveFeatureCommand } from "./action/active-feature-command";
 import { TriviaChannelCommand } from "./action/trivia-channel-command";
 import { GetTriviaCommand } from "./action/get-trivia-command";
+import { TriviaChannelEnglishCommand } from "./action/trivia-channel-english-command";
+import { TriviaChannelIndonesiaCommand } from "./action/trivia-channel-indonesia-command";
 
 export class CommandInteractionHandler extends InteractionCreateListener {
   static readonly commands: CommandBase[] = [
@@ -16,6 +18,8 @@ export class CommandInteractionHandler extends InteractionCreateListener {
     new ActiveFeatureCommand(),
     new TriviaChannelCommand(),
     new GetTriviaCommand(),
+    new TriviaChannelEnglishCommand(),
+    new TriviaChannelIndonesiaCommand(),
   ]
 
   public async action(interaction: Interaction) {

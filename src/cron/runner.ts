@@ -1,6 +1,6 @@
 import { CronJob } from "cron";
 import { changeDynamicVoiceChannelName } from "./change-dynamic-voice-channel-name";
-import { triviaHandler } from "./trivia-handler";
+import { triviaEnglish } from "./trivia-english";
 
 export function startCron() {
   CronJob.from({
@@ -13,14 +13,14 @@ export function startCron() {
   CronJob.from({
     cronTime: "0 6 * * *",
     timeZone: "Asia/Jakarta",
-    onTick: triviaHandler,
+    onTick: triviaEnglish,
     start: true,
   });
 
   CronJob.from({
     cronTime: "0 18 * * *",
     timeZone: "Asia/Jakarta",
-    onTick: triviaHandler,
+    onTick: triviaEnglish,
     start: true,
   });
 }

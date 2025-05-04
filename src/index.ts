@@ -14,6 +14,7 @@ import { SetStatus } from "./feature/action/set-status";
 import { WelcomeBannerForward } from "./feature/action/welcome-banner-forward";
 import { CommandInteractionHandler } from "./command/command-interaction-handler";
 import { TriviaAnswerCheck } from "./feature/action/trivia-answer-check";
+import { TriviaForward } from "./feature/action/trivia-forward";
 
 // Load environment variables
 dotenv.config();
@@ -32,6 +33,7 @@ function featureInit() {
   new WelcomeBannerForward();
   new CommandInteractionHandler();
   new TriviaAnswerCheck();
+  new TriviaForward();
 }
 
 // Register features

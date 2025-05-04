@@ -1,12 +1,9 @@
-import { ActionRowBuilder, StringSelectMenuBuilder } from "discord.js";
 import { discord } from "../singleton/client-singleton";
 import { prisma } from "../singleton/prisma-singleton";
-import { shuffle } from "../utils/shuffle";
-import { translator } from "../utils/translator";
 import he from "he";
 import { isFeatureDisabled } from "../utils/is-feature-disabled";
 
-export async function triviaHandler() {
+export async function triviaEnglish() {
   try {
     // Apakah fitur aktif
     if (await isFeatureDisabled("Trivia")) return;
@@ -17,10 +14,10 @@ export async function triviaHandler() {
         id: 1,
       },
       select: {
-        triviaChannel: true
+        triviaEnglishChannel: true
       }
     })
-    if (!config?.triviaChannel) return;
+    if (!config?.triviaEnglishChannel) return;
 
     // dapatkan trivia
     const res = await fetch("https://opentdb.com/api.php?amount=1&category=9&difficulty=easy&type=multiple");
@@ -30,7 +27,6 @@ export async function triviaHandler() {
     const trivia = await prisma.trivia.create({
       data: {
         question: he.decode(triviaJson.question),
-        questionIndo: await translator(he.decode(triviaJson.question)),
         correctAnswer: he.decode(triviaJson.correct_answer),
         category: he.decode(triviaJson.category),
         optionOne: he.decode(triviaJson.incorrect_answers[0]),
@@ -50,48 +46,17 @@ export async function triviaHandler() {
     })
 
     // Dapatkan trivia channel
-    const channel = await discord().channels.fetch(config.triviaChannel);
+    const channel = await discord().channels.fetch(config.triviaEnglishChannel);
     if (!channel) return;
 
     // Cek sendable
     if (!channel.isSendable()) return;
 
-    // Answer option
-    const answerOptions = shuffle([
-      trivia.correctAnswer,
-      trivia.optionOne,
-      trivia.optionTwo,
-      trivia.optionThree,
-    ]);
-
-    // Selector
-    const select = new StringSelectMenuBuilder()
-      .setCustomId(`trivia-${trivia.id}`)
-      .setPlaceholder('Pilih Jawaban')
-      .setOptions(answerOptions.map(answer => ({
-        label: answer,
-        value: answer,
-        default: false
-      })))
-
-    const row = new ActionRowBuilder()
-      .addComponents(select);
-
     // Kirim trivia
-    const message = await channel.send({
-      content: `*Kategori ${trivia.category}*
-
-**${trivia.question}**
-*"${trivia.questionIndo}"*
-  
-Jawaban kamu :`,
-      components: [row as any]
+    channel.send({
+      content: trivia.question + "\n" + trivia.id.toString(),
     });
-
-    // Create thread
-    if (message.hasThread) return;
-    await message.startThread({ name: "ᴛʀɪᴠɪᴀ" });
-  } catch {
-    //
+  } catch (err) {
+    console.log(err)
   }
 }
