@@ -13,17 +13,32 @@ export class TriviaAnswerCheck extends InteractionCreateListener {
       if (!interaction.customId.startsWith('trivia-')) return;
 
       const triviaId = parseInt(interaction.customId.split('-')[1]);
+      // Sudah menjawab benar
+      const isAnsweredCorrect = await prisma.triviaUserAnswer.count({
+        where: {
+          triviaId: triviaId,
+          userId: interaction.user.id,
+          correct: true,
+        }
+      });
+      if (isAnsweredCorrect > 0) {
+        interaction.reply({
+          content: 'Kamu udah menjawab benar, tidak perlu menjawab lagi 😎',
+          flags: MessageFlags.Ephemeral,
+        })
+        return;
+      }
 
-      // Cek apakah user sudah menjawab
+      // Sudah menjawab 2x
       const isAnswered = await prisma.triviaUserAnswer.count({
         where: {
           triviaId: triviaId,
           userId: interaction.user.id,
         }
       });
-      if (isAnswered > 0) {
+      if (isAnswered > 1) {
         interaction.reply({
-          content: 'Maaf nih, Kamu hanya boleh menjawab satu kali 😌',
+          content: 'Maaf nih, Kamu udah dikasih kesempatan 2 kali 😌',
           flags: MessageFlags.Ephemeral,
         })
         return;
@@ -55,9 +70,10 @@ Sssst 🤫, jangan kasih tau yang lain ya 🤭`,
           flags: MessageFlags.Ephemeral,
         })
       } else {
+        const additionalMessage = isAnswered === 0 ? ". Kamu masih punya kesempatan 1 kali lagi!" : ""
         thread.send(`❌ Jawaban <@!${interaction.member?.user.id}> salah 😝`);
         interaction.reply({
-          content: '❌ Jawabannya salah ya 😝',
+          content: '❌ Jawabannya salah ya 😝' + additionalMessage,
           flags: MessageFlags.Ephemeral,
         })
       }
