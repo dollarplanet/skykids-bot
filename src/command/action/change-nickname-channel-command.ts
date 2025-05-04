@@ -45,6 +45,7 @@ export class ChangeNicknameChannelCommand extends CommandBase {
     const collector = reply.createMessageComponentCollector({
       componentType: ComponentType.ChannelSelect,
       filter: i => (i.user.id === interaction.user.id) && (i.customId === interaction.id),
+      time: 60_000,
     });
 
     collector.on('collect', async i => {

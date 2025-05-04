@@ -34,6 +34,7 @@ export class DefaultRoleCommand extends CommandBase {
     const collector = reply.createMessageComponentCollector({
       componentType: ComponentType.RoleSelect,
       filter: i => (i.user.id === interaction.user.id) && (i.customId === interaction.id),
+      time: 120_000,
     });
 
     collector.on("collect", async inter => {
