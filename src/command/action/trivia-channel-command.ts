@@ -16,28 +16,43 @@ export class TriviaChannelCommand extends CommandBase {
         id: 1,
       },
       select: {
-        triviaChannel: true
+        triviaChannel: true,
+        triviaEnglishChannel: true
       }
     })
 
     // Selection
-    const select = new ChannelSelectMenuBuilder()
+    const selectTrivia = new ChannelSelectMenuBuilder()
       .setCustomId(interaction.id)
-      .setPlaceholder('Pilih Channel')
+      .setPlaceholder('Pilih Channel Trivia')
       .setChannelTypes(ChannelType.GuildText)
       .setMinValues(1)
       .setMaxValues(1);
 
     // Existing config
     if (config?.triviaChannel) {
-      select.setDefaultChannels([config.triviaChannel]);
+      selectTrivia.setDefaultChannels([config.triviaChannel]);
     }
 
-    const row = new ActionRowBuilder()
-      .addComponents(select);
+    // Selection
+    const selectEnglish = new ChannelSelectMenuBuilder()
+      .setCustomId(interaction.id)
+      .setPlaceholder('Pilih Channel English')
+      .setChannelTypes(ChannelType.GuildText)
+      .setMinValues(1)
+      .setMaxValues(1);
+
+    // Existing config
+    if (config?.triviaEnglishChannel) {
+      selectEnglish.setDefaultChannels([config.triviaEnglishChannel]);
+    }
+
+    const row = new ActionRowBuilder();
+    row.addComponents(selectTrivia);
+    row.addComponents(selectEnglish);
 
     const reply = await interaction.reply({
-      content: 'Pilih channel untuk daily trivia',
+      content: 'Pilih channel untuk daily trivia dan english trivia',
       components: [row as any],
       flags: MessageFlags.Ephemeral,
     });
@@ -51,7 +66,8 @@ export class TriviaChannelCommand extends CommandBase {
     collector.on('collect', async i => {
       try {
         const data = {
-          triviaChannel: i.values[0]
+          triviaChannel: i.values[0],
+          triviaEnglishChannel: i.values[1]
         };
 
         await prisma.config.upsert({

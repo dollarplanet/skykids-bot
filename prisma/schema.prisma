@@ -38,6 +38,7 @@ model config {
   id                    Int     @id @default(1)
   changeNicknameChannel String?
   triviaChannel         String?
+  triviaEnglishChannel  String?
 }
 
 model trivia {
