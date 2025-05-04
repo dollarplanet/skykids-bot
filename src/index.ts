@@ -13,6 +13,7 @@ import { ProvinceRoleNicknameRemove } from "./feature/action/province-role-nickn
 import { SetStatus } from "./feature/action/set-status";
 import { WelcomeBannerForward } from "./feature/action/welcome-banner-forward";
 import { CommandInteractionHandler } from "./command/command-interaction-handler";
+import { TriviaAnswerCheck } from "./feature/action/trivia-answer-check";
 
 // Load environment variables
 dotenv.config();
@@ -30,6 +31,7 @@ function featureInit() {
   new SetStatus();
   new WelcomeBannerForward();
   new CommandInteractionHandler();
+  new TriviaAnswerCheck();
 }
 
 // Register features

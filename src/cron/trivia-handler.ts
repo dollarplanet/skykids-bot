@@ -78,7 +78,7 @@ export async function triviaHandler() {
       .addComponents(select);
 
     // Kirim trivia
-    await channel.send({
+    const message = await channel.send({
       content: `*Kategori ${trivia.category}*
 
 **${trivia.question}**
@@ -87,6 +87,10 @@ export async function triviaHandler() {
 Jawaban kamu :`,
       components: [row as any]
     });
+
+    // Create thread
+    if (message.hasThread) return;
+    await message.startThread({ name: "Trivia" });
   } catch {
     //
   }

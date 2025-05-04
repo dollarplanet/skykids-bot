@@ -41,12 +41,22 @@ model config {
 }
 
 model trivia {
-  id            Int     @id @default(autoincrement())
-  category      String?
-  question      String
-  questionIndo  String
-  correctAnswer String
-  optionOne     String
-  optionTwo     String?
-  optionThree   String?
+  id               Int                @id @default(autoincrement())
+  category         String?
+  question         String
+  questionIndo     String
+  correctAnswer    String
+  optionOne        String
+  optionTwo        String?
+  optionThree      String?
+  triviaUserAnswer triviaUserAnswer[]
+}
+
+model triviaUserAnswer {
+  id       Int     @id @default(autoincrement())
+  trivia   trivia? @relation(fields: [triviaId], references: [id])
+  triviaId Int
+  userId   String
+  correct  Boolean
+  answer   String
 }
