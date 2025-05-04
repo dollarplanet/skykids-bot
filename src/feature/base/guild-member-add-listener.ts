@@ -6,6 +6,6 @@ export abstract class GuildMemberAddListener extends ListenerBase {
   public abstract action(member: GuildMember): Promise<void>;
 
   protected override async registerListener() {
-    (await discord()).on(Events.GuildMemberAdd, this.action);
+    discord().on(Events.GuildMemberAdd, this.action);
   }
 }

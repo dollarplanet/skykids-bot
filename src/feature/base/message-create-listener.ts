@@ -6,5 +6,5 @@ export abstract class MessageCreateListener extends ListenerBase {
   public abstract action(data: OmitPartialGroupDMChannel<Message<boolean>>): Promise<void>;
 
   protected override async registerListener() {
-    (await discord()).on(Events.MessageCreate, this.action);
+    discord().on(Events.MessageCreate, this.action);
   }}

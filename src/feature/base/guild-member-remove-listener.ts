@@ -6,6 +6,6 @@ export abstract class GuildMemberRemoveListener extends ListenerBase {
   public abstract action(member: GuildMember | PartialGuildMember): Promise<void>;
 
   protected override async registerListener() {
-    (await discord()).on(Events.GuildMemberRemove, this.action);
+    discord().on(Events.GuildMemberRemove, this.action);
   }
 }

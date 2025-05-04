@@ -6,5 +6,5 @@ export abstract class GuildMemberUpdateListener extends ListenerBase {
   public abstract action(oldMember: GuildMember | PartialGuildMember, newMember: GuildMember): Promise<void>;
 
   protected override async registerListener() {
-    (await discord()).on(Events.GuildMemberUpdate, this.action);
+    discord().on(Events.GuildMemberUpdate, this.action);
   }}

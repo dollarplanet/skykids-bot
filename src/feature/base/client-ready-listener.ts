@@ -6,6 +6,6 @@ export abstract class ClientReadyListener extends ListenerBase {
   public abstract action(client: Client): Promise<void>;
 
   protected override async registerListener() {
-    (await discord()).once(Events.ClientReady, this.action);
+    discord().once(Events.ClientReady, this.action);
   }
 }
