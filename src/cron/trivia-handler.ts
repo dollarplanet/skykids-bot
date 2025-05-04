@@ -90,7 +90,7 @@ Jawaban kamu :`,
 
     // Create thread
     if (message.hasThread) return;
-    await message.startThread({ name: "Trivia" });
+    await message.startThread({ name: "ᴛʀɪᴠɪᴀ" });
   } catch {
     //
   }
