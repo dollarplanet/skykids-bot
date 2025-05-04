@@ -23,6 +23,7 @@ enum featureEnum {
   ProvinceRoleNicknameRemove
   SetStatus
   WelcomeBannerForward
+  Trivia
 }
 
 model activeFeature {
@@ -37,4 +38,15 @@ model config {
   id                    Int     @id @default(1)
   changeNicknameChannel String?
   triviaChannel         String?
+}
+
+model trivia {
+  id            Int     @id @default(autoincrement())
+  category      String?
+  question      String
+  questionIndo  String
+  correctAnswer String
+  optionOne     String
+  optionTwo     String?
+  optionThree   String?
 }

@@ -6,6 +6,7 @@ import { PingCommand } from "./action/ping-command";
 import { ChangeNicknameChannelCommand } from "./action/change-nickname-channel-command";
 import { ActiveFeatureCommand } from "./action/active-feature-command";
 import { TriviaChannelCommand } from "./action/trivia-channel-command";
+import { GetTriviaCommand } from "./action/get-trivia-command";
 
 export class CommandInteractionHandler extends InteractionCreateListener {
   static readonly commands: CommandBase[] = [
@@ -14,6 +15,7 @@ export class CommandInteractionHandler extends InteractionCreateListener {
     new ChangeNicknameChannelCommand(),
     new ActiveFeatureCommand(),
     new TriviaChannelCommand(),
+    new GetTriviaCommand(),
   ]
 
   public async action(interaction: Interaction) {

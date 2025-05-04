@@ -16,11 +16,14 @@
   "dependencies": {
     "@discordjs/voice": "^0.18.0",
     "@prisma/client": "^6.6.0",
+    "@types/he": "^1.2.3",
     "cron": "^4.3.0",
     "dayjs": "^1.11.13",
     "discord.js": "^14.18.0",
     "dotenv": "^16.5.0",
-    "fs": "^0.0.1-security"
+    "free-translate": "^0.6.1",
+    "fs": "^0.0.1-security",
+    "he": "^1.2.0"
   },
   "scripts": {
     "build": "tsc && tsc-alias",
