@@ -69,6 +69,9 @@ export class ChangeNicknameChannelCommand extends CommandBase {
         });
       } catch {
         //
+      } finally {
+        collector.removeAllListeners();
+        collector.stop();
       }
     });
   }

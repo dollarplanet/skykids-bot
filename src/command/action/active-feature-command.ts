@@ -58,6 +58,9 @@ export class ActiveFeatureCommand extends CommandBase {
         });
       } catch {
         //
+      } finally {
+        collector.removeAllListeners();
+        collector.stop();
       }
     });
   }

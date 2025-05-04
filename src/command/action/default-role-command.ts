@@ -48,6 +48,9 @@ export class DefaultRoleCommand extends CommandBase {
         await inter.reply({ content: 'Role default berhasil diubah', ephemeral: true });
       } catch {
         //
+      } finally {
+        collector.removeAllListeners();
+        collector.stop();
       }
     })
   }
