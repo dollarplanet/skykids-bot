@@ -29,6 +29,6 @@ model activeFeature {
   name featureEnum @id
 }
 
-model initialRole {
+model defaultRole {
   roleId String @id
 }

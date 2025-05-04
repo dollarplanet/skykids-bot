@@ -26,9 +26,6 @@ export class ProvinceRoleInNickname extends GuildMemberUpdateListener {
 
       // Edit nickname
       await newMember.setNickname(newNickname);
-
-      // Notify member
-      await newMember.send(`Wah, ternyata kamu dari provinsi ${newRole.name} ya, kalo gitu nickname kamu sekarang menjadi ${newNickname}! 🥳`);
     } catch {
       //
     }

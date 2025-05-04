@@ -10,7 +10,7 @@ export class AddRoleOnMemberJoin extends GuildMemberAddListener {
       if (await isFeatureDisabled("AddRoleOnMemberJoin")) return;
 
       // Get roles
-      const roles = await prisma.initialRole.findMany();
+      const roles = await prisma.defaultRole.findMany();
 
       // Add roles
       await member.roles.add(roles.map(role => role.roleId));

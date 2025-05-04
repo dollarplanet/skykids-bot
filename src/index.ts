@@ -12,6 +12,7 @@ import { ProvinceRoleInNickname } from "./feature/action/province-role-in-nickna
 import { ProvinceRoleNicknameRemove } from "./feature/action/province-role-nickname-remove";
 import { SetStatus } from "./feature/action/set-status";
 import { WelcomeBannerForward } from "./feature/action/welcome-banner-forward";
+import { CommandInteractionHandler } from "./command/command-interaction-handler";
 
 // Load environment variables
 dotenv.config();
@@ -28,13 +29,14 @@ function featureInit() {
   new ProvinceRoleNicknameRemove();
   new SetStatus();
   new WelcomeBannerForward();
+  new CommandInteractionHandler();
 }
 
 // Register features
 featureInit();
 
 // Login
-discord().login(process.env.DISCORD_TOKEN).then(() => {
+discord().login(process.env.DISCORD_TOKEN).then(async () => {
   // Start cron job
   startCron();
 });
