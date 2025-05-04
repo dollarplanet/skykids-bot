@@ -28,3 +28,7 @@ enum featureEnum {
 model activeFeature {
   name featureEnum @id
 }
+
+model initialRole {
+  roleId String @id
+}
