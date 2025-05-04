@@ -48,10 +48,7 @@ enum featureEnum {
   DirectWelcomeMessage
   DynamicVoiceChannelState
   GoodbyMessageAndDM
-  JoinAuroraConcert
   MediaOnlyForum
-  PauseAuroraPlaylist
-  PlayAuroraPlaylist
   ProvinceRoleInNickname
   ProvinceRoleNicknameRemove
   SetStatus
