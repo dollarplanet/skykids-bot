@@ -17,7 +17,7 @@ enum featureEnum {
   DailyQuestionForward
   DirectWelcomeMessage
   DynamicVoiceChannelState
-  GoodbyMessageAndDM
+  GoodbyMessage
   MediaOnlyForum
   ProvinceRoleInNickname
   ProvinceRoleNicknameRemove

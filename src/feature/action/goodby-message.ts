@@ -1,11 +1,15 @@
 import { GuildMember, PartialGuildMember } from "discord.js";
 import { GuildMemberRemoveListener } from "../base/guild-member-remove-listener";
+import { isFeatureDisabled } from "../../utils/is-feature-disabled";
 
-export class GoodbyMessageAndDm extends GuildMemberRemoveListener {
+export class GoodbyMessage extends GuildMemberRemoveListener {
   private goodbyChannelId = "1362379775079088329";
 
   public async action(member: GuildMember | PartialGuildMember) {
     try {
+      // Cek fitur diaktifkan
+      if (await isFeatureDisabled("GoodbyMessage")) return;
+
       // Kirim DM ke user
       await member.send(`${member.user.globalName}, terima kasih telah bersama kami di komunitas ${member.guild.name}! 😭. Kami semua akan merindukanmu 😢. Sampai jumpa di lain waktu 👋`);
 

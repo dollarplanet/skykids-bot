@@ -4,10 +4,14 @@ import { MemberVoiceState } from "../../utils/member-voice-state";
 import dayjs from "dayjs";
 import { capitalize } from "../../utils/capitalize";
 import { VoiceStateUpdateListener } from "../base/voice-state-update-listener";
+import { isFeatureDisabled } from "../../utils/is-feature-disabled";
 
 export class DynamicVoiceChannelState extends VoiceStateUpdateListener {
   public async action(oldState: VoiceState, newState: VoiceState) {
     try {
+      // Cek fitur diaktifkan
+      if (await isFeatureDisabled("DynamicVoiceChannelState")) return;
+
       const channelId = "1361398803445579987"; // Dynamic voice channel name
       const stateChannelId = oldState.channelId ?? newState.channelId;
       const isJoin = !oldState.channelId && newState.channelId;

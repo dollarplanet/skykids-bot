@@ -1,5 +1,6 @@
 import { Message, MessageCreateOptions, OmitPartialGroupDMChannel } from "discord.js";
 import { MessageCreateListener } from "../base/message-create-listener";
+import { isFeatureDisabled } from "../../utils/is-feature-disabled";
 
 
 export class WelcomeBannerForward extends MessageCreateListener {
@@ -8,6 +9,9 @@ export class WelcomeBannerForward extends MessageCreateListener {
 
   public async action(data: OmitPartialGroupDMChannel<Message<boolean>>) {
     try {
+      // Cek fitur diaktifkan
+      if (await isFeatureDisabled("WelcomeBannerForward")) return;
+
       // Pesan harus berasal dari bot welcome channel
       if (data.channelId !== this.botWelcomeChannelId) return;
 

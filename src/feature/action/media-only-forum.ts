@@ -1,10 +1,14 @@
 import { AnyThreadChannel, ChannelType } from "discord.js";
 import { mediaOnlyChannelList } from "../../utils/media-only-channels";
 import { ThreadCreateListener } from "../base/thread-create-listener";
+import { isFeatureDisabled } from "../../utils/is-feature-disabled";
 
 export class MediaOnlyForum extends ThreadCreateListener {
   public async action(channel: AnyThreadChannel, _: boolean) {
     try {
+      // Cek fitur diaktifkan
+      if (await isFeatureDisabled("MediaOnlyForum")) return;
+
       // Cek channel harus type forum
       if (channel.parent?.type !== ChannelType.GuildForum) return;
 

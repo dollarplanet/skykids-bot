@@ -1,5 +1,6 @@
 import { OmitPartialGroupDMChannel, Message, MessageCreateOptions } from "discord.js";
 import { MessageCreateListener } from "../base/message-create-listener";
+import { isFeatureDisabled } from "../../utils/is-feature-disabled";
 
 export class DailyQuestionForward extends MessageCreateListener {
   private dailyQuestionChannelId = "1362320556162158603";
@@ -7,6 +8,9 @@ export class DailyQuestionForward extends MessageCreateListener {
 
   public async action(data: OmitPartialGroupDMChannel<Message<boolean>>) {
     try {
+      // Cek fitur diaktifkan
+      if (await isFeatureDisabled("DailyQuestionForward")) return;
+
       // Harus dari channel daily question
       if (data.channelId !== this.dailyQuestionChannelId) return;
 

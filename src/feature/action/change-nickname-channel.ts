@@ -1,10 +1,14 @@
 import { OmitPartialGroupDMChannel, Message } from "discord.js";
 import { provinceRoles } from "../../utils/nickname-role-list";
 import { MessageCreateListener } from "../base/message-create-listener";
+import { isFeatureDisabled } from "../../utils/is-feature-disabled";
 
 export class ChangeNicknameChannel extends MessageCreateListener {
   public async action(data: OmitPartialGroupDMChannel<Message<boolean>>) {
     try {
+      // Cek fitur diaktifkan
+      if (await isFeatureDisabled("ChangeNicknameChannel")) return;
+
       const channelId = "1365998319687434280";
       const adventurerRoleId = "1360285795159642242";
 

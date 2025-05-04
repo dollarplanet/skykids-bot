@@ -1,10 +1,14 @@
 import { GuildMember, PartialGuildMember } from "discord.js";
 import { provinceRoles } from "../../utils/nickname-role-list";
 import { GuildMemberUpdateListener } from "../base/guild-member-update-listener";
+import { isFeatureDisabled } from "../../utils/is-feature-disabled";
 
 export class ProvinceRoleNicknameRemove extends GuildMemberUpdateListener {
   public async action(oldMember: GuildMember | PartialGuildMember, newMember: GuildMember) {
     try {
+      // Cek fitur diaktifkan
+      if (await isFeatureDisabled("ProvinceRoleNicknameRemove")) return;
+
       // Return kalo role ditambah
       if (oldMember.roles.cache.size < newMember.roles.cache.size) return;
 

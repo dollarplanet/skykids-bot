@@ -6,7 +6,7 @@ import { ChangeNicknameChannel } from "./feature/action/change-nickname-channel"
 import { DailyQuestionForward } from "./feature/action/daily-question-forward";
 import { DirectWelcomeMessage } from "./feature/action/direct-welcome-message";
 import { DynamicVoiceChannelState } from "./feature/action/dynamic-voice-channel-state";
-import { GoodbyMessageAndDm } from "./feature/action/goodby-message-and-dm";
+import { GoodbyMessage } from "./feature/action/goodby-message";
 import { MediaOnlyForum } from "./feature/action/media-only-forum";
 import { ProvinceRoleInNickname } from "./feature/action/province-role-in-nickname";
 import { ProvinceRoleNicknameRemove } from "./feature/action/province-role-nickname-remove";
@@ -22,7 +22,7 @@ function featureInit() {
   new DailyQuestionForward();
   new DirectWelcomeMessage();
   new DynamicVoiceChannelState();
-  new GoodbyMessageAndDm();
+  new GoodbyMessage();
   new MediaOnlyForum();
   new ProvinceRoleInNickname();
   new ProvinceRoleNicknameRemove();
