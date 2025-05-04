@@ -36,4 +36,5 @@ model defaultRole {
 model config {
   id                    Int     @id @default(1)
   changeNicknameChannel String?
+  triviaChannel         String?
 }

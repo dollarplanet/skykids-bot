@@ -5,6 +5,7 @@ import { DefaultRoleCommand } from "./action/default-role-command";
 import { PingCommand } from "./action/ping-command";
 import { ChangeNicknameChannelCommand } from "./action/change-nickname-channel-command";
 import { ActiveFeatureCommand } from "./action/active-feature-command";
+import { TriviaChannelCommand } from "./action/trivia-channel-command";
 
 export class CommandInteractionHandler extends InteractionCreateListener {
   static readonly commands: CommandBase[] = [
@@ -12,6 +13,7 @@ export class CommandInteractionHandler extends InteractionCreateListener {
     new PingCommand(),
     new ChangeNicknameChannelCommand(),
     new ActiveFeatureCommand(),
+    new TriviaChannelCommand(),
   ]
 
   public async action(interaction: Interaction) {

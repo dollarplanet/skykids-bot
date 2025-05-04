@@ -2,9 +2,9 @@ import { ActionRowBuilder, ChannelSelectMenuBuilder, ChannelType, ComponentType,
 import { CommandBase } from "./command-base";
 import { prisma } from "../../singleton/prisma-singleton";
 
-export class ChangeNicknameChannelCommand extends CommandBase {
-  protected name: string = "change-nickname-channel";
-  protected description: string = "Atur channel untuk ganti nickname";
+export class TriviaChannelCommand extends CommandBase {
+  protected name: string = "trivia-channel";
+  protected description: string = "Atur channel untuk daily trivia";
 
   public async action(interaction: Interaction) {
     // Cek apakah pisa di reply
@@ -16,7 +16,7 @@ export class ChangeNicknameChannelCommand extends CommandBase {
         id: 1,
       },
       select: {
-        changeNicknameChannel: true
+        triviaChannel: true
       }
     })
 
@@ -29,15 +29,15 @@ export class ChangeNicknameChannelCommand extends CommandBase {
       .setMaxValues(1);
 
     // Existing config
-    if (config?.changeNicknameChannel) {
-      select.setDefaultChannels([config.changeNicknameChannel]);
+    if (config?.triviaChannel) {
+      select.setDefaultChannels([config.triviaChannel]);
     }
 
     const row = new ActionRowBuilder()
       .addComponents(select);
 
     const reply = await interaction.reply({
-      content: 'Pilih channel untuk ganti nickname',
+      content: 'Pilih channel untuk daily trivia',
       components: [row as any],
       flags: MessageFlags.Ephemeral,
     });
@@ -51,7 +51,7 @@ export class ChangeNicknameChannelCommand extends CommandBase {
     collector.on('collect', async i => {
       try {
         const data = {
-          changeNicknameChannel: i.values[0],
+          triviaChannel: i.values[0]
         };
 
         await prisma.config.upsert({
@@ -64,12 +64,13 @@ export class ChangeNicknameChannelCommand extends CommandBase {
 
         await interaction.deleteReply();
         await i.reply({
-          content: 'Channel berhasil diubah',
-          flags: MessageFlags.Ephemeral
+          content: 'Channel daily trivia telah diatur',
+          ephemeral: true
         });
       } catch {
         //
       }
     });
   }
+
 }
