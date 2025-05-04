@@ -5,7 +5,7 @@ import { ListenerBase } from "./listener-base";
 export abstract class VoiceStateUpdateListener extends ListenerBase {
   public abstract action(oldState: VoiceState, newState: VoiceState): Promise<void>;
 
-  protected override registerListener() {
-    discord().on(Events.VoiceStateUpdate, this.action);
+  protected override async registerListener() {
+    (await discord()).on(Events.VoiceStateUpdate, this.action);
   }
 }

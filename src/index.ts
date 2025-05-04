@@ -19,7 +19,7 @@ async function init() {
 // Register features
 init().then(async () => {
   // Login
-  await discord().login(process.env.DISCORD_TOKEN)
+  await (await discord()).login(process.env.DISCORD_TOKEN)
 }).then(() => {
   // Start cron job
   startCron();

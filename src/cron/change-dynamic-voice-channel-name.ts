@@ -7,7 +7,7 @@ export async function changeDynamicVoiceChannelName() {
   const guildId = "1301594669461016627";
 
   // Dapatkan guild
-  const guild = discord().guilds.cache.get(guildId);
+  const guild = (await discord()).guilds.cache.get(guildId);
   if (!guild) return;
 
   // Dapatkan channel

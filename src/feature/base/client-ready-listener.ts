@@ -5,7 +5,7 @@ import { ListenerBase } from "./listener-base";
 export abstract class ClientReadyListener extends ListenerBase {
   public abstract action(client: Client): Promise<void>;
 
-  protected override registerListener() {
-    discord().once(Events.ClientReady, this.action);
+  protected override async registerListener() {
+    (await discord()).once(Events.ClientReady, this.action);
   }
 }

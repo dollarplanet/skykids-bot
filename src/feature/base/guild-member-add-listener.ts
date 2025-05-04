@@ -5,7 +5,7 @@ import { ListenerBase } from "./listener-base";
 export abstract class GuildMemberAddListener extends ListenerBase {
   public abstract action(member: GuildMember): Promise<void>;
 
-  protected override registerListener() {
-    discord().on(Events.GuildMemberAdd, this.action);
+  protected override async registerListener() {
+    (await discord()).on(Events.GuildMemberAdd, this.action);
   }
 }
