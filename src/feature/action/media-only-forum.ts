@@ -6,7 +6,7 @@ import { isFeatureDisabled } from "../../utils/is-feature-disabled";
 export class MediaOnlyForum extends ThreadCreateListener {
   public async action(channel: AnyThreadChannel, _: boolean) {
     try {
-      // Cek fitur diaktifkan
+      // Cek fitur dimatikan
       if (await isFeatureDisabled("MediaOnlyForum")) return;
 
       // Cek channel harus type forum

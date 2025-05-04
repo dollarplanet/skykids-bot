@@ -9,7 +9,7 @@ import { isFeatureDisabled } from "../../utils/is-feature-disabled";
 export class DynamicVoiceChannelState extends VoiceStateUpdateListener {
   public async action(oldState: VoiceState, newState: VoiceState) {
     try {
-      // Cek fitur diaktifkan
+      // Cek fitur dimatikan
       if (await isFeatureDisabled("DynamicVoiceChannelState")) return;
 
       const channelId = "1361398803445579987"; // Dynamic voice channel name

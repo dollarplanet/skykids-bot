@@ -7,7 +7,7 @@ export class GoodbyMessage extends GuildMemberRemoveListener {
 
   public async action(member: GuildMember | PartialGuildMember) {
     try {
-      // Cek fitur diaktifkan
+      // Cek fitur dimatikan
       if (await isFeatureDisabled("GoodbyMessage")) return;
 
       // Kirim DM ke user

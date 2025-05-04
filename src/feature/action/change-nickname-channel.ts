@@ -6,7 +6,7 @@ import { isFeatureDisabled } from "../../utils/is-feature-disabled";
 export class ChangeNicknameChannel extends MessageCreateListener {
   public async action(data: OmitPartialGroupDMChannel<Message<boolean>>) {
     try {
-      // Cek fitur diaktifkan
+      // Cek fitur dimatikan
       if (await isFeatureDisabled("ChangeNicknameChannel")) return;
 
       const channelId = "1365998319687434280";

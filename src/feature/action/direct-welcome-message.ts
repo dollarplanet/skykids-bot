@@ -5,7 +5,7 @@ import { isFeatureDisabled } from "../../utils/is-feature-disabled";
 export class DirectWelcomeMessage extends GuildMemberAddListener {
   public async action(member: GuildMember) {
     try {
-      // Cek fitur diaktifkan
+      // Cek fitur dimatikan
       if (await isFeatureDisabled("DirectWelcomeMessage")) return;
 
       await member.send(`Halo ${member.user.globalName} 👋, selamat datang di komunitas Skykids, mari berpetualang bersama 🥳`);

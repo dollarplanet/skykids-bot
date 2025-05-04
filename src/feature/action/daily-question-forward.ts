@@ -8,7 +8,7 @@ export class DailyQuestionForward extends MessageCreateListener {
 
   public async action(data: OmitPartialGroupDMChannel<Message<boolean>>) {
     try {
-      // Cek fitur diaktifkan
+      // Cek fitur dimatikan
       if (await isFeatureDisabled("DailyQuestionForward")) return;
 
       // Harus dari channel daily question

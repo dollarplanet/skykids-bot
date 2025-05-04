@@ -6,7 +6,7 @@ import { isFeatureDisabled } from "../../utils/is-feature-disabled";
 export class AddRoleOnMemberJoin extends GuildMemberAddListener {
   public async action(member: GuildMember) {
     try {
-      // Cek fitur diaktifkan
+      // Cek fitur dimatikan
       if (await isFeatureDisabled("AddRoleOnMemberJoin")) return;
 
       // Get roles

@@ -9,7 +9,7 @@ export class WelcomeBannerForward extends MessageCreateListener {
 
   public async action(data: OmitPartialGroupDMChannel<Message<boolean>>) {
     try {
-      // Cek fitur diaktifkan
+      // Cek fitur dimatikan
       if (await isFeatureDisabled("WelcomeBannerForward")) return;
 
       // Pesan harus berasal dari bot welcome channel

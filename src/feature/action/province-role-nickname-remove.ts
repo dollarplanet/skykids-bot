@@ -6,7 +6,7 @@ import { isFeatureDisabled } from "../../utils/is-feature-disabled";
 export class ProvinceRoleNicknameRemove extends GuildMemberUpdateListener {
   public async action(oldMember: GuildMember | PartialGuildMember, newMember: GuildMember) {
     try {
-      // Cek fitur diaktifkan
+      // Cek fitur dimatikan
       if (await isFeatureDisabled("ProvinceRoleNicknameRemove")) return;
 
       // Return kalo role ditambah
