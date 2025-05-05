@@ -91,11 +91,6 @@ Jawaban kamu :`,
       // Create thread
       if (message.hasThread) return;
       await message.startThread({ name: "ᴛʀɪᴠɪᴀ" });
-
-      // Crosspost
-      if (message.crosspostable) {
-        await message.crosspost();
-      }
     } catch {
       //
     }
