@@ -85,12 +85,17 @@ export class TriviaForward extends MessageCreateListener {
 *"${trivia.questionIndo}"*
   
 Jawaban kamu :`,
-        components: [row as any]
+        components: [row as any],
       });
 
       // Create thread
       if (message.hasThread) return;
       await message.startThread({ name: "ᴛʀɪᴠɪᴀ" });
+
+      // Crosspost
+      if (message.crosspostable) {
+        await message.crosspost();
+      }
     } catch {
       //
     }
