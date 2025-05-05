@@ -51,6 +51,8 @@ export class TriviaAnswerCheck extends InteractionCreateListener {
         },
         select: {
           correctAnswer: true,
+          question: true,
+          questionIndo: true,          
         }
       });
       if (!trivia) return;
@@ -62,20 +64,38 @@ export class TriviaAnswerCheck extends InteractionCreateListener {
 
       const isCorrect = value === trivia.correctAnswer;
       if (isCorrect) {
-        thread.send(`✅ Jawaban <@!${interaction.member?.user.id}> benar! 🥳`);
+        // Kalo jawaban benar
+        thread.send(`✅ Jawaban <@!${interaction.user.id}> benar! 🥳`);
         interaction.reply({
           content: `✅ Jawaban kamu benar! 
           
 Sssst 🤫, jangan kasih tau yang lain ya 🤭`,
           flags: MessageFlags.Ephemeral,
         })
-      } else {
-        const additionalMessage = isAnswered === 0 ? ". Kamu masih punya kesempatan 1 kali lagi!" : ""
-        thread.send(`❌ Jawaban <@!${interaction.member?.user.id}> salah 😝`);
+      } else if (isAnswered === 0) {
+        // Kalo jawaban salah 1x
+        thread.send(`❌ Jawaban <@!${interaction.user.id}> salah 😝`);
         interaction.reply({
-          content: '❌ Jawabannya salah ya 😝' + additionalMessage,
+          content: '❌ Jawabannya salah ya 😝. Kamu masih punya kesempatan 1 kali lagi!',
           flags: MessageFlags.Ephemeral,
         })
+      } else {
+        // Kalo jawaban salah 2x
+        thread.send(`❌ Jawaban <@!${interaction.user.id}> masih salah aja 🤣`);
+        interaction.reply({
+          content: '❌ Sayang sekali, kamu gagal di kesempatan terakhir 🙃. Yaudah jawabannya aku kirim lewat DM ya, biar kamu gak penasaran. 😁',
+          flags: MessageFlags.Ephemeral,
+        })
+
+        // Kirim DM jawaban
+        await interaction.user.send(`Halo ${interaction.user.displayName} 👋
+
+Trivia :
+**${trivia.question}**
+*"${trivia.questionIndo}"*
+
+Jawaban yang benar adalah, ***${trivia.correctAnswer}***
+Jangan bosen - bosen main trivia ya ☺️`);
       }
 
       // Simpan log
