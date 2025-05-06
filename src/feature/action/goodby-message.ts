@@ -16,7 +16,7 @@ export class GoodbyMessage extends GuildMemberRemoveListener {
 
       // Kirim pesan ke goodby channel
       if (goodbyChannel.isSendable()) {
-        await goodbyChannel.send(`Sampai jumpa lagi <@!${member.user.id}>! 👋, senang sekali bisa mengenalmu.`);
+        await goodbyChannel.send(`Sampai jumpa lagi ${member.user.displayName}! 👋, senang sekali bisa mengenalmu.`);
       }
     } catch {
       //
