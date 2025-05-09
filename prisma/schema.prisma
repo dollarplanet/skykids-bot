@@ -82,6 +82,41 @@ model fish {
   price    Int
   time     Int[]
   months   Int[]
+  bucket   bucket[]
+  createAt DateTime @default(now())
+  updateAt DateTime @default(now())
+}
+
+model bucket {
+  id       Int      @id @default(autoincrement())
+  userId   String
+  quantity Int
+  fish     fish     @relation(fields: [fishId], references: [id])
+  fishId   Int
+  createAt DateTime @default(now())
+  updateAt DateTime @default(now())
+}
+
+model wallet {
+  id       Int      @id @default(autoincrement())
+  userId   String   @unique
+  amount   Int
+  createAt DateTime @default(now())
+  updateAt DateTime @default(now())
+}
+
+model daily {
+  id       Int      @id @default(autoincrement())
+  userId   String   @unique
+  createAt DateTime @default(now())
+  updateAt DateTime @default(now())
+}
+
+model fishingRod {
+  id       Int      @id @default(autoincrement())
+  userId   String   @unique
+  energy   Int
+  lastFish DateTime?
   createAt DateTime @default(now())
   updateAt DateTime @default(now())
 }
