@@ -7,8 +7,9 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./sqlite.db"
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 enum featureEnum {
@@ -27,19 +28,25 @@ enum featureEnum {
 }
 
 model activeFeature {
-  name featureEnum @id
+  name     featureEnum @id
+  createAt DateTime    @default(now())
+  updateAt DateTime    @default(now())
 }
 
 model defaultRole {
-  roleId String @id
+  roleId   String   @id
+  createAt DateTime @default(now())
+  updateAt DateTime @default(now())
 }
 
 model config {
-  id                     Int     @id @default(1)
+  id                     Int      @id @default(1)
   changeNicknameChannel  String?
   triviaChannel          String?
   triviaEnglishChannel   String?
   triviaIndonesiaChannel String?
+  createAt               DateTime @default(now())
+  updateAt               DateTime @default(now())
 }
 
 model trivia {
@@ -52,13 +59,29 @@ model trivia {
   optionTwo        String?
   optionThree      String?
   triviaUserAnswer triviaUserAnswer[]
+  createAt         DateTime           @default(now())
+  updateAt         DateTime           @default(now())
 }
 
 model triviaUserAnswer {
-  id       Int     @id @default(autoincrement())
-  trivia   trivia? @relation(fields: [triviaId], references: [id])
+  id       Int      @id @default(autoincrement())
+  trivia   trivia?  @relation(fields: [triviaId], references: [id])
   triviaId Int
   userId   String
   correct  Boolean
   answer   String
+  createAt DateTime @default(now())
+  updateAt DateTime @default(now())
+}
+
+model fish {
+  id       Int      @id @default(autoincrement())
+  name     String
+  image    String
+  rarity   String
+  price    Int
+  time     Int[]
+  months   Int[]
+  createAt DateTime @default(now())
+  updateAt DateTime @default(now())
 }
