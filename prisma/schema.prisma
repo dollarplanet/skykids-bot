@@ -25,6 +25,7 @@ enum featureEnum {
   SetStatus
   WelcomeBannerForward
   Trivia
+  Fishing
 }
 
 model activeFeature {

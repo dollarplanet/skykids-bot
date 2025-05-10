@@ -15,9 +15,17 @@ import { WelcomeBannerForward } from "./feature/action/welcome-banner-forward";
 import { CommandInteractionHandler } from "./command/command-interaction-handler";
 import { TriviaAnswerCheck } from "./feature/action/trivia-answer-check";
 import { TriviaForward } from "./feature/action/trivia-forward";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+import { FishingListener } from "./feature/fishing/fishing-listener";
 
 // Load environment variables
 dotenv.config();
+
+// extends dayjs
+dayjs.extend(utc)
+dayjs.extend(timezone)
 
 function featureInit() {
   new AddRoleOnMemberJoin();
@@ -34,6 +42,7 @@ function featureInit() {
   new CommandInteractionHandler();
   new TriviaAnswerCheck();
   new TriviaForward();
+  new FishingListener();
 }
 
 // Register features
