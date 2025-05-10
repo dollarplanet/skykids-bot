@@ -7,6 +7,7 @@ import { rarity } from "@prisma/xxx-client"
 import { shuffle } from "../../../utils/shuffle";
 import { prisma } from "../../../singleton/prisma-singleton";
 import { getBucketFishes } from "./utils/get-bucket-fishes";
+import dayjs from "dayjs";
 
 type Possibility = "Ikan" | "Sampah" | "Tanaman";
 
@@ -49,6 +50,18 @@ export class FishNowCommand extends CommandBase {
       return;
     }
 
+    // Tunggu 1 menit
+    if (fishingRod.lastFish) {
+      const diff = dayjs().diff(dayjs(fishingRod.lastFish), "seconds");
+      if (diff < 60) {
+        await interaction.reply({
+          content: `<@${interaction.user.id}> Umpannya lagi dipasang, tunggu sekitar ${60 - diff} detik lagi.`,
+          flags: MessageFlags.Ephemeral,
+        });
+        return;
+      }
+    }
+
     // Jika energy habis
     if (fishingRod.energy <= 0) {
       await interaction.reply({
@@ -66,7 +79,8 @@ export class FishNowCommand extends CommandBase {
       data: {
         energy: {
           decrement: 1
-        }
+        },
+        lastFish: dayjs().toDate(),
       }
     })
 
