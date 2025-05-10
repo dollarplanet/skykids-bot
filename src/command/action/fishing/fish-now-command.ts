@@ -40,7 +40,7 @@ export class FishNowCommand extends CommandBase {
 
     if (randomPossibility === "Tanaman") {
       await interaction.reply({
-        content: "Kamu mendapatkan tumbuhan air! Sayang sekali tidak bisa dijual.",
+        content: `<@${interaction.user.id}> mendapatkan tumbuhan air! Sayang sekali tidak bisa dijual.`,
         embeds: [new EmbedBuilder()
           .setTitle("Tumbuhan Air")
           .setThumbnail("https://dodo.ac/np/images/8/8c/Seaweed_NH_Icon.png")
@@ -57,7 +57,7 @@ export class FishNowCommand extends CommandBase {
 
     if (randomPossibility === "Sampah") {
       await interaction.reply({
-        content: "Yah, kamu dapat sampah. Buang saja ya!",
+        content: `Yah, <@${interaction.user.id}> dapat sampah. Buang saja ya!`,
         embeds: [new EmbedBuilder()
           .setTitle("Sampah")
           .setThumbnail("https://dodo.ac/np/images/e/ed/Green_Ring_Shirt_PG_Model.png")
@@ -98,7 +98,7 @@ export class FishNowCommand extends CommandBase {
 
     // Kirim ikan
     await interaction.reply({
-      content: "Kamu mendapatkan ikan!",
+      content: `<@${interaction.user.id}> mendapatkan ikan!`,
       embeds: [new EmbedBuilder()
         .setTitle(pickedFish.name)
         .setThumbnail(pickedFish.image)

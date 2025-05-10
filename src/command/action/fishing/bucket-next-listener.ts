@@ -42,7 +42,11 @@ export class BucketNextListener extends InteractionCreateListener {
 
     // kalo ikan kosong
     if (fishes.paged.length === 0) {
-      await interaction.update("Ikan sudah ditampilkan semua");
+      await interaction.update({
+        content: "Ikan sudah ditampilkan semua",
+        embeds: [],
+        components: []
+      });
       return;
     }
 
