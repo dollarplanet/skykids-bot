@@ -98,7 +98,7 @@ model fish {
 }
 
 model bucket {
-  id       Int      @id @default(autoincrement())
+  id       String   @id
   userId   String
   quantity Int
   fish     fish     @relation(fields: [fishId], references: [id])

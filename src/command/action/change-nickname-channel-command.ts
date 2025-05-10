@@ -59,7 +59,10 @@ export class ChangeNicknameChannelCommand extends CommandBase {
             id: 1,
           },
           create: data,
-          update: data,
+          update: {
+            ...data,
+            updateAt: new Date(),
+          },
         });
 
         await interaction.deleteReply();

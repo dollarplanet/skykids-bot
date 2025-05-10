@@ -7,7 +7,9 @@ export async function activeFeatureSeed() {
       where: {
         name: permission
       },
-      update: {},
+      update: {
+        updateAt: new Date()
+      },
       create: {
         name: permission,
       }

@@ -10,6 +10,7 @@ export async function getCurrentFishes() {
   // dapatkan ikan sesuai waktu
   const fishes = await prisma.fish.findMany({
     select: {
+      id: true,
       name: true,
       image: true,
       rarity: true,

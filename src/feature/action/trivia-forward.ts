@@ -57,11 +57,11 @@ export class TriviaForward extends MessageCreateListener {
       if (!channel.isSendable()) return;
 
       // Answer option
-      const answerOptions = shuffle([
+      const answerOptions: string[] = shuffle<string>([
         trivia.correctAnswer,
         trivia.optionOne,
-        trivia.optionTwo,
-        trivia.optionThree,
+        trivia.optionTwo ?? "",
+        trivia.optionThree ?? "",
       ]);
 
       // Selector

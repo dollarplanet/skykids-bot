@@ -5,6 +5,7 @@ import { getCurrentFishes } from "../utils/get-current-fishes";
 import { candleMoney } from "../utils/candle-money";
 import { rarity } from "@prisma/xxx-client"
 import { shuffle } from "../../../utils/shuffle";
+import { prisma } from "../../../singleton/prisma-singleton";
 
 type Possibility = "Ikan" | "Sampah" | "Tanaman";
 
@@ -48,7 +49,7 @@ export class FishNow extends FishingActionBase {
       return temp;
     }).flat();
 
-    const pickedFish = randomPicker(shuffle(multipleFish));
+    const pickedFish = randomPicker<typeof multipleFish[0]>(shuffle<typeof multipleFish[0]>(multipleFish));
 
     // Kirim ikan
     await data.reply({
@@ -69,5 +70,26 @@ export class FishNow extends FishingActionBase {
         })
       ],
     });
+
+    // Masukan ikan ke ember
+    if (!data.member) return;
+    const fingerprint = data.member.id + "-" + pickedFish.id.toString();
+    await prisma.bucket.upsert({
+      where: {
+        id: fingerprint,
+      },
+      create: {
+        id: fingerprint,
+        userId: data.member.id,
+        fishId: pickedFish.id,
+        quantity: 1,
+      },
+      update: {
+        quantity: {
+          increment: 1,
+        },
+        updateAt: new Date(),
+      }
+    })
   }
 }
