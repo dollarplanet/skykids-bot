@@ -45,6 +45,7 @@ model config {
   triviaChannel          String?
   triviaEnglishChannel   String?
   triviaIndonesiaChannel String?
+  fishingChannel         String?
   createAt               DateTime @default(now())
   updateAt               DateTime @default(now())
 }
@@ -113,10 +114,10 @@ model daily {
 }
 
 model fishingRod {
-  id       Int      @id @default(autoincrement())
-  userId   String   @unique
+  id       Int       @id @default(autoincrement())
+  userId   String    @unique
   energy   Int
   lastFish DateTime?
-  createAt DateTime @default(now())
-  updateAt DateTime @default(now())
+  createAt DateTime  @default(now())
+  updateAt DateTime  @default(now())
 }
