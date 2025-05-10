@@ -49,6 +49,7 @@ export class WalletCommand extends CommandBase {
         .setTitle("Dompet")
         .setDescription(`Total candle: ${candleMoney((wallet.amount) + wallet.all)}`)
         .setThumbnail("https://dodo.ac/np/images/1/1e/99k_Bells_NH_Inv_Icon.png")
+        .setColor("Blue")
         .addFields({
           name: "Cash",
           value: candleMoney(wallet.amount),

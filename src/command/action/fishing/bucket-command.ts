@@ -40,24 +40,29 @@ export class BucketCommand extends CommandBase {
       .setLabel('Next')
       .setStyle(ButtonStyle.Primary);
 
+    const sell = new ButtonBuilder()
+      .setCustomId("sell-0")
+      .setLabel('Jual')
+      .setStyle(ButtonStyle.Danger);
+
+    const sellLimit = new ButtonBuilder()
+      .setCustomId("sell_limit-0")
+      .setLabel('Jual Sisakan 1')
+      .setStyle(ButtonStyle.Success);
+
     const row = new ActionRowBuilder();
 
     if (!isDone) {
-      row.addComponents(next);
+      row.addComponents(sell, sellLimit, next);
     }
-
-    const totalPrice = fishes.all.reduce((total, fish) => {
-      return total + (fish.fish.price * fish.quantity);
-    }, 0)
 
     const totalFishes = fishes.all.reduce((total, fish) => {
       return total + fish.quantity;
     }, 0)
 
     await interaction.reply({
-      content: `Kamu memiliki ${totalFishes} ekor ikan dalam ember dengan ${fishes.all.length} jenis ikan yang berbeda. 
-Total harga: ${candleMoney(totalPrice)}\n`,
-      components: isDone ? [] :[row as any],
+      content: `Kamu memiliki ${totalFishes} ekor ikan dalam ember dengan ${fishes.all.length} jenis ikan yang berbeda.`,
+      components: isDone ? [] : [row as any],
       flags: MessageFlags.Ephemeral,
       embeds: fishes.paged.map(data => {
         return new EmbedBuilder()
