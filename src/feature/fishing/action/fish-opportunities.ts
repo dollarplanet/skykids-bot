@@ -35,15 +35,9 @@ export class FishOpportunities extends FishingActionBase {
           return new EmbedBuilder()
             .setTitle(fish.name)
             .setThumbnail(fish.image)
-            // .setDescription(`Jam: ${fish.time.join(", ")}\nBulan: ${fish.months.join(", ")}`)
-            .addFields({
-              name: "Rarity",
-              value: fish.rarity,
-              inline: true,
-            })
             .addFields({
               name: "Harga",
-              value: candleMoney(fish.price),
+              value: candleMoney(fish.price) + ` (${fish.rarity})`,
               inline: true,
             })
         }),

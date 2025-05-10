@@ -17,6 +17,7 @@ export class FishNow extends FishingActionBase {
     const possibility: Possibility[] = [
       "Ikan",
       "Sampah",
+      "Ikan",
       "Tanaman",
     ]
 
@@ -29,11 +30,6 @@ export class FishNow extends FishingActionBase {
           .setTitle("Tumbuhan Air")
           .setThumbnail("https://dodo.ac/np/images/8/8c/Seaweed_NH_Icon.png")
           .setColor("#e63946")
-          .addFields({
-            name: "Rarity",
-            value: "Tanaman",
-            inline: true,
-          })
           .addFields({
             name: "Harga",
             value: candleMoney(0),
@@ -51,11 +47,6 @@ export class FishNow extends FishingActionBase {
           .setTitle("Sampah")
           .setThumbnail("https://dodo.ac/np/images/e/ed/Green_Ring_Shirt_PG_Model.png")
           .setColor("#e63946")
-          .addFields({
-            name: "Rarity",
-            value: "Sampah",
-            inline: true,
-          })
           .addFields({
             name: "Harga",
             value: candleMoney(0),
@@ -98,13 +89,8 @@ export class FishNow extends FishingActionBase {
         .setThumbnail(pickedFish.image)
         .setColor("#008000")
         .addFields({
-          name: "Rarity",
-          value: pickedFish.rarity,
-          inline: true,
-        })
-        .addFields({
           name: "Harga",
-          value: candleMoney(pickedFish.price),
+          value: candleMoney(pickedFish.price) + ` (${pickedFish.rarity})`,
           inline: true,
         })
       ],
