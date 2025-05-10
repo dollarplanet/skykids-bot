@@ -1,35 +1,48 @@
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, Interaction, MessageFlags } from "discord.js";
-import { CommandBase } from "../command-base";
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, Interaction } from "discord.js";
+import { InteractionCreateListener } from "../../../feature/base/interaction-create-listener";
+import { isFeatureDisabled } from "../../../utils/is-feature-disabled";
 import { prisma } from "../../../singleton/prisma-singleton";
-import { getBucketFishes } from "./utils/get-bucket-fishes";
 import { candleMoney } from "./utils/candle-money";
 import { pageLimit } from "./utils/limit";
+import { getBucketFishes } from "./utils/get-bucket-fishes";
 
-export class BucketCommand extends CommandBase {
-  protected name: string = "ember";
-  protected description: string = "Lihat semua ikan hasil tangkapan kamu disini";
-
+export class BucketNextListener extends InteractionCreateListener {
   public async action(interaction: Interaction): Promise<void> {
-    // Cek apakah bisa di reply
+    // Cek interaction dapat dibalas
     if (!interaction.isRepliable()) return;
 
-    // pastikan dari fishing channel
-    const channel = await prisma.config.findUnique({
+    // Cek fitur dimatikan
+    if (await isFeatureDisabled("Fishing")) return;
+
+    // Dapatkan config
+    const config = await prisma.config.findUnique({
       where: {
         id: 1,
       },
       select: {
         fishingChannel: true
       }
-    });
-    if (interaction.channelId !== channel?.fishingChannel) return;
+    })
+    if (!config) return;
 
-    // Dapatkan ikan dalam ember
-    const fishes = await getBucketFishes(interaction.user.id, 0);
+    // Harus dari channel change nickname
+    if (interaction.channelId !== config.fishingChannel) return;
+
+    // Harus bukan bot
+    if (interaction.user.bot) return;
+
+    // Harus button
+    if (!interaction.isButton()) return;
+
+    const customId = interaction.customId;
+    if (!customId.startsWith('ember_next-')) return;
+
+    // Dapatkan ikan
+    const fishes = await getBucketFishes(interaction.user.id, parseInt(customId.split('-')[1]));
 
     // kalo ikan kosong
-    if (fishes.all.length === 0) {
-      await interaction.reply("Kamu belum menangkap ikan apapun :(");
+    if (fishes.paged.length === 0) {
+      await interaction.update("Ikan sudah ditampilkan semua");
       return;
     }
 
@@ -54,11 +67,10 @@ export class BucketCommand extends CommandBase {
       return total + fish.quantity;
     }, 0)
 
-    await interaction.reply({
+    await interaction.update({
       content: `Kamu memiliki ${totalFishes} ekor ikan dalam ember dengan ${fishes.all.length} jenis ikan yang berbeda. 
-Total harga: ${candleMoney(totalPrice)}\n`,
-      components: isDone ? [] :[row as any],
-      flags: MessageFlags.Ephemeral,
+    Total harga: ${candleMoney(totalPrice)}\n`,
+      components: isDone ? [] : [row as any],
       embeds: fishes.paged.map(data => {
         return new EmbedBuilder()
           .setTitle(data.fish.name)

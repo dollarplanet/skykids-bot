@@ -42,7 +42,7 @@ export class OpportunitiesNextListener extends InteractionCreateListener {
 
     // kalo ikan kosong
     if (fishes.length === 0) {
-      await interaction.reply("Tidak ada ikan untuk saat ini :(");
+      await interaction.update("Ikan sudah ditampilkan semua");
       return;
     }
 

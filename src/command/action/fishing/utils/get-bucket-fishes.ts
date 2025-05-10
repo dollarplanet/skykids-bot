@@ -7,7 +7,7 @@ export async function getBucketFishes(userId: string, cursor: number) {
     id: cursor,
   } : undefined;
 
-  const fishes = await prisma.bucket.findMany({
+  const paged = await prisma.bucket.findMany({
     where: {
       userId: userId,
     },
@@ -28,5 +28,23 @@ export async function getBucketFishes(userId: string, cursor: number) {
     skip: cursor === 0 ? 0 : 1,
   });
 
-  return fishes;
+  const all = await prisma.bucket.findMany({
+    where: {
+      userId: userId,
+    },
+    select: {
+      id: true,
+      fish: {
+        select: {
+          price: true,
+        }
+      },
+      quantity: true,
+    },
+  });
+
+  return {
+    all,
+    paged
+  };
 }
