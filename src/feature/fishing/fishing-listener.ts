@@ -4,7 +4,6 @@ import { isFeatureDisabled } from "../../utils/is-feature-disabled";
 import { prisma } from "../../singleton/prisma-singleton";
 import { FishingActionBase } from "./action/fishing-action-base";
 import { FishOpportunities } from "./action/fish-opportunities";
-import { FishNow } from "./action/fish-now";
 import { BucketCheck } from "./action/bucket-check";
 
 export class FishingListener extends MessageCreateListener {
@@ -35,7 +34,6 @@ export class FishingListener extends MessageCreateListener {
 
       // Aksi
       const actions: FishingActionBase[] = [
-        new FishNow(),
         new FishOpportunities(),
         new BucketCheck(),
       ]

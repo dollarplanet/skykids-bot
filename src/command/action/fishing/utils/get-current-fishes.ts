@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { prisma } from "../../../singleton/prisma-singleton";
+import { prisma } from "../../../../singleton/prisma-singleton";
 
 export async function getCurrentFishes() {
   // dapatkan jam dan bulan

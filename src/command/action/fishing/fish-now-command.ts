@@ -1,18 +1,33 @@
-import { OmitPartialGroupDMChannel, Message, EmbedBuilder } from "discord.js";
-import { FishingActionBase } from "./fishing-action-base";
-import { randomPicker } from "../utils/random-picker";
-import { getCurrentFishes } from "../utils/get-current-fishes";
-import { candleMoney } from "../utils/candle-money";
+import { EmbedBuilder, Interaction } from "discord.js";
+import { CommandBase } from "../command-base";
+import { randomPicker } from "./utils/random-picker";
+import { candleMoney } from "./utils/candle-money";
+import { getCurrentFishes } from "./utils/get-current-fishes";
 import { rarity } from "@prisma/xxx-client"
 import { shuffle } from "../../../utils/shuffle";
 import { prisma } from "../../../singleton/prisma-singleton";
 
 type Possibility = "Ikan" | "Sampah" | "Tanaman";
 
-export class FishNow extends FishingActionBase {
-  public commands: string[] = ["mancing"];
+export class FishNowCommand extends CommandBase {
+  protected name: string = "mancing";
+  protected description: string = "Lempar joran untuk mulai memancing";
 
-  public async action(data: OmitPartialGroupDMChannel<Message<boolean>>): Promise<void> {
+  public async action(interaction: Interaction): Promise<void> {
+    // Cek apakah bisa di reply
+    if (!interaction.isRepliable()) return;
+
+    // pastikan dari fishing channel
+    const channel = await prisma.config.findUnique({
+      where: {
+        id: 1,
+      },
+      select: {
+        fishingChannel: true
+      }
+    });
+    if (interaction.channelId !== channel?.fishingChannel) return;
+
     // dapatkan peluang
     const possibility: Possibility[] = [
       "Ikan",
@@ -24,7 +39,7 @@ export class FishNow extends FishingActionBase {
     const randomPossibility = randomPicker(possibility);
 
     if (randomPossibility === "Tanaman") {
-      await data.reply({
+      await interaction.reply({
         content: "Kamu mendapatkan tumbuhan air! Sayang sekali tidak bisa dijual.",
         embeds: [new EmbedBuilder()
           .setTitle("Tumbuhan Air")
@@ -41,7 +56,7 @@ export class FishNow extends FishingActionBase {
     }
 
     if (randomPossibility === "Sampah") {
-      await data.reply({
+      await interaction.reply({
         content: "Yah, kamu dapat sampah. Buang saja ya!",
         embeds: [new EmbedBuilder()
           .setTitle("Sampah")
@@ -82,7 +97,7 @@ export class FishNow extends FishingActionBase {
     const pickedFish = randomPicker<typeof multipleFish[0]>(shuffle<typeof multipleFish[0]>(multipleFish));
 
     // Kirim ikan
-    await data.reply({
+    await interaction.reply({
       content: "Kamu mendapatkan ikan!",
       embeds: [new EmbedBuilder()
         .setTitle(pickedFish.name)
@@ -97,15 +112,15 @@ export class FishNow extends FishingActionBase {
     });
 
     // Masukan ikan ke ember
-    if (!data.member) return;
-    const fingerprint = data.member.id + "-" + pickedFish.id.toString();
+    if (!interaction.member) return;
+    const fingerprint = interaction.user.id + "-" + pickedFish.id.toString();
     await prisma.bucket.upsert({
       where: {
         id: fingerprint,
       },
       create: {
         id: fingerprint,
-        userId: data.member.id,
+        userId: interaction.user.id,
         fishId: pickedFish.id,
         quantity: 1,
       },
@@ -117,4 +132,5 @@ export class FishNow extends FishingActionBase {
       }
     })
   }
+
 }

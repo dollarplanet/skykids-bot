@@ -10,6 +10,7 @@ import { GetTriviaCommand } from "./action/get-trivia-command";
 import { TriviaChannelEnglishCommand } from "./action/trivia-channel-english-command";
 import { TriviaChannelIndonesiaCommand } from "./action/trivia-channel-indonesia-command";
 import { FishingChannelCommand } from "./action/fishing-channel-command";
+import { FishNowCommand } from "./action/fishing/fish-now-command";
 
 export class CommandInteractionHandler extends InteractionCreateListener {
   static readonly commands: CommandBase[] = [
@@ -22,6 +23,7 @@ export class CommandInteractionHandler extends InteractionCreateListener {
     new TriviaChannelEnglishCommand(),
     new TriviaChannelIndonesiaCommand(),
     new FishingChannelCommand(),
+    new FishNowCommand(),
   ]
 
   public async action(interaction: Interaction) {

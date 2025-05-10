@@ -1,7 +1,7 @@
 import { OmitPartialGroupDMChannel, Message, EmbedBuilder } from "discord.js";
 import { FishingActionBase } from "./fishing-action-base";
-import { candleMoney } from "../utils/candle-money";
-import { getCurrentFishes } from "../utils/get-current-fishes";
+import { candleMoney } from "../../../command/action/fishing/utils/candle-money";
+import { getCurrentFishes } from "../../../command/action/fishing/utils/get-current-fishes";
 
 export class FishOpportunities extends FishingActionBase {
   public commands: string[] = ["peluang"];

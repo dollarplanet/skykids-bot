@@ -1,7 +1,7 @@
 import { OmitPartialGroupDMChannel, Message, EmbedBuilder, ButtonStyle, ButtonBuilder, ActionRowBuilder, MessageFlags } from "discord.js";
 import { FishingActionBase } from "./fishing-action-base";
 import { prisma } from "../../../singleton/prisma-singleton";
-import { candleMoney } from "../utils/candle-money";
+import { candleMoney } from "../../../command/action/fishing/utils/candle-money";
 
 export class BucketCheck extends FishingActionBase {
   public commands: string[] = ["ember"];
