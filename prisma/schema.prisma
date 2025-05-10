@@ -76,11 +76,19 @@ model triviaUserAnswer {
   updateAt DateTime @default(now())
 }
 
+enum rarity {
+  Common
+  VeryCommon
+  Uncommon
+  Rare
+  VeryRare
+}
+
 model fish {
   id       Int      @id @default(autoincrement())
   name     String
   image    String
-  rarity   String
+  rarity   rarity
   price    Int
   time     Int[]
   months   Int[]

@@ -1,43 +1,17 @@
 import { OmitPartialGroupDMChannel, Message, EmbedBuilder } from "discord.js";
 import { FishingActionBase } from "./fishing-action-base";
-import dayjs from "dayjs";
-import { prisma } from "../../../singleton/prisma-singleton";
 import { candleMoney } from "../utils/candle-money";
+import { getCurrentFishes } from "../utils/get-current-fishes";
 
 export class FishOpportunities extends FishingActionBase {
   public commands: string[] = ["peluang"];
 
   public async action(data: OmitPartialGroupDMChannel<Message<boolean>>): Promise<void> {
-    // dapatkan jam dan bulan
-    const now = dayjs().tz('Asia/Jakarta').locale('id');
-    const hour = now.hour();
-    const month = now.month() + 1;
-
-    // dapatkan ikan sesuai waktu
-    const fishs = await prisma.fish.findMany({
-      select: {
-        name: true,
-        image: true,
-        rarity: true,
-        price: true,
-        time: true,
-        months: true
-      },
-      where: {
-        time: {
-          has: hour,
-        },
-        months: {
-          has: month,
-        },
-      },
-      orderBy: {
-        price: "asc",
-      },
-    })
+    // dapatkan ikan 
+    const fishes = await getCurrentFishes();
 
     // kalo ikan kosong
-    if (fishs.length === 0) {
+    if (fishes.length === 0) {
       await data.reply("Tidak ada ikan untuk saat ini :(");
       return;
     }
@@ -54,10 +28,10 @@ export class FishOpportunities extends FishingActionBase {
     })
 
     // kalo ikan ada
-    for (let i = 0; i < fishs.length; i += 10) {
-      const fishsCopy = fishs.slice(i, i + 10);
+    for (let i = 0; i < fishes.length; i += 10) {
+      const fishesCopy = fishes.slice(i, i + 10);
       await thread.send({
-        embeds: fishsCopy.map(fish => {
+        embeds: fishesCopy.map(fish => {
           return new EmbedBuilder()
             .setTitle(fish.name)
             .setThumbnail(fish.image)

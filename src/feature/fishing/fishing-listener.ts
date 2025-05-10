@@ -4,6 +4,7 @@ import { isFeatureDisabled } from "../../utils/is-feature-disabled";
 import { prisma } from "../../singleton/prisma-singleton";
 import { FishingActionBase } from "./action/fishing-action-base";
 import { FishOpportunities } from "./action/fish-opportunities";
+import { FishNow } from "./action/fish-now";
 
 export class FishingListener extends MessageCreateListener {
   public async action(data: OmitPartialGroupDMChannel<Message<boolean>>) {
@@ -33,6 +34,7 @@ export class FishingListener extends MessageCreateListener {
 
       // Aksi
       const actions: FishingActionBase[] = [
+        new FishNow(),
         new FishOpportunities(),
       ]
 
