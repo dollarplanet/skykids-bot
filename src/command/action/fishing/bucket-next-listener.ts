@@ -57,10 +57,24 @@ export class BucketNextListener extends InteractionCreateListener {
       .setLabel('Next')
       .setStyle(ButtonStyle.Primary);
 
+    const sell = new ButtonBuilder()
+      .setCustomId(`sell-${customId.split('-')[1]}`)
+      .setLabel('Jual')
+      .setStyle(ButtonStyle.Danger);
+
+    const sellLimit = new ButtonBuilder()
+      .setCustomId(`sell_limit-${customId.split('-')[1]}`)
+      .setLabel('Jual Sisakan 1')
+      .setStyle(ButtonStyle.Success);
+
     const row = new ActionRowBuilder();
 
     if (!isDone) {
-      row.addComponents(next);
+      row.addComponents(next, sell);
+
+      if (fishes.paged.filter(fish => fish.quantity > 1).length > 0) {
+        row.addComponents(sellLimit);
+      }
     }
 
     const totalPrice = fishes.all.reduce((total, fish) => {

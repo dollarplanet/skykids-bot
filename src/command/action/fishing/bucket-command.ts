@@ -53,7 +53,11 @@ export class BucketCommand extends CommandBase {
     const row = new ActionRowBuilder();
 
     if (!isDone) {
-      row.addComponents(sell, sellLimit, next);
+      row.addComponents( next, sell);
+
+      if (fishes.paged.filter(fish => fish.quantity > 1).length > 0) {
+        row.addComponents(sellLimit);
+      }
     }
 
     const totalFishes = fishes.all.reduce((total, fish) => {

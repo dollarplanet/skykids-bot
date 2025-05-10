@@ -21,6 +21,7 @@ import timezone from "dayjs/plugin/timezone";
 import { OpportunitiesNextListener } from "./command/action/fishing/opportunities-next-listener";
 import { BucketNextListener } from "./command/action/fishing/bucket-next-listener";
 import { SellListener } from "./command/action/fishing/sell-listener";
+import { SellLimitListener } from "./command/action/fishing/sell-limit-listener";
 
 // Load environment variables
 dotenv.config();
@@ -47,6 +48,7 @@ function featureInit() {
   new OpportunitiesNextListener();
   new BucketNextListener();
   new SellListener();
+  new SellLimitListener();
 }
 
 // Register features

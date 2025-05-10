@@ -3,10 +3,9 @@ import { InteractionCreateListener } from "../../../feature/base/interaction-cre
 import { isFeatureDisabled } from "../../../utils/is-feature-disabled";
 import { prisma } from "../../../singleton/prisma-singleton";
 import { candleMoney } from "./utils/candle-money";
-import { pageLimit } from "./utils/limit";
 import { getBucketFishes } from "./utils/get-bucket-fishes";
 
-export class SellListener extends InteractionCreateListener {
+export class SellLimitListener extends InteractionCreateListener {
   public async action(interaction: Interaction): Promise<void> {
     // Cek interaction dapat dibalas
     if (!interaction.isRepliable()) return;
@@ -35,7 +34,7 @@ export class SellListener extends InteractionCreateListener {
     if (!interaction.isButton()) return;
 
     const customId = interaction.customId;
-    if (!customId.startsWith('sell-')) return;
+    if (!customId.startsWith('sell_limit-')) return;
 
     // Dapatkan ikan
     const fishes = await getBucketFishes(interaction.user.id, parseInt(customId.split('-')[1]));
@@ -50,22 +49,25 @@ export class SellListener extends InteractionCreateListener {
       return;
     }
 
+    // Filter
+    const filteredFish = fishes.paged.filter(data => data.quantity > 1);
+
     // Selection
     const select = new StringSelectMenuBuilder()
       .setCustomId(interaction.id)
-      .setOptions(fishes.paged.map(data => ({
+      .setOptions(filteredFish.map(data => ({
         label: data.fish.name,
         value: data.id.toString(),
       })))
       .setPlaceholder('Pilih ikan dijual')
       .setMinValues(1)
-      .setMaxValues(pageLimit);
+      .setMaxValues(filteredFish.length);
 
     const row = new ActionRowBuilder()
       .addComponents(select);
 
     const reply = await interaction.update({
-      content: "Pilih ikan yang ingin kamu jual",
+      content: "Pilih ikan yang ingin kamu jual, ikan akan disisakan 1 ekor",
       components: [row as any],
     });
 
@@ -77,17 +79,20 @@ export class SellListener extends InteractionCreateListener {
 
     collector.on('collect', async i => {
       try {
-        const result = i.values.map(value => fishes.paged.find(fish => fish.id.toString() === value)).filter(val => val !== undefined);
-        const candle = result.reduce((total, data) => total + data.fish.price * data.quantity, 0);
+        const result = i.values.map(value => filteredFish.find(fish => fish.id.toString() === value)).filter(val => val !== undefined);
+        const candle = result.reduce((total, data) => total + data.fish.price * (data.quantity - 1), 0);
 
         await prisma.$transaction(async prisma => {
-          await prisma.bucket.deleteMany({
+          await prisma.bucket.updateMany({
             where: {
               userId: interaction.user.id,
               id: {
                 in: result.map(data => data.id)
               }
-            }
+            },
+            data: {
+              quantity: 1,
+            },
           });
 
           await prisma.wallet.update({
@@ -101,7 +106,7 @@ export class SellListener extends InteractionCreateListener {
               all: {
                 decrement: candle
               },
-            },
+            }
           });
         });
 
