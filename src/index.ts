@@ -19,6 +19,7 @@ import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
 import { FishingListener } from "./feature/fishing/fishing-listener";
+import { OpportunitiesNextListener } from "./command/action/fishing/opportunities-next-listener";
 
 // Load environment variables
 dotenv.config();
@@ -43,6 +44,7 @@ function featureInit() {
   new TriviaAnswerCheck();
   new TriviaForward();
   new FishingListener();
+  new OpportunitiesNextListener();
 }
 
 // Register features
