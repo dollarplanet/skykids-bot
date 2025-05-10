@@ -1,4 +1,4 @@
-import { EmbedBuilder, Interaction } from "discord.js";
+import { EmbedBuilder, Interaction, MessageFlags } from "discord.js";
 import { CommandBase } from "../command-base";
 import { randomPicker } from "./utils/random-picker";
 import { candleMoney } from "./utils/candle-money";
@@ -28,6 +28,35 @@ export class FishNowCommand extends CommandBase {
       }
     });
     if (interaction.channelId !== channel?.fishingChannel) return;
+
+    // Cek joran
+    const fishingRod = await prisma.fishingRod.findUnique({
+      where: {
+        userId: interaction.user.id
+      },
+      select: {
+        energy: true,
+        lastFish: true,
+      }
+    })
+
+    // Jika tidak punya joran
+    if (!fishingRod) {
+      await interaction.reply({
+        content: "Kamu harus memiliki joran untuk memancing! Gunakan command /joran untuk membeli joran. Gunakan command /bantuan untuk membaca cara bermain.",
+        flags: MessageFlags.Ephemeral,
+      });
+      return;
+    }
+
+    // Jika energy habis
+    if (fishingRod.energy <= 0) {
+      await interaction.reply({
+        content: "Joran kamu sudah rusak! Gunakan command /joran untuk membeli joran lagi.",
+        flags: MessageFlags.Ephemeral,
+      });
+      return;
+    }
 
     // dapatkan peluang
     const possibility: Possibility[] = [
@@ -98,45 +127,59 @@ export class FishNowCommand extends CommandBase {
     const pickedFish = randomPicker<typeof multipleFish[0]>(shuffle<typeof multipleFish[0]>(multipleFish));
 
 
-    // Masukan ikan ke ember
-    if (!interaction.member) return;
-    const fingerprint = interaction.user.id + "-" + pickedFish.id.toString();
-    await prisma.bucket.upsert({
-      where: {
-        fingerprint: fingerprint,
-      },
-      create: {
-        fingerprint: fingerprint,
-        userId: interaction.user.id,
-        fishId: pickedFish.id,
-        quantity: 1,
-      },
-      update: {
-        quantity: {
-          increment: 1,
+    await prisma.$transaction(async prisma => {
+      // Masukan ikan ke ember
+      if (!interaction.member) return;
+      const fingerprint = interaction.user.id + "-" + pickedFish.id.toString();
+      await prisma.bucket.upsert({
+        where: {
+          fingerprint: fingerprint,
         },
-        updateAt: new Date(),
-      }
-    })
+        create: {
+          fingerprint: fingerprint,
+          userId: interaction.user.id,
+          fishId: pickedFish.id,
+          quantity: 1,
+        },
+        update: {
+          quantity: {
+            increment: 1,
+          },
+          updateAt: new Date(),
+        }
+      })
 
-    // Dapatkan total ikan di ember
-    const bucketFishes = await getBucketFishes(interaction.user.id, 0);
-    const totalFishesPrice = bucketFishes.all.reduce((total, fish) => {
-      return total + (fish.fish.price * fish.quantity);
-    }, 0)
+      // Dapatkan total ikan di ember
+      const bucketFishes = await getBucketFishes(interaction.user.id, 0);
+      const totalFishesPrice = bucketFishes.all.reduce((total, fish) => {
+        return total + (fish.fish.price * fish.quantity);
+      }, 0)
 
-    // Update wallet
-    await prisma.wallet.upsert({
-      where: {
-        userId: interaction.user.id,
-      },
-      update: {
-        all:  totalFishesPrice
-      },
-      create: {
-        userId: interaction.user.id,
-        all: totalFishesPrice
-      }
+      // Update wallet
+      await prisma.wallet.upsert({
+        where: {
+          userId: interaction.user.id,
+        },
+        update: {
+          all: totalFishesPrice
+        },
+        create: {
+          userId: interaction.user.id,
+          all: totalFishesPrice
+        }
+      });
+
+      // Kurangi energy joran
+      await prisma.fishingRod.update({
+        where: {
+          userId: interaction.user.id,
+        },
+        data: {
+          energy: {
+            decrement: 1
+          }
+        }
+      })
     });
 
     // Kirim ikan
@@ -153,6 +196,5 @@ export class FishNowCommand extends CommandBase {
         })
       ],
     });
-
   }
 }
