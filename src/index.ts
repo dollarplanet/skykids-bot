@@ -18,7 +18,6 @@ import { TriviaForward } from "./feature/action/trivia-forward";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
-import { FishingListener } from "./feature/fishing/fishing-listener";
 import { OpportunitiesNextListener } from "./command/action/fishing/opportunities-next-listener";
 
 // Load environment variables
@@ -43,7 +42,6 @@ function featureInit() {
   new CommandInteractionHandler();
   new TriviaAnswerCheck();
   new TriviaForward();
-  new FishingListener();
   new OpportunitiesNextListener();
 }
 

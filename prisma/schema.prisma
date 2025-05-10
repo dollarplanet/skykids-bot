@@ -98,13 +98,14 @@ model fish {
 }
 
 model bucket {
-  id       String   @id
-  userId   String
-  quantity Int
-  fish     fish     @relation(fields: [fishId], references: [id])
-  fishId   Int
-  createAt DateTime @default(now())
-  updateAt DateTime @default(now())
+  id          Int      @id @default(autoincrement())
+  fingerprint String   @unique
+  userId      String
+  quantity    Int
+  fish        fish     @relation(fields: [fishId], references: [id])
+  fishId      Int
+  createAt    DateTime @default(now())
+  updateAt    DateTime @default(now())
 }
 
 model wallet {

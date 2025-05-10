@@ -116,10 +116,10 @@ export class FishNowCommand extends CommandBase {
     const fingerprint = interaction.user.id + "-" + pickedFish.id.toString();
     await prisma.bucket.upsert({
       where: {
-        id: fingerprint,
+        fingerprint: fingerprint,
       },
       create: {
-        id: fingerprint,
+        fingerprint: fingerprint,
         userId: interaction.user.id,
         fishId: pickedFish.id,
         quantity: 1,

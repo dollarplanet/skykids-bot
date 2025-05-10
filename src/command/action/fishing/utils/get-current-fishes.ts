@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
 import { prisma } from "../../../../singleton/prisma-singleton";
+import { pageLimit } from "./limit";
 
 export async function getCurrentFishes(cursor?: number) {
   // dapatkan jam dan bulan
@@ -33,7 +34,7 @@ export async function getCurrentFishes(cursor?: number) {
     orderBy: {
       price: "asc",
     },
-    take: cursor === undefined ? undefined : 10,
+    take: cursor === undefined ? undefined : pageLimit,
     cursor: realCursor,
     skip: cursor === 0 ? 0 : 1,
   })

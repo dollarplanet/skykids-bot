@@ -3,6 +3,7 @@ import { CommandBase } from "../command-base";
 import { prisma } from "../../../singleton/prisma-singleton";
 import { getCurrentFishes } from "./utils/get-current-fishes";
 import { candleMoney } from "./utils/candle-money";
+import { pageLimit } from "./utils/limit";
 
 export class FishOpportunitiesCommand extends CommandBase {
   protected name: string = "peluang";
@@ -32,7 +33,7 @@ export class FishOpportunitiesCommand extends CommandBase {
       return;
     }
 
-    const isDone = (fishes.length < 10) || (fishes.length === 0);
+    const isDone = (fishes.length < pageLimit) || (fishes.length === 0);
 
     const next = new ButtonBuilder()
       .setCustomId(`peluang_next-${fishes[fishes.length - 1].id}`)
@@ -47,7 +48,7 @@ export class FishOpportunitiesCommand extends CommandBase {
 
     // kalo ikan ada
     await interaction.reply({
-      content: "Ikan yang berbeda memiliki jadwal yang berbeda juga. Semakin tinggi tingkat rarity, semakin sulit untuk mendapatkannya. Untuk waktu saat ini, kamu berpeluang mendapatkan ikan:",
+      content: "Ikan yang berbeda memiliki jadwal yang berbeda juga. Semakin tinggi tingkat rarity, semakin sulit untuk mendapatkannya. Untuk waktu saat ini, kamu berpeluang mendapatkan ikan:\n",
       flags: MessageFlags.Ephemeral,
       components: isDone ? [] : [row as any],
       embeds: fishes.map(fish => {

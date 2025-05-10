@@ -4,6 +4,7 @@ import { isFeatureDisabled } from "../../../utils/is-feature-disabled";
 import { prisma } from "../../../singleton/prisma-singleton";
 import { getCurrentFishes } from "./utils/get-current-fishes";
 import { candleMoney } from "./utils/candle-money";
+import { pageLimit } from "./utils/limit";
 
 export class OpportunitiesNextListener extends InteractionCreateListener {
   public async action(interaction: Interaction): Promise<void> {
@@ -45,7 +46,7 @@ export class OpportunitiesNextListener extends InteractionCreateListener {
       return;
     }
 
-    const isDone = (fishes.length < 10) || (fishes.length === 0);
+    const isDone = (fishes.length < pageLimit) || (fishes.length === 0);
 
     const next = new ButtonBuilder()
       .setCustomId(`peluang_next-${fishes[fishes.length - 1].id}`)
