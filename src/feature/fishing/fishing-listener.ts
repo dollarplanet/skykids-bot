@@ -5,6 +5,7 @@ import { prisma } from "../../singleton/prisma-singleton";
 import { FishingActionBase } from "./action/fishing-action-base";
 import { FishOpportunities } from "./action/fish-opportunities";
 import { FishNow } from "./action/fish-now";
+import { BucketCheck } from "./action/bucket-check";
 
 export class FishingListener extends MessageCreateListener {
   public async action(data: OmitPartialGroupDMChannel<Message<boolean>>) {
@@ -36,6 +37,7 @@ export class FishingListener extends MessageCreateListener {
       const actions: FishingActionBase[] = [
         new FishNow(),
         new FishOpportunities(),
+        new BucketCheck(),
       ]
 
       // Execution only use one action
