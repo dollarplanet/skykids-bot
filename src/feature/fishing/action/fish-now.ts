@@ -22,8 +22,47 @@ export class FishNow extends FishingActionBase {
 
     const randomPossibility = randomPicker(possibility);
 
-    if (randomPossibility !== "Ikan") {
-      await data.reply(`Kamu mendapatkan ${randomPossibility}`);
+    if (randomPossibility === "Tanaman") {
+      await data.reply({
+        content: "Kamu mendapatkan tumbuhan air! Sayang sekali tidak bisa dijual.",
+        embeds: [new EmbedBuilder()
+          .setTitle("Tumbuhan Air")
+          .setThumbnail("https://dodo.ac/np/images/8/8c/Seaweed_NH_Icon.png")
+          .setColor("#e63946")
+          .addFields({
+            name: "Rarity",
+            value: "Tanaman",
+            inline: true,
+          })
+          .addFields({
+            name: "Harga",
+            value: candleMoney(0),
+            inline: true,
+          })
+        ],
+      });
+      return;
+    }
+
+    if (randomPossibility === "Sampah") {
+      await data.reply({
+        content: "Yah, kamu dapat sampah. Buang saja ya!",
+        embeds: [new EmbedBuilder()
+          .setTitle("Sampah")
+          .setThumbnail("https://dodo.ac/np/images/e/ed/Green_Ring_Shirt_PG_Model.png")
+          .setColor("#e63946")
+          .addFields({
+            name: "Rarity",
+            value: "Sampah",
+            inline: true,
+          })
+          .addFields({
+            name: "Harga",
+            value: candleMoney(0),
+            inline: true,
+          })
+        ],
+      });
       return;
     }
 
@@ -57,7 +96,7 @@ export class FishNow extends FishingActionBase {
       embeds: [new EmbedBuilder()
         .setTitle(pickedFish.name)
         .setThumbnail(pickedFish.image)
-        // .setDescription(`Jam: ${fish.time.join(", ")}\nBulan: ${fish.months.join(", ")}`)
+        .setColor("#008000")
         .addFields({
           name: "Rarity",
           value: pickedFish.rarity,
