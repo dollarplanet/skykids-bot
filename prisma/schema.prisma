@@ -111,7 +111,8 @@ model bucket {
 model wallet {
   id       Int      @id @default(autoincrement())
   userId   String   @unique
-  amount   Int
+  amount   Int      @default(0)
+  all      Int      @default(0)
   createAt DateTime @default(now())
   updateAt DateTime @default(now())
 }

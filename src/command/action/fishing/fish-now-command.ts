@@ -6,6 +6,7 @@ import { getCurrentFishes } from "./utils/get-current-fishes";
 import { rarity } from "@prisma/xxx-client"
 import { shuffle } from "../../../utils/shuffle";
 import { prisma } from "../../../singleton/prisma-singleton";
+import { getBucketFishes } from "./utils/get-bucket-fishes";
 
 type Possibility = "Ikan" | "Sampah" | "Tanaman";
 
@@ -96,20 +97,6 @@ export class FishNowCommand extends CommandBase {
 
     const pickedFish = randomPicker<typeof multipleFish[0]>(shuffle<typeof multipleFish[0]>(multipleFish));
 
-    // Kirim ikan
-    await interaction.reply({
-      content: `<@${interaction.user.id}> mendapatkan ikan!`,
-      embeds: [new EmbedBuilder()
-        .setTitle(pickedFish.name)
-        .setThumbnail(pickedFish.image)
-        .setColor("#008000")
-        .addFields({
-          name: "Harga",
-          value: candleMoney(pickedFish.price) + ` (${pickedFish.rarity})`,
-          inline: true,
-        })
-      ],
-    });
 
     // Masukan ikan ke ember
     if (!interaction.member) return;
@@ -131,6 +118,41 @@ export class FishNowCommand extends CommandBase {
         updateAt: new Date(),
       }
     })
-  }
 
+    // Dapatkan total ikan di ember
+    const bucketFishes = await getBucketFishes(interaction.user.id, 0);
+    const totalFishesPrice = bucketFishes.all.reduce((total, fish) => {
+      return total + (fish.fish.price * fish.quantity);
+    }, 0)
+
+    // Update wallet
+    await prisma.wallet.upsert({
+      where: {
+        userId: interaction.user.id,
+      },
+      update: {
+        all:  totalFishesPrice
+      },
+      create: {
+        userId: interaction.user.id,
+        all: totalFishesPrice
+      }
+    });
+
+    // Kirim ikan
+    await interaction.reply({
+      content: `<@${interaction.user.id}> mendapatkan ikan!`,
+      embeds: [new EmbedBuilder()
+        .setTitle(pickedFish.name)
+        .setThumbnail(pickedFish.image)
+        .setColor("#008000")
+        .addFields({
+          name: "Harga",
+          value: candleMoney(pickedFish.price) + ` (${pickedFish.rarity})`,
+          inline: true,
+        })
+      ],
+    });
+
+  }
 }
