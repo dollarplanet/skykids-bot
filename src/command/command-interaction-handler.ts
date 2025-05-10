@@ -14,6 +14,7 @@ import { FishNowCommand } from "./action/fishing/fish-now-command";
 import { FishOpportunitiesCommand } from "./action/fishing/fish-opportunities-command";
 import { BucketCommand } from "./action/fishing/bucket-command";
 import { WalletCommand } from "./action/fishing/wallet-command";
+import { BuyRodCommand } from "./action/fishing/buy-rod-command";
 
 export class CommandInteractionHandler extends InteractionCreateListener {
   static readonly commands: CommandBase[] = [
@@ -30,6 +31,7 @@ export class CommandInteractionHandler extends InteractionCreateListener {
     new FishOpportunitiesCommand(),
     new BucketCommand(),
     new WalletCommand(),
+    new BuyRodCommand(),
   ]
 
   public async action(interaction: Interaction) {

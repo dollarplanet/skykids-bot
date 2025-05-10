@@ -43,7 +43,7 @@ export class FishNowCommand extends CommandBase {
     // Jika tidak punya joran
     if (!fishingRod) {
       await interaction.reply({
-        content: "Kamu harus memiliki joran untuk memancing! Gunakan command /joran untuk membeli joran. Gunakan command /bantuan untuk membaca cara bermain.",
+        content: "Kamu harus memiliki 🎣 joran untuk memancing! Gunakan command /joran untuk membeli 🎣 joran. Gunakan command /bantuan untuk membaca cara bermain.",
         flags: MessageFlags.Ephemeral,
       });
       return;
@@ -52,11 +52,23 @@ export class FishNowCommand extends CommandBase {
     // Jika energy habis
     if (fishingRod.energy <= 0) {
       await interaction.reply({
-        content: "Joran kamu sudah rusak! Gunakan command /joran untuk membeli joran lagi.",
+        content: "🎣 Joran kamu sudah rusak! Gunakan command /joran untuk membeli 🎣 joran lagi.",
         flags: MessageFlags.Ephemeral,
       });
       return;
     }
+
+    // Kurangi energy joran
+    await prisma.fishingRod.update({
+      where: {
+        userId: interaction.user.id,
+      },
+      data: {
+        energy: {
+          decrement: 1
+        }
+      }
+    })
 
     // dapatkan peluang
     const possibility: Possibility[] = [
@@ -168,18 +180,6 @@ export class FishNowCommand extends CommandBase {
           all: totalFishesPrice
         }
       });
-
-      // Kurangi energy joran
-      await prisma.fishingRod.update({
-        where: {
-          userId: interaction.user.id,
-        },
-        data: {
-          energy: {
-            decrement: 1
-          }
-        }
-      })
     });
 
     // Kirim ikan
