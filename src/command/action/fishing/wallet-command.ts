@@ -43,23 +43,23 @@ export class WalletCommand extends CommandBase {
 
     // reply
     await interaction.reply({
-      content: `**Dompet milik <@${interaction.user.id}>**`,
+      content: `Dompet milik <@${interaction.user.id}>`,
       embeds: [
         new EmbedBuilder()
-        .setTitle("Dompet")
-        .setDescription(`Total candle: ${candleMoney(wallet.all)}`)
-        .setThumbnail("https://dodo.ac/np/images/1/1e/99k_Bells_NH_Inv_Icon.png")
-        .setColor("Blue")
-        .addFields({
-          name: "Cash",
-          value: candleMoney(wallet.amount),
-          inline: true,
-        })
-        .addFields({
-          name: "Dalam Ember",
-          value: candleMoney(wallet.all - wallet.amount),
-          inline: true,
-        })
+          .setTitle("Dompet")
+          .setDescription(`Total candle: ${candleMoney(wallet.all)}`)
+          .setThumbnail("https://dodo.ac/np/images/1/1e/99k_Bells_NH_Inv_Icon.png")
+          .setColor("Blue")
+          .addFields({
+            name: "Cash",
+            value: candleMoney(wallet.amount),
+            inline: true,
+          })
+          .addFields({
+            name: "Dalam Ember",
+            value: candleMoney(wallet.all - wallet.amount),
+            inline: true,
+          })
       ]
     });
   }

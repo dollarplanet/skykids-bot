@@ -124,6 +124,13 @@ model work {
   updateAt DateTime @default(now())
 }
 
+model pick {
+  id       Int      @id @default(autoincrement())
+  userId   String   @unique
+  createAt DateTime @default(now())
+  updateAt DateTime @default(now())
+}
+
 model fishingRod {
   id       Int       @id @default(autoincrement())
   userId   String    @unique
