@@ -175,6 +175,16 @@ export class FishNowCommand extends CommandBase {
         }
       })
 
+      // dapatkan current wallet
+      const wallet = await prisma.wallet.findUnique({
+        where: {
+          userId: interaction.user.id,
+        },
+        select: {
+          amount: true,
+        }
+      });
+
       // Dapatkan total ikan di ember
       const bucketFishes = await getBucketFishes(interaction.user.id, 0);
       const totalFishesPrice = bucketFishes.all.reduce((total, fish) => {
@@ -187,11 +197,11 @@ export class FishNowCommand extends CommandBase {
           userId: interaction.user.id,
         },
         update: {
-          all: totalFishesPrice
+          all: totalFishesPrice + (wallet?.amount ?? 0) 
         },
         create: {
           userId: interaction.user.id,
-          all: totalFishesPrice
+          all: totalFishesPrice + (wallet?.amount ?? 0) 
         }
       });
     });

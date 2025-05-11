@@ -98,9 +98,6 @@ export class SellListener extends InteractionCreateListener {
               amount: {
                 increment: candle
               },
-              all: {
-                decrement: candle
-              },
             },
           });
         });

@@ -29,7 +29,10 @@ export class FishOpportunitiesCommand extends CommandBase {
 
     // kalo ikan kosong
     if (fishes.length === 0) {
-      await interaction.reply("Tidak ada ikan untuk saat ini :(");
+      await interaction.reply({
+        content: "Tidak ada ikan untuk saat ini :(",
+        flags: MessageFlags.Ephemeral
+      });
       return;
     }
 

@@ -103,9 +103,6 @@ export class SellLimitListener extends InteractionCreateListener {
               amount: {
                 increment: candle
               },
-              all: {
-                decrement: candle
-              },
             }
           });
         });

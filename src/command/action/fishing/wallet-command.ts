@@ -47,7 +47,7 @@ export class WalletCommand extends CommandBase {
       embeds: [
         new EmbedBuilder()
         .setTitle("Dompet")
-        .setDescription(`Total candle: ${candleMoney((wallet.amount) + wallet.all)}`)
+        .setDescription(`Total candle: ${candleMoney(wallet.all)}`)
         .setThumbnail("https://dodo.ac/np/images/1/1e/99k_Bells_NH_Inv_Icon.png")
         .setColor("Blue")
         .addFields({
@@ -57,7 +57,7 @@ export class WalletCommand extends CommandBase {
         })
         .addFields({
           name: "Dalam Ember",
-          value: candleMoney(wallet.all),
+          value: candleMoney(wallet.all - wallet.amount),
           inline: true,
         })
       ]

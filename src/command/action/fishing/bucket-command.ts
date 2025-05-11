@@ -29,7 +29,10 @@ export class BucketCommand extends CommandBase {
 
     // kalo ikan kosong
     if (fishes.all.length === 0) {
-      await interaction.reply("Kamu belum menangkap ikan apapun :(");
+      await interaction.reply({
+        content: "Kamu belum menangkap ikan apapun :(",
+        flags: MessageFlags.Ephemeral
+      });
       return;
     }
 

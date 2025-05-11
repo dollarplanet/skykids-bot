@@ -63,7 +63,7 @@ export class BuyRodCommand extends CommandBase {
     }
 
     // Kalo uang cash kurang dan punya ikan di ember
-    if (wallet.amount < 500 && wallet.all > 0) {
+    if (wallet.amount < 500 && (wallet.all - wallet.amount) > 0) {
       await interaction.reply({
         content: "Candle kamu tidak cukup. Coba jual beberapa ikan di ember dengan command /ember.",
         flags: MessageFlags.Ephemeral
@@ -89,6 +89,9 @@ export class BuyRodCommand extends CommandBase {
         },
         data: {
           amount: {
+            decrement: rodPrice
+          },
+          all: {
             decrement: rodPrice
           }
         }
