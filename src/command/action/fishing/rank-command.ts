@@ -1,4 +1,4 @@
-import { EmbedBuilder, Interaction } from "discord.js";
+import { EmbedBuilder, Interaction, MessageFlags } from "discord.js";
 import { CommandBase } from "../command-base";
 import { prisma } from "../../../singleton/prisma-singleton";
 import { candleMoney } from "./utils/candle-money";
@@ -32,6 +32,15 @@ export class RankCommand extends CommandBase {
         all: "desc",
       }
     });
+
+    // Kalo masih kosong
+    if (ranked.length === 0) {
+      await interaction.reply({
+        content: "Peringkat mancing mania masih kosong :(",
+        flags: MessageFlags.Ephemeral
+      });
+      return;
+    }
 
     // Get current user rank
     const currentUser = ranked.find(wallet => wallet.userId === interaction.user.id);
