@@ -1,4 +1,4 @@
-import { ActionRowBuilder, ComponentType, Interaction, StringSelectMenuBuilder } from "discord.js";
+import { ActionRowBuilder, ComponentType, EmbedBuilder, Interaction, StringSelectMenuBuilder } from "discord.js";
 import { InteractionCreateListener } from "../../../feature/base/interaction-create-listener";
 import { isFeatureDisabled } from "../../../utils/is-feature-disabled";
 import { prisma } from "../../../singleton/prisma-singleton";
@@ -106,7 +106,20 @@ export class SellListener extends InteractionCreateListener {
         await interaction.deleteReply();
 
         if (i.channel && i.channel.isSendable()) {
-          await i.channel.send(`<@${i.user.id}> menjual beberapa ikan dan mendapatkan ${candleMoney(candle)}`);
+          await i.channel.send({
+            content: `<@${i.user.id}> menjual beberapa ikan`,
+            embeds: [
+              new EmbedBuilder()
+                .setTitle("Jual Ikan")
+                .setThumbnail("https://dodo.ac/np/images/a/a7/Shop_Model_PG_Model.png")
+                .setColor("Orange")
+                .addFields({
+                  name: "Pendapatan",
+                  value: candleMoney(candle),
+                  inline: true,
+                })
+            ],
+          });
         }
 
         await i.deleteReply();
