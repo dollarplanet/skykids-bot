@@ -40,7 +40,6 @@ export class RankCommand extends CommandBase {
       : `<@${interaction.user.id}> belum ada dalam peringkat mancing mania, yuk mulai memancing!\n\n`;
 
     const embed = new EmbedBuilder()
-      .setTitle("Peringkat Mancing Mania")
       .setThumbnail("https://dodo.ac/np/images/e/ea/Autumn_Medal_PG_Model.png");
 
     let embedDescription = "";
