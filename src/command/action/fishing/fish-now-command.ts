@@ -85,6 +85,16 @@ export class FishNowCommand extends CommandBase {
       }
     })
 
+    // Dapatkan dompet
+    const wallet = await prisma.wallet.findUnique({
+      where: {
+        userId: interaction.user.id
+      },
+      select: {
+        all: true,
+      }
+    })
+
     // dapatkan peluang
     const possibility: Possibility[] = [
       "Ikan",
@@ -93,7 +103,7 @@ export class FishNowCommand extends CommandBase {
       "Tanaman",
     ]
 
-    const randomPossibility = randomPicker(possibility);
+    const randomPossibility: Possibility = (wallet?.all ?? 0 >= 500) ?  randomPicker(possibility) : "Ikan";
 
     if (randomPossibility === "Tanaman") {
       await interaction.reply({
