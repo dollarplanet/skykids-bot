@@ -190,7 +190,7 @@ export class FishNowCommand extends CommandBase {
       const bucketFishes = await getBucketFishes(interaction.user.id, 0);
       const totalFishesPrice = bucketFishes.all.reduce((total, fish) => {
         return total + (fish.fish.price * fish.quantity);
-      }, 0)
+      }, 0) + pickedFish.price;
 
       // Update wallet
       await prisma.wallet.upsert({
