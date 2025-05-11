@@ -69,12 +69,19 @@ export class BucketNextListener extends InteractionCreateListener {
 
     const row = new ActionRowBuilder();
 
-    if (!isDone) {
-      row.addComponents(next, sell);
+    let rowLength = 0
 
-      if (fishes.paged.filter(fish => fish.quantity > 1).length > 0) {
-        row.addComponents(sellLimit);
-      }
+    if (!isDone) {
+      row.addComponents(next);
+      rowLength++;
+    }
+
+    row.addComponents(sell);
+    rowLength++;
+
+    if (fishes.paged.filter(fish => fish.quantity > 1).length > 0) {
+      row.addComponents(sellLimit);
+      rowLength++;
     }
 
     const totalPrice = fishes.all.reduce((total, fish) => {
@@ -88,7 +95,7 @@ export class BucketNextListener extends InteractionCreateListener {
     await interaction.update({
       content: `Kamu memiliki ${totalFishes} ekor ikan dalam ember dengan ${fishes.all.length} jenis ikan yang berbeda. 
     Total harga: ${candleMoney(totalPrice)}\n`,
-      components: isDone ? [] : [row as any],
+      components: (rowLength === 0) ? [] : [row as any],
       embeds: fishes.paged.map(data => {
         return new EmbedBuilder()
           .setTitle(data.fish.name)

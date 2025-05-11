@@ -1,4 +1,4 @@
-import { Interaction, MessageFlags } from "discord.js";
+import { EmbedBuilder, Interaction, MessageFlags } from "discord.js";
 import { CommandBase } from "../command-base";
 import { prisma } from "../../../singleton/prisma-singleton";
 import { candleMoney } from "./utils/candle-money";
@@ -115,7 +115,23 @@ export class BuyRodCommand extends CommandBase {
     });
 
     await interaction.reply({
-      content: `<@${interaction.user.id}> membeli 🎣 joran baru dengan harga ${candleMoney(rodPrice)}`,
+      content: `<@${interaction.user.id}> membeli joran baru`,
+      embeds: [
+        new EmbedBuilder()
+          .setTitle("Joran")
+          .setThumbnail("https://dodo.ac/np/images/a/a1/Fishing_Rod_%28Blue%29_NH_Icon.png")
+          .setColor("Orange")
+          .addFields({
+            name: "Harga",
+            value: candleMoney(500),
+            inline: true,
+          })
+          .addFields({
+            name: "Kekuatan",
+            value: "5 tarikan",
+            inline: true,
+          })
+      ],
     });
   }
 }

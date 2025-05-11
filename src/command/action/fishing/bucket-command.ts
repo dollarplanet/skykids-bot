@@ -54,13 +54,19 @@ export class BucketCommand extends CommandBase {
       .setStyle(ButtonStyle.Success);
 
     const row = new ActionRowBuilder();
+    let rowLength = 0
 
     if (!isDone) {
-      row.addComponents( next, sell);
+      row.addComponents(next);
+      rowLength++;
+    }
 
-      if (fishes.paged.filter(fish => fish.quantity > 1).length > 0) {
-        row.addComponents(sellLimit);
-      }
+    row.addComponents(sell);
+    rowLength++;
+
+    if (fishes.paged.filter(fish => fish.quantity > 1).length > 0) {
+      row.addComponents(sellLimit);
+      rowLength++;
     }
 
     const totalFishes = fishes.all.reduce((total, fish) => {
@@ -69,7 +75,7 @@ export class BucketCommand extends CommandBase {
 
     await interaction.reply({
       content: `Kamu memiliki ${totalFishes} ekor ikan dalam ember dengan ${fishes.all.length} jenis ikan yang berbeda.`,
-      components: isDone ? [] : [row as any],
+      components: (rowLength === 0) ? [] : [row as any],
       flags: MessageFlags.Ephemeral,
       embeds: fishes.paged.map(data => {
         return new EmbedBuilder()
