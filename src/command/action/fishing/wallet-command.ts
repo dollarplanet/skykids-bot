@@ -35,7 +35,7 @@ export class WalletCommand extends CommandBase {
 
     if (!wallet) {
       await interaction.reply({
-        content: "Dompet kamu masih kosong. Coba claim daily dengan cara ketik command /daily.",
+        content: "Dompet kamu masih kosong. Baca cara bermain dengan command /bantuan.",
         flags: MessageFlags.Ephemeral
       });
       return;

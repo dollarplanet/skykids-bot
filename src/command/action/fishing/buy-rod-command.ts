@@ -56,7 +56,7 @@ export class BuyRodCommand extends CommandBase {
     // Kalo tidak punya dompet
     if (!wallet) {
       await interaction.reply({
-        content: "Dompet kamu masih kosong. Coba claim daily dengan cara ketik command /daily.",
+        content: "Dompet kamu masih kosong. Baca cara bermain dengan command /bantuan.",
         flags: MessageFlags.Ephemeral
       });
       return;
@@ -74,7 +74,7 @@ export class BuyRodCommand extends CommandBase {
     // Kalo uang cash kurang dan tidak punya ikan
     if (wallet.amount < rodPrice) {
       await interaction.reply({
-        content: "Candle kamu tidak cukup. Coba claim daily dengan cara ketik command /daily.",
+        content: "Candle kamu tidak cukup. Baca cara bermain dengan command /bantuan.",
         flags: MessageFlags.Ephemeral
       });
       return;
