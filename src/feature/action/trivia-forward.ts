@@ -36,7 +36,8 @@ export class TriviaForward extends MessageCreateListener {
           id: triviaId,
         },
         data: {
-          questionIndo: questionIndo
+          questionIndo: questionIndo,
+          updateAt: new Date()
         },
         select: {
           id: true,

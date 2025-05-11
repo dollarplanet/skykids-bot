@@ -117,7 +117,7 @@ model wallet {
   updateAt DateTime @default(now())
 }
 
-model daily {
+model work {
   id       Int      @id @default(autoincrement())
   userId   String   @unique
   createAt DateTime @default(now())

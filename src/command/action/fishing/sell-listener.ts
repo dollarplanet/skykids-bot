@@ -98,6 +98,7 @@ export class SellListener extends InteractionCreateListener {
               amount: {
                 increment: candle
               },
+              updateAt: new Date()
             },
           });
         });

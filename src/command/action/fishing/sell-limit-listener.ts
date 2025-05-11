@@ -92,6 +92,7 @@ export class SellLimitListener extends InteractionCreateListener {
             },
             data: {
               quantity: 1,
+              updateAt: new Date()
             },
           });
 
@@ -103,6 +104,7 @@ export class SellLimitListener extends InteractionCreateListener {
               amount: {
                 increment: candle
               },
+              updateAt: new Date()
             }
           });
         });

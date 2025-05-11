@@ -93,7 +93,8 @@ export class BuyRodCommand extends CommandBase {
           },
           all: {
             decrement: rodPrice
-          }
+          },
+          updateAt: new Date()
         }
       });
 
@@ -103,7 +104,8 @@ export class BuyRodCommand extends CommandBase {
           userId: interaction.user.id
         },
         update: {
-          energy: rodEnergy
+          energy: rodEnergy,
+          updateAt: new Date()
         },
         create: {
           userId: interaction.user.id,

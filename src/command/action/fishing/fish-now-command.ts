@@ -81,6 +81,7 @@ export class FishNowCommand extends CommandBase {
           decrement: 1
         },
         lastFish: dayjs().toDate(),
+        updateAt: new Date()
       }
     })
 
@@ -197,11 +198,12 @@ export class FishNowCommand extends CommandBase {
           userId: interaction.user.id,
         },
         update: {
-          all: totalFishesPrice + (wallet?.amount ?? 0) 
+          all: totalFishesPrice + (wallet?.amount ?? 0),
+          updateAt: new Date()
         },
         create: {
           userId: interaction.user.id,
-          all: totalFishesPrice + (wallet?.amount ?? 0) 
+          all: totalFishesPrice + (wallet?.amount ?? 0)
         }
       });
     });
