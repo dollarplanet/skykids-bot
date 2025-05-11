@@ -19,6 +19,7 @@ import { WorkCommand } from "./action/fishing/work-command";
 import { RankCommand } from "./action/fishing/rank-command";
 import { ShowoffCommand } from "./action/fishing/showoff-command";
 import { PickCommmand } from "./action/fishing/pick-command";
+import { HelpCommand } from "./action/fishing/help-command";
 
 export class CommandInteractionHandler extends InteractionCreateListener {
   static readonly commands: CommandBase[] = [
@@ -40,6 +41,7 @@ export class CommandInteractionHandler extends InteractionCreateListener {
     new RankCommand(),
     new ShowoffCommand(),
     new PickCommmand(),
+    new HelpCommand(),
   ]
 
   public async action(interaction: Interaction) {
