@@ -60,8 +60,7 @@ export class SellLimitListener extends InteractionCreateListener {
         value: data.id.toString(),
       })))
       .setPlaceholder('Pilih ikan dijual')
-      .setMinValues(1)
-      .setMaxValues(filteredFish.length);
+      .setMinValues(1);
 
     const row = new ActionRowBuilder()
       .addComponents(select);

@@ -23,8 +23,7 @@ export class ActiveFeatureCommand extends CommandBase {
         value: key,
         default: dbFeatures.map(feature => feature.name).includes(key as featureEnum)
       })))
-      .setMinValues(0)
-      .setMaxValues(Object.keys(featureEnum).length);
+      .setMinValues(0);
 
     const row = new ActionRowBuilder()
       .addComponents(select);

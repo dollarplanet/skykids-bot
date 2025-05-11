@@ -3,7 +3,6 @@ import { InteractionCreateListener } from "../../../feature/base/interaction-cre
 import { isFeatureDisabled } from "../../../utils/is-feature-disabled";
 import { prisma } from "../../../singleton/prisma-singleton";
 import { candleMoney } from "./utils/candle-money";
-import { pageLimit } from "./utils/limit";
 import { getBucketFishes } from "./utils/get-bucket-fishes";
 
 export class SellListener extends InteractionCreateListener {
@@ -58,8 +57,7 @@ export class SellListener extends InteractionCreateListener {
         value: data.id.toString(),
       })))
       .setPlaceholder('Pilih ikan dijual')
-      .setMinValues(1)
-      .setMaxValues(pageLimit);
+      .setMinValues(1);
 
     const row = new ActionRowBuilder()
       .addComponents(select);
