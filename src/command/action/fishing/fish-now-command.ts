@@ -30,17 +30,19 @@ export class FishNowCommand extends CommandBase {
     if (interaction.channelId !== channel?.fishingChannel) return;
 
     // Cek joran
-    const fishingRod = await prisma.rodState.findUnique({
+    const rodState = await prisma.rodState.findUnique({
       where: {
         userId: interaction.user.id
       },
       select: {
         lastFish: true,
+        energy: true,
+        rod: true
       }
     })
 
     // Jika tidak punya joran
-    if (!fishingRod) {
+    if (!rodState?.rod) {
       await interaction.reply({
         content: "Kamu harus memiliki 🎣 joran untuk memancing! Gunakan command /joran untuk membeli 🎣 joran. Gunakan command /bantuan untuk membaca cara bermain.",
         flags: MessageFlags.Ephemeral,
@@ -48,9 +50,38 @@ export class FishNowCommand extends CommandBase {
       return;
     }
 
+    // Jika energy habis
+    if (rodState.energy <= 0) {
+      await interaction.reply({
+        content: "Joran kamu sudah rusak! Gunakan command /joran untuk membeli joran lagi.",
+        flags: MessageFlags.Ephemeral,
+        embeds: [new EmbedBuilder()
+          .setTitle(rodState.rod.name)
+          .setThumbnail(rodState.rod.image)
+          .setColor("Orange")
+          .addFields({
+            name: "Harga",
+            value: candleMoney(rodState.rod.price),
+            inline: true,
+          })
+          .addFields({
+            name: "Kekuatan",
+            value: `${rodState.energy} tarikan`,
+            inline: true,
+          })
+          .addFields({
+            name: "Peluang",
+            value: rodState.rod.possibilityPercentAdded === 0 ? "Basic" : `+ ${rodState.rod.possibilityPercentAdded}%`,
+            inline: true,
+          }),
+        ],
+      });
+      return;
+    }
+
     // Tunggu 1 menit
-    if (fishingRod.lastFish) {
-      const diff = dayjs().diff(dayjs(fishingRod.lastFish), "seconds");
+    if (rodState.lastFish) {
+      const diff = dayjs().diff(dayjs(rodState.lastFish), "seconds");
       if (diff < 60) {
         await interaction.reply({
           content: `<@${interaction.user.id}> Umpannya lagi dipasang, tunggu sekitar ${60 - diff} detik lagi.`,
@@ -60,28 +91,19 @@ export class FishNowCommand extends CommandBase {
       }
     }
 
-    // Jika energy habis
-    // if (fishingRod.energy <= 0) {
-    //   await interaction.reply({
-    //     content: "🎣 Joran kamu sudah rusak! Gunakan command /joran untuk membeli 🎣 joran lagi.",
-    //     flags: MessageFlags.Ephemeral,
-    //   });
-    //   return;
-    // }
-
     // Kurangi energy joran
-    // await prisma.fishingRod.update({
-    //   where: {
-    //     userId: interaction.user.id,
-    //   },
-    //   data: {
-    //     energy: {
-    //       decrement: 1
-    //     },
-    //     lastFish: dayjs().toDate(),
-    //     updateAt: new Date()
-    //   }
-    // })
+    await prisma.rodState.update({
+      where: {
+        userId: interaction.user.id,
+      },
+      data: {
+        energy: {
+          decrement: 1
+        },
+        lastFish: dayjs().toDate(),
+        updateAt: new Date()
+      }
+    })
 
     // Dapatkan dompet
     const wallet = await prisma.wallet.findUnique({
@@ -94,24 +116,7 @@ export class FishNowCommand extends CommandBase {
     })
 
     // Garansi dapat ikan untuk candle dibawah 1000
-    const risk = new RiskManagement(wallet?.all ?? 0);
-
-    if (risk.result === "Tanaman") {
-      await interaction.reply({
-        content: `<@${interaction.user.id}> mendapatkan tumbuhan air! Sayang sekali tidak bisa dijual.`,
-        embeds: [new EmbedBuilder()
-          .setTitle("Tumbuhan Air")
-          .setThumbnail("https://dodo.ac/np/images/8/8c/Seaweed_NH_Icon.png")
-          .setColor("#e63946")
-          .addFields({
-            name: "Harga",
-            value: candleMoney(0),
-            inline: true,
-          })
-        ],
-      });
-      return;
-    }
+    const risk = new RiskManagement(wallet?.all ?? 0, rodState.rod);
 
     if (risk.result === "Sampah") {
       await interaction.reply({

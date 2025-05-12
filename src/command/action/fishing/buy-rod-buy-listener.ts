@@ -47,40 +47,32 @@ export class BuyRodBuyListener extends InteractionCreateListener {
       }
     })
 
-    if (rodState) {
-      if (rodState.energy > 0) {
-        await interaction.update({
-          content: "Kamu sudah punya joran! Gunakan command /mancing untuk memancing! Gunakan command /bantuan untuk membaca cara bermain.",
-          components: [],
-          embeds: [new EmbedBuilder()
-            .setTitle(rodState.rod!.name)
-            .setThumbnail(rodState.rod!.image)
-            .setColor("Orange")
-            .addFields({
-              name: "Harga",
-              value: candleMoney(rodState.rod!.price),
-              inline: true,
-            })
-            .addFields({
-              name: "Kekuatan",
-              value: `${rodState.energy} tarikan`,
-              inline: true,
-            })
-            .addFields({
-              name: "Peluang",
-              value: rodState.rod!.possibilityPercentAdded === 0 ? "Basic" : `+ ${rodState.rod!.possibilityPercentAdded}%`,
-              inline: true,
-            })],
-        });
-        return;
-      }
-
-      // Kalo masih ada tapi energy kosong, hapus
-      await prisma.rodState.delete({
-        where: {
-          userId: interaction.user.id
-        }
+    if (rodState && rodState.energy > 0) {
+      await interaction.update({
+        content: "Kamu sudah punya joran! Gunakan command /mancing untuk memancing! Gunakan command /bantuan untuk membaca cara bermain.",
+        components: [],
+        embeds: [new EmbedBuilder()
+          .setTitle(rodState.rod!.name)
+          .setThumbnail(rodState.rod!.image)
+          .setColor("Orange")
+          .addFields({
+            name: "Harga",
+            value: candleMoney(rodState.rod!.price),
+            inline: true,
+          })
+          .addFields({
+            name: "Kekuatan",
+            value: `${rodState.energy} tarikan`,
+            inline: true,
+          })
+          .addFields({
+            name: "Peluang",
+            value: rodState.rod!.possibilityPercentAdded === 0 ? "Basic" : `+ ${rodState.rod!.possibilityPercentAdded}%`,
+            inline: true,
+          }),
+        ],
       });
+      return;
     }
 
     // Dapatkan joran
@@ -148,8 +140,16 @@ export class BuyRodBuyListener extends InteractionCreateListener {
       });
 
       // Tambah joran
-      await tx.rodState.create({
-        data: {
+      await tx.rodState.upsert({
+        where: {
+          userId: interaction.user.id
+        },
+        update: {
+          energy: rod.defaultEnergy,
+          updateAt: new Date(),
+          rodId: rod.id,
+        },
+        create: {
           userId: interaction.user.id,
           rodId: rod.id,
           energy: rod.defaultEnergy
