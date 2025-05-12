@@ -23,7 +23,7 @@ export async function rodSeed() {
       name: "Joran Fiber",
       price: 750,
       defaultEnergy: 5,
-      image: "https://dodo.ac/np/images/a/a9/Outdoorsy_Fishing_Rod_%28Avocado%29_NH_Icon.png",
+      image: "https://dodo.ac/np/images/6/6f/Fish_Fishing_Rod_%28Green%29_NH_Icon.png",
       possibilityPercentAdded: 10,
       risk0: ["Ikan"] as possibility[],
       risk1000: ["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Sampah", "Sampah"] as possibility[],
