@@ -31,7 +31,7 @@ export class ShowoffCommand extends CommandBase {
       },
       select: {
         fish: true,
-        createAt: true,
+        updateAt: true,
         rod: true
       },
       orderBy: {
@@ -55,7 +55,7 @@ export class ShowoffCommand extends CommandBase {
     await interaction.reply({
       content: `Lihat!, ${fishes.length} ikan terbaik di ember <@${interaction.user.id}>`,
       embeds: fishes.map(data => {
-        const catchedAt = dayjs(data.createAt).tz("Asia/Jakarta");
+        const catchedAt = dayjs(data.updateAt).tz("Asia/Jakarta");
         return new EmbedBuilder()
           .setTitle(data.fish.name)
           .setDescription(`Ditangkap pada ${getDayName(catchedAt.day())}, ${catchedAt.format(`DD ##### YYYY, HH:mm`).replace("#####", getMonthName(catchedAt.month()))} WIB, menggunakan ${data.rod.name}`)

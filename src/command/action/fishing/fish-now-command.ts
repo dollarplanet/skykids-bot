@@ -173,11 +173,13 @@ export class FishNowCommand extends CommandBase {
           userId: interaction.user.id,
           fishId: pickedFish.id,
           quantity: 1,
+          rodId: rodState.rod?.id ?? 1,
         },
         update: {
           quantity: {
             increment: 1,
           },
+          rodId: rodState.rod?.id ?? 1,
           updateAt: new Date(),
         }
       })
