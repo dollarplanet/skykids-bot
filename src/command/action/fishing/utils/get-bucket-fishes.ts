@@ -25,7 +25,7 @@ export async function getBucketFishes(userId: string, cursor: number) {
     },
     orderBy: {
       fish: {
-        price: "desc",
+        price: "asc",
       }
     },
     take: pageLimit,
