@@ -158,11 +158,7 @@ export class BuyRodBuyListener extends InteractionCreateListener {
     })
 
     // Reply
-    await interaction.update({
-      content: "Done",
-      embeds: [],
-      components: [],
-    });
+    await interaction.deferUpdate();
     await interaction.deleteReply();
     if (!interaction.channel?.isSendable()) return;
     await interaction.channel.send({

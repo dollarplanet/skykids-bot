@@ -24,6 +24,7 @@ import { SellListener } from "./command/action/fishing/sell-listener";
 import { SellLimitListener } from "./command/action/fishing/sell-limit-listener";
 import { BuyRodNextListener } from "./command/action/fishing/buy-rod-next-listener";
 import { BuyRodBuyListener } from "./command/action/fishing/buy-rod-buy-listener";
+import { CurrentRodListener } from "./command/action/fishing/current-rod-listener";
 
 // Load environment variables
 dotenv.config();
@@ -53,6 +54,7 @@ function featureInit() {
   new SellLimitListener();
   new BuyRodNextListener();
   new BuyRodBuyListener();
+  new CurrentRodListener();
 }
 
 // Register features

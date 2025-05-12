@@ -32,9 +32,14 @@ export async function buyRodReply(interaction: RepliableInteraction<CacheType>, 
     .setLabel('Beli')
     .setStyle(ButtonStyle.Success);
 
+    const current = new ButtonBuilder()
+      .setCustomId("joran_current")
+      .setLabel('Joran Saya')
+      .setStyle(ButtonStyle.Secondary);
+
   const row = new ActionRowBuilder();
   if (count > currentId) row.addComponents(next);
-  row.addComponents(buy);
+  row.addComponents(buy, current);
 
   const data = {
     content: "**Pilih Joran**",
