@@ -23,6 +23,11 @@ export async function getBucketFishes(userId: string, cursor: number) {
       },
       quantity: true,
     },
+    orderBy: {
+      fish: {
+        price: "desc",
+      }
+    },
     take: pageLimit,
     cursor: realCursor,
     skip: cursor === 0 ? 0 : 1,
