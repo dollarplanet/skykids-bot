@@ -8,8 +8,7 @@ import { shuffle } from "../../../utils/shuffle";
 import { prisma } from "../../../singleton/prisma-singleton";
 import { getBucketFishes } from "./utils/get-bucket-fishes";
 import dayjs from "dayjs";
-
-type Possibility = "Ikan" | "Sampah" | "Tanaman";
+import { RiskManagement } from "./utils/risk-management";
 
 export class FishNowCommand extends CommandBase {
   protected name: string = "mancing";
@@ -95,17 +94,10 @@ export class FishNowCommand extends CommandBase {
       }
     })
 
-    // dapatkan peluang
-    const possibility: Possibility[] = [
-      "Ikan",
-      "Sampah",
-      "Ikan",
-      "Tanaman",
-    ]
+    // Garansi dapat ikan untuk candle dibawah 1000
+    const risk = new RiskManagement(wallet?.all ?? 0);
 
-    const randomPossibility: Possibility = (wallet?.all ?? 0 >= 500) ?  randomPicker(possibility) : "Ikan";
-
-    if (randomPossibility === "Tanaman") {
+    if (risk.result === "Tanaman") {
       await interaction.reply({
         content: `<@${interaction.user.id}> mendapatkan tumbuhan air! Sayang sekali tidak bisa dijual.`,
         embeds: [new EmbedBuilder()
@@ -122,7 +114,7 @@ export class FishNowCommand extends CommandBase {
       return;
     }
 
-    if (randomPossibility === "Sampah") {
+    if (risk.result === "Sampah") {
       await interaction.reply({
         content: `Yah, <@${interaction.user.id}> dapat sampah. Buang saja ya!`,
         embeds: [new EmbedBuilder()
