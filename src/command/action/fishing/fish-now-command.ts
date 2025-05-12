@@ -219,6 +219,7 @@ export class FishNowCommand extends CommandBase {
       content: `<@${interaction.user.id}> mendapatkan ikan!`,
       embeds: [new EmbedBuilder()
         .setTitle(pickedFish.name)
+        .setDescription(`Menggunakan ${rodState.rod.name}`)
         .setThumbnail(pickedFish.image)
         .setColor("#008000")
         .addFields({
