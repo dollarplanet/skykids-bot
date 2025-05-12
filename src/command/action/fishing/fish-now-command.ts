@@ -30,12 +30,11 @@ export class FishNowCommand extends CommandBase {
     if (interaction.channelId !== channel?.fishingChannel) return;
 
     // Cek joran
-    const fishingRod = await prisma.fishingRod.findUnique({
+    const fishingRod = await prisma.rodState.findUnique({
       where: {
         userId: interaction.user.id
       },
       select: {
-        energy: true,
         lastFish: true,
       }
     })
@@ -62,27 +61,27 @@ export class FishNowCommand extends CommandBase {
     }
 
     // Jika energy habis
-    if (fishingRod.energy <= 0) {
-      await interaction.reply({
-        content: "🎣 Joran kamu sudah rusak! Gunakan command /joran untuk membeli 🎣 joran lagi.",
-        flags: MessageFlags.Ephemeral,
-      });
-      return;
-    }
+    // if (fishingRod.energy <= 0) {
+    //   await interaction.reply({
+    //     content: "🎣 Joran kamu sudah rusak! Gunakan command /joran untuk membeli 🎣 joran lagi.",
+    //     flags: MessageFlags.Ephemeral,
+    //   });
+    //   return;
+    // }
 
     // Kurangi energy joran
-    await prisma.fishingRod.update({
-      where: {
-        userId: interaction.user.id,
-      },
-      data: {
-        energy: {
-          decrement: 1
-        },
-        lastFish: dayjs().toDate(),
-        updateAt: new Date()
-      }
-    })
+    // await prisma.fishingRod.update({
+    //   where: {
+    //     userId: interaction.user.id,
+    //   },
+    //   data: {
+    //     energy: {
+    //       decrement: 1
+    //     },
+    //     lastFish: dayjs().toDate(),
+    //     updateAt: new Date()
+    //   }
+    // })
 
     // Dapatkan dompet
     const wallet = await prisma.wallet.findUnique({

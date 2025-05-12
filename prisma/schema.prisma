@@ -131,11 +131,37 @@ model pick {
   updateAt DateTime @default(now())
 }
 
-model fishingRod {
+enum possibility {
+  Ikan
+  Sampah
+}
+
+model rod {
+  id                      Int           @id @default(autoincrement())
+  name                    String
+  image                   String
+  price                   Int
+  defaultEnergy           Int           @default(5)
+  possibilityPercentAdded Int
+  risk0                   possibility[]
+  risk1000                possibility[]
+  risk5000                possibility[]
+  risk10000               possibility[]
+  risk70000               possibility[]
+  risk150000              possibility[]
+  risk200000              possibility[]
+  createAt                DateTime      @default(now())
+  updateAt                DateTime      @default(now())
+  rodState                rodState[]
+}
+
+model rodState {
   id       Int       @id @default(autoincrement())
   userId   String    @unique
-  energy   Int
   lastFish DateTime?
+  energy   Int
   createAt DateTime  @default(now())
   updateAt DateTime  @default(now())
+  rod      rod?      @relation(fields: [rodId], references: [id])
+  rodId    Int?
 }

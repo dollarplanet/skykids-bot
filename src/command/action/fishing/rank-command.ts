@@ -22,7 +22,7 @@ export class RankCommand extends CommandBase {
     });
     if (interaction.channelId !== channel?.fishingChannel) return;
 
-    // dapatkan 10 user teratas
+    // dapatkan user
     const ranked = await prisma.wallet.findMany({
       select: {
         userId: true,
@@ -56,7 +56,7 @@ export class RankCommand extends CommandBase {
     // Add fields
     let index = 0;
     for (const wallet of ranked) {
-      if (index >= 10) break;
+      if (index >= 20) break;
 
       const user = await interaction.guild!.members.fetch(wallet.userId);
       embedDescription += `**${index + 1}. ${user.nickname}** => ${candleMoney(wallet.all)}\n`;

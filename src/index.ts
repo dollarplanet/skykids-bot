@@ -22,6 +22,8 @@ import { OpportunitiesNextListener } from "./command/action/fishing/opportunitie
 import { BucketNextListener } from "./command/action/fishing/bucket-next-listener";
 import { SellListener } from "./command/action/fishing/sell-listener";
 import { SellLimitListener } from "./command/action/fishing/sell-limit-listener";
+import { BuyRodNextListener } from "./command/action/fishing/buy-rod-next-listener";
+import { BuyRodBuyListener } from "./command/action/fishing/buy-rod-buy-listener";
 
 // Load environment variables
 dotenv.config();
@@ -49,6 +51,8 @@ function featureInit() {
   new BucketNextListener();
   new SellListener();
   new SellLimitListener();
+  new BuyRodNextListener();
+  new BuyRodBuyListener();
 }
 
 // Register features
