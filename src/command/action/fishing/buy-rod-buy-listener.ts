@@ -162,7 +162,7 @@ export class BuyRodBuyListener extends InteractionCreateListener {
     await interaction.deleteReply();
     if (!interaction.channel?.isSendable()) return;
     await interaction.channel.send({
-      content: `<@${interaction.user.id}> membeli joran baru>`,
+      content: `<@${interaction.user.id}> membeli joran baru`,
       embeds: [new EmbedBuilder()
         .setTitle(rod.name)
         .setThumbnail(rod.image)
