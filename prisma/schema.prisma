@@ -135,7 +135,7 @@ model pick {
 
 enum possibility {
   Ikan
-  Sampah
+  Gagal
 }
 
 model rod {
@@ -167,4 +167,11 @@ model rodState {
   updateAt DateTime  @default(now())
   rod      rod?      @relation(fields: [rodId], references: [id])
   rodId    Int?
+}
+
+model accident {
+  id          Int      @id @default(autoincrement())
+  description String
+  createAt    DateTime @default(now())
+  updateAt    DateTime @default(now())
 }

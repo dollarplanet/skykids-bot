@@ -35,6 +35,10 @@ export class RiskManagement {
   }
 
   public get result(): possibility {
+    return randomPicker<possibility>(["Ikan", "Ikan", "Ikan", "Ikan", "Ikan","Ikan", "Ikan", "Ikan", "Ikan", "Gagal"]);
+  }
+
+  public get luck(): possibility {
     return randomPicker(this.possibility);
   }
 }

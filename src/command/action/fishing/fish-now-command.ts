@@ -118,7 +118,7 @@ export class FishNowCommand extends CommandBase {
     // Garansi dapat ikan untuk candle dibawah 1000
     const risk = new RiskManagement(wallet?.all ?? 0, rodState.rod);
 
-    if (risk.result === "Sampah") {
+    if (risk.result === "Gagal") {
       await interaction.reply({
         content: `Yah, <@${interaction.user.id}> dapat sampah. Buang saja ya!`,
         embeds: [new EmbedBuilder()
@@ -158,6 +158,36 @@ export class FishNowCommand extends CommandBase {
     }).flat();
 
     const pickedFish = randomPicker<typeof multipleFish[0]>(shuffle<typeof multipleFish[0]>(multipleFish));
+
+    // Lihat keberuntungan
+    const luck = risk.luck;
+
+    if (luck === "Gagal") {
+      // Dapatkan musibah dari db
+      const accidents = await prisma.accident.findMany({
+        select: {
+          description: true
+        }
+      });
+
+      const accident = randomPicker(accidents);
+
+      await interaction.reply({
+        content: `<@${interaction.user.id}> sayang sekali, kamu mengalami musibah`,
+        embeds: [new EmbedBuilder()
+          .setTitle("Musibah")
+          .setDescription(accident.description)
+          .setThumbnail(pickedFish.image)
+          .setColor("Red")
+          .addFields({
+            name: "Ikan",
+            value: `${pickedFish.name} (${pickedFish.rarity})`,
+            inline: true,
+          })
+        ],
+      })
+      return;
+    }
 
 
     await prisma.$transaction(async prisma => {

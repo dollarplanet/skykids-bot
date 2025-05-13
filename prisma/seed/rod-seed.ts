@@ -11,12 +11,12 @@ export async function rodSeed() {
       image: "https://dodo.ac/np/images/a/a1/Fishing_Rod_%28Blue%29_NH_Icon.png",
       possibilityPercentAdded: 0,
       risk0: ["Ikan"] as possibility[],
-      risk1000: ["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Sampah", "Sampah", "Sampah"] as possibility[],
-      risk5000: ["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Sampah", "Sampah", "Sampah", "Sampah"] as possibility[],
-      risk10000: ["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Sampah", "Sampah", "Sampah", "Sampah", "Sampah"] as possibility[],
-      risk70000: ["Ikan", "Ikan", "Ikan", "Ikan", "Sampah", "Sampah", "Sampah", "Sampah", "Sampah", "Sampah"] as possibility[],
-      risk150000: ["Ikan", "Ikan", "Ikan", "Sampah", "Sampah", "Sampah", "Sampah", "Sampah", "Sampah", "Sampah"] as possibility[],
-      risk200000: ["Ikan", "Ikan", "Sampah", "Sampah", "Sampah", "Sampah", "Sampah", "Sampah", "Sampah", "Sampah"] as possibility[],
+      risk1000: ["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Gagal", "Gagal"] as possibility[],
+      risk5000: ["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Gagal", "Gagal", "Gagal"] as possibility[],
+      risk10000: ["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Gagal", "Gagal", "Gagal", "Gagal"] as possibility[],
+      risk70000: ["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Gagal", "Gagal", "Gagal", "Gagal", "Gagal"] as possibility[],
+      risk150000: ["Ikan", "Ikan", "Ikan", "Ikan", "Gagal", "Gagal", "Gagal", "Gagal", "Gagal", "Gagal"] as possibility[],
+      risk200000: ["Ikan", "Ikan", "Ikan", "Gagal", "Gagal", "Gagal", "Gagal", "Gagal", "Gagal", "Gagal"] as possibility[],
     },
     {
       id: 2,
@@ -26,12 +26,12 @@ export async function rodSeed() {
       image: "https://dodo.ac/np/images/6/6f/Fish_Fishing_Rod_%28Green%29_NH_Icon.png",
       possibilityPercentAdded: 10,
       risk0: ["Ikan"] as possibility[],
-      risk1000: ["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Sampah", "Sampah"] as possibility[],
-      risk5000: ["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Sampah", "Sampah", "Sampah"] as possibility[],
-      risk10000: ["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Sampah", "Sampah", "Sampah", "Sampah"] as possibility[],
-      risk70000: ["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Sampah", "Sampah", "Sampah", "Sampah", "Sampah"] as possibility[],
-      risk150000: ["Ikan", "Ikan", "Ikan", "Ikan", "Sampah", "Sampah", "Sampah", "Sampah", "Sampah", "Sampah"] as possibility[],
-      risk200000: ["Ikan", "Ikan", "Ikan", "Sampah", "Sampah", "Sampah", "Sampah", "Sampah", "Sampah", "Sampah"] as possibility[]
+      risk1000: ["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Gagal"] as possibility[],
+      risk5000: ["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Gagal", "Gagal"] as possibility[],
+      risk10000: ["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Gagal", "Gagal", "Gagal"] as possibility[],
+      risk70000: ["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Gagal", "Gagal", "Gagal", "Gagal"] as possibility[],
+      risk150000: ["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Gagal", "Gagal", "Gagal", "Gagal", "Gagal"] as possibility[],
+      risk200000: ["Ikan", "Ikan", "Ikan", "Ikan", "Gagal", "Gagal", "Gagal", "Gagal", "Gagal", "Gagal"] as possibility[]
     },
 
     {
@@ -42,12 +42,12 @@ export async function rodSeed() {
       image: "https://static.wikia.nocookie.net/animalcrossing/images/7/7d/NH-Tools-Fish_Fishing_Rod_%28blue%29.png",
       possibilityPercentAdded: 20,
       risk0: ["Ikan"] as possibility[],
-      risk1000: ["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Sampah"] as possibility[],
-      risk5000: ["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Sampah", "Sampah"] as possibility[],
-      risk10000: ["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Sampah", "Sampah", "Sampah"] as possibility[],
-      risk70000: ["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Sampah", "Sampah", "Sampah", "Sampah"] as possibility[],
-      risk150000: ["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Sampah", "Sampah", "Sampah", "Sampah", "Sampah"] as possibility[],
-      risk200000: ["Ikan", "Ikan", "Ikan", "Ikan", "Sampah", "Sampah", "Sampah", "Sampah", "Sampah", "Sampah"] as possibility[]
+      risk1000: ["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan"] as possibility[],
+      risk5000: ["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Gagal"] as possibility[],
+      risk10000: ["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Gagal", "Gagal"] as possibility[],
+      risk70000: ["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Gagal", "Gagal", "Gagal"] as possibility[],
+      risk150000: ["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Gagal", "Gagal", "Gagal", "Gagal"] as possibility[],
+      risk200000: ["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Gagal", "Gagal", "Gagal", "Gagal", "Gagal"] as possibility[]
     }
   ];
 
