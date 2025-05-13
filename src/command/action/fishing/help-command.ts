@@ -38,6 +38,9 @@ Lempar joran dan mulai memancing.
 **/ember**
 Lihat semua ikan hasil tangkapan kamu disini. Kamu juga bisa menjual ikan melalui menu ini.
 
+**/jual-duplikat**
+Jual semua ikan yang duplikat dan sisakan masing - masing 1 ekor untuk koleksi. 
+
 **/peluang**
 Dapatkan info peluang ikan yang akan di dapatkan. Jenis ikan yang berbeda memiliki musim dan jam makan yang berbeda.
 
