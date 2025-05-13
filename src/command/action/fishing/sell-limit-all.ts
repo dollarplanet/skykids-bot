@@ -71,9 +71,6 @@ export class SellLimitAll extends CommandBase {
         data: {
           amount: {
             increment: cost
-          },
-          all: {
-            decrement: cost
           }
         }
       });
