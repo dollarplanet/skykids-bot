@@ -140,11 +140,11 @@ export class FishNowCommand extends CommandBase {
 
     // Shuffle ikan berdasarkan rarity
     const multipleValue = new Map<rarity, number>();
-    multipleValue.set(rarity.VeryCommon, 10);
-    multipleValue.set(rarity.Common, 9);
-    multipleValue.set(rarity.Uncommon, 6);
-    multipleValue.set(rarity.Rare, 3);
-    multipleValue.set(rarity.VeryRare, 1);
+    multipleValue.set(rarity.Murahan, 10);
+    multipleValue.set(rarity.Biasa, 9);
+    multipleValue.set(rarity.Bagus, 6);
+    multipleValue.set(rarity.Mahal, 3);
+    multipleValue.set(rarity.Langka, 1);
 
     const multipleFish = fishes.map(fish => {
       const temp = [fish];

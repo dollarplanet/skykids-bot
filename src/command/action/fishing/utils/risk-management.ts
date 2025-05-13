@@ -35,6 +35,10 @@ export class RiskManagement {
   }
 
   public get result(): possibility {
+    if (this.wallet < 1_000) {
+      return "Ikan";
+    }
+
     return randomPicker<possibility>(["Ikan", "Ikan", "Ikan", "Ikan", "Ikan","Ikan", "Ikan", "Ikan", "Ikan", "Gagal"]);
   }
 
