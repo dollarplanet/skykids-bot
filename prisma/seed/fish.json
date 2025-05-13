@@ -46,7 +46,7 @@
     ],
     "createAt": "2025-05-09 17:48:58.516",
     "updateAt": "2025-05-09 17:59:04.506",
-    "rarity": "Common"
+    "rarity": "Biasa"
   },
   {
     "id": 2,
@@ -79,7 +79,7 @@
     ],
     "createAt": "2025-05-09 17:48:58.986",
     "updateAt": "2025-05-09 17:59:05.132",
-    "rarity": "Common"
+    "rarity": "Biasa"
   },
   {
     "id": 3,
@@ -128,7 +128,7 @@
     ],
     "createAt": "2025-05-09 17:48:59.133",
     "updateAt": "2025-05-09 17:59:05.237",
-    "rarity": "Common"
+    "rarity": "Biasa"
   },
   {
     "id": 4,
@@ -171,7 +171,7 @@
     ],
     "createAt": "2025-05-09 17:48:59.239",
     "updateAt": "2025-05-09 17:59:05.344",
-    "rarity": "Common"
+    "rarity": "Biasa"
   },
   {
     "id": 5,
@@ -220,7 +220,7 @@
     ],
     "createAt": "2025-05-09 17:48:59.345",
     "updateAt": "2025-05-09 17:59:05.476",
-    "rarity": "VeryCommon"
+    "rarity": "Murahan"
   },
   {
     "id": 6,
@@ -263,7 +263,7 @@
     ],
     "createAt": "2025-05-09 17:48:59.447",
     "updateAt": "2025-05-09 17:59:05.58",
-    "rarity": "Rare"
+    "rarity": "Mahal"
   },
   {
     "id": 7,
@@ -312,7 +312,7 @@
     ],
     "createAt": "2025-05-09 17:48:59.57",
     "updateAt": "2025-05-09 17:59:05.683",
-    "rarity": "Rare"
+    "rarity": "Mahal"
   },
   {
     "id": 8,
@@ -355,7 +355,7 @@
     ],
     "createAt": "2025-05-09 17:48:59.693",
     "updateAt": "2025-05-09 17:59:05.786",
-    "rarity": "Rare"
+    "rarity": "Mahal"
   },
   {
     "id": 9,
@@ -388,7 +388,7 @@
     ],
     "createAt": "2025-05-09 17:48:59.809",
     "updateAt": "2025-05-09 17:59:05.892",
-    "rarity": "Rare"
+    "rarity": "Mahal"
   },
   {
     "id": 10,
@@ -430,7 +430,7 @@
     ],
     "createAt": "2025-05-09 17:48:59.91",
     "updateAt": "2025-05-09 17:59:05.996",
-    "rarity": "Uncommon"
+    "rarity": "Bagus"
   },
   {
     "id": 11,
@@ -473,7 +473,7 @@
     ],
     "createAt": "2025-05-09 17:49:00.014",
     "updateAt": "2025-05-09 17:59:06.11",
-    "rarity": "Common"
+    "rarity": "Biasa"
   },
   {
     "id": 12,
@@ -506,7 +506,7 @@
     ],
     "createAt": "2025-05-09 17:49:00.118",
     "updateAt": "2025-05-09 17:59:06.218",
-    "rarity": "Uncommon"
+    "rarity": "Bagus"
   },
   {
     "id": 13,
@@ -544,7 +544,7 @@
     ],
     "createAt": "2025-05-09 17:49:00.225",
     "updateAt": "2025-05-09 17:59:06.321",
-    "rarity": "Rare"
+    "rarity": "Mahal"
   },
   {
     "id": 14,
@@ -586,7 +586,7 @@
     ],
     "createAt": "2025-05-09 17:49:00.333",
     "updateAt": "2025-05-09 17:59:06.424",
-    "rarity": "Uncommon"
+    "rarity": "Bagus"
   },
   {
     "id": 15,
@@ -627,7 +627,7 @@
     ],
     "createAt": "2025-05-09 17:49:00.438",
     "updateAt": "2025-05-09 17:59:06.527",
-    "rarity": "Common"
+    "rarity": "Biasa"
   },
   {
     "id": 16,
@@ -670,7 +670,7 @@
     ],
     "createAt": "2025-05-09 17:49:00.542",
     "updateAt": "2025-05-09 17:59:06.641",
-    "rarity": "Rare"
+    "rarity": "Mahal"
   },
   {
     "id": 17,
@@ -710,7 +710,7 @@
     ],
     "createAt": "2025-05-09 17:49:00.651",
     "updateAt": "2025-05-09 17:59:06.742",
-    "rarity": "Common"
+    "rarity": "Biasa"
   },
   {
     "id": 18,
@@ -753,7 +753,7 @@
     ],
     "createAt": "2025-05-09 17:49:00.757",
     "updateAt": "2025-05-09 17:59:06.845",
-    "rarity": "Common"
+    "rarity": "Biasa"
   },
   {
     "id": 19,
@@ -786,7 +786,7 @@
     ],
     "createAt": "2025-05-09 17:49:00.869",
     "updateAt": "2025-05-09 17:59:06.947",
-    "rarity": "Rare"
+    "rarity": "Mahal"
   },
   {
     "id": 20,
@@ -819,7 +819,7 @@
     ],
     "createAt": "2025-05-09 17:49:00.977",
     "updateAt": "2025-05-09 17:59:07.05",
-    "rarity": "VeryCommon"
+    "rarity": "Murahan"
   },
   {
     "id": 21,
@@ -862,7 +862,7 @@
     ],
     "createAt": "2025-05-09 17:49:01.08",
     "updateAt": "2025-05-09 17:59:07.152",
-    "rarity": "Common"
+    "rarity": "Biasa"
   },
   {
     "id": 22,
@@ -911,7 +911,7 @@
     ],
     "createAt": "2025-05-09 17:49:01.184",
     "updateAt": "2025-05-09 17:59:07.268",
-    "rarity": "VeryCommon"
+    "rarity": "Murahan"
   },
   {
     "id": 23,
@@ -953,7 +953,7 @@
     ],
     "createAt": "2025-05-09 17:49:01.294",
     "updateAt": "2025-05-09 17:59:07.379",
-    "rarity": "Common"
+    "rarity": "Biasa"
   },
   {
     "id": 24,
@@ -988,7 +988,7 @@
     ],
     "createAt": "2025-05-09 17:49:01.413",
     "updateAt": "2025-05-09 17:59:07.482",
-    "rarity": "Uncommon"
+    "rarity": "Bagus"
   },
   {
     "id": 25,
@@ -1028,7 +1028,7 @@
     ],
     "createAt": "2025-05-09 17:49:01.516",
     "updateAt": "2025-05-09 17:59:07.585",
-    "rarity": "VeryCommon"
+    "rarity": "Murahan"
   },
   {
     "id": 26,
@@ -1077,7 +1077,7 @@
     ],
     "createAt": "2025-05-09 17:49:01.627",
     "updateAt": "2025-05-09 17:59:07.689",
-    "rarity": "Uncommon"
+    "rarity": "Bagus"
   },
   {
     "id": 27,
@@ -1115,7 +1115,7 @@
     ],
     "createAt": "2025-05-09 17:49:01.738",
     "updateAt": "2025-05-09 17:59:07.792",
-    "rarity": "Common"
+    "rarity": "Biasa"
   },
   {
     "id": 28,
@@ -1153,7 +1153,7 @@
     ],
     "createAt": "2025-05-09 17:49:01.84",
     "updateAt": "2025-05-09 17:59:07.897",
-    "rarity": "Rare"
+    "rarity": "Mahal"
   },
   {
     "id": 29,
@@ -1190,7 +1190,7 @@
     ],
     "createAt": "2025-05-09 17:49:01.949",
     "updateAt": "2025-05-09 17:59:08.011",
-    "rarity": "VeryRare"
+    "rarity": "Langka"
   },
   {
     "id": 30,
@@ -1225,7 +1225,7 @@
     ],
     "createAt": "2025-05-09 17:49:02.053",
     "updateAt": "2025-05-09 17:59:08.115",
-    "rarity": "VeryRare"
+    "rarity": "Langka"
   },
   {
     "id": 31,
@@ -1263,7 +1263,7 @@
     ],
     "createAt": "2025-05-09 17:49:02.156",
     "updateAt": "2025-05-09 17:59:08.225",
-    "rarity": "VeryCommon"
+    "rarity": "Murahan"
   },
   {
     "id": 32,
@@ -1301,7 +1301,7 @@
     ],
     "createAt": "2025-05-09 17:49:02.262",
     "updateAt": "2025-05-09 17:59:08.329",
-    "rarity": "Rare"
+    "rarity": "Mahal"
   },
   {
     "id": 33,
@@ -1332,7 +1332,7 @@
     ],
     "createAt": "2025-05-09 17:49:02.373",
     "updateAt": "2025-05-09 17:59:08.433",
-    "rarity": "Rare"
+    "rarity": "Mahal"
   },
   {
     "id": 34,
@@ -1361,7 +1361,7 @@
     ],
     "createAt": "2025-05-09 17:49:02.475",
     "updateAt": "2025-05-09 17:59:08.541",
-    "rarity": "Rare"
+    "rarity": "Mahal"
   },
   {
     "id": 35,
@@ -1387,7 +1387,7 @@
     ],
     "createAt": "2025-05-09 17:49:02.578",
     "updateAt": "2025-05-09 17:59:08.644",
-    "rarity": "Uncommon"
+    "rarity": "Bagus"
   },
   {
     "id": 36,
@@ -1424,7 +1424,7 @@
     ],
     "createAt": "2025-05-09 17:49:02.683",
     "updateAt": "2025-05-09 17:59:08.748",
-    "rarity": "Rare"
+    "rarity": "Mahal"
   },
   {
     "id": 37,
@@ -1450,7 +1450,7 @@
     ],
     "createAt": "2025-05-09 17:49:02.784",
     "updateAt": "2025-05-09 17:59:08.852",
-    "rarity": "Rare"
+    "rarity": "Mahal"
   },
   {
     "id": 38,
@@ -1479,7 +1479,7 @@
     ],
     "createAt": "2025-05-09 17:49:02.886",
     "updateAt": "2025-05-09 17:59:08.96",
-    "rarity": "Uncommon"
+    "rarity": "Bagus"
   },
   {
     "id": 39,
@@ -1506,7 +1506,7 @@
     ],
     "createAt": "2025-05-09 17:49:02.987",
     "updateAt": "2025-05-09 17:59:09.063",
-    "rarity": "Uncommon"
+    "rarity": "Bagus"
   },
   {
     "id": 40,
@@ -1537,7 +1537,7 @@
     ],
     "createAt": "2025-05-09 17:49:03.091",
     "updateAt": "2025-05-09 17:59:09.165",
-    "rarity": "Rare"
+    "rarity": "Mahal"
   },
   {
     "id": 41,
@@ -1572,7 +1572,7 @@
     ],
     "createAt": "2025-05-09 17:49:03.194",
     "updateAt": "2025-05-09 17:59:09.276",
-    "rarity": "Rare"
+    "rarity": "Mahal"
   },
   {
     "id": 42,
@@ -1607,7 +1607,7 @@
     ],
     "createAt": "2025-05-09 17:49:03.306",
     "updateAt": "2025-05-09 17:59:09.381",
-    "rarity": "Rare"
+    "rarity": "Mahal"
   },
   {
     "id": 43,
@@ -1642,7 +1642,7 @@
     ],
     "createAt": "2025-05-09 17:49:03.419",
     "updateAt": "2025-05-09 17:59:09.491",
-    "rarity": "Rare"
+    "rarity": "Mahal"
   },
   {
     "id": 44,
@@ -1677,7 +1677,7 @@
     ],
     "createAt": "2025-05-09 17:49:03.525",
     "updateAt": "2025-05-09 17:59:09.595",
-    "rarity": "Rare"
+    "rarity": "Mahal"
   },
   {
     "id": 45,
@@ -1702,7 +1702,7 @@
     ],
     "createAt": "2025-05-09 17:49:03.636",
     "updateAt": "2025-05-09 17:59:09.7",
-    "rarity": "Rare"
+    "rarity": "Mahal"
   },
   {
     "id": 46,
@@ -1746,7 +1746,7 @@
     ],
     "createAt": "2025-05-09 17:49:03.745",
     "updateAt": "2025-05-09 17:59:09.805",
-    "rarity": "Rare"
+    "rarity": "Mahal"
   },
   {
     "id": 47,
@@ -1786,7 +1786,7 @@
     ],
     "createAt": "2025-05-09 17:49:03.847",
     "updateAt": "2025-05-09 17:59:09.942",
-    "rarity": "Common"
+    "rarity": "Biasa"
   },
   {
     "id": 48,
@@ -1831,7 +1831,7 @@
     ],
     "createAt": "2025-05-09 17:49:03.958",
     "updateAt": "2025-05-09 17:59:10.043",
-    "rarity": "Common"
+    "rarity": "Biasa"
   },
   {
     "id": 50,
@@ -1874,7 +1874,7 @@
     ],
     "createAt": "2025-05-09 17:49:04.164",
     "updateAt": "2025-05-09 17:59:10.259",
-    "rarity": "Uncommon"
+    "rarity": "Bagus"
   },
   {
     "id": 51,
@@ -1917,7 +1917,7 @@
     ],
     "createAt": "2025-05-09 17:49:04.267",
     "updateAt": "2025-05-09 17:59:10.362",
-    "rarity": "Uncommon"
+    "rarity": "Bagus"
   },
   {
     "id": 52,
@@ -1950,7 +1950,7 @@
     ],
     "createAt": "2025-05-09 17:49:04.371",
     "updateAt": "2025-05-09 17:59:10.471",
-    "rarity": "Rare"
+    "rarity": "Mahal"
   },
   {
     "id": 53,
@@ -1995,7 +1995,7 @@
     ],
     "createAt": "2025-05-09 17:49:04.473",
     "updateAt": "2025-05-09 17:59:10.595",
-    "rarity": "Common"
+    "rarity": "Biasa"
   },
   {
     "id": 54,
@@ -2020,7 +2020,7 @@
     ],
     "createAt": "2025-05-09 17:49:04.574",
     "updateAt": "2025-05-09 17:59:10.706",
-    "rarity": "Rare"
+    "rarity": "Mahal"
   },
   {
     "id": 55,
@@ -2060,7 +2060,7 @@
     ],
     "createAt": "2025-05-09 17:49:04.676",
     "updateAt": "2025-05-09 17:59:10.814",
-    "rarity": "Uncommon"
+    "rarity": "Bagus"
   },
   {
     "id": 56,
@@ -2103,7 +2103,7 @@
     ],
     "createAt": "2025-05-09 17:49:04.781",
     "updateAt": "2025-05-09 17:59:10.921",
-    "rarity": "Common"
+    "rarity": "Biasa"
   },
   {
     "id": 57,
@@ -2152,7 +2152,7 @@
     ],
     "createAt": "2025-05-09 17:49:04.885",
     "updateAt": "2025-05-09 17:59:11.042",
-    "rarity": "VeryCommon"
+    "rarity": "Murahan"
   },
   {
     "id": 58,
@@ -2198,7 +2198,7 @@
     ],
     "createAt": "2025-05-09 17:49:04.992",
     "updateAt": "2025-05-09 17:59:11.157",
-    "rarity": "Rare"
+    "rarity": "Mahal"
   },
   {
     "id": 59,
@@ -2247,7 +2247,7 @@
     ],
     "createAt": "2025-05-09 17:49:05.097",
     "updateAt": "2025-05-09 17:59:11.264",
-    "rarity": "VeryCommon"
+    "rarity": "Murahan"
   },
   {
     "id": 60,
@@ -2296,7 +2296,7 @@
     ],
     "createAt": "2025-05-09 17:49:05.204",
     "updateAt": "2025-05-09 17:59:11.373",
-    "rarity": "Uncommon"
+    "rarity": "Bagus"
   },
   {
     "id": 61,
@@ -2340,7 +2340,7 @@
     ],
     "createAt": "2025-05-09 17:49:05.306",
     "updateAt": "2025-05-09 17:59:11.478",
-    "rarity": "Common"
+    "rarity": "Biasa"
   },
   {
     "id": 62,
@@ -2389,7 +2389,7 @@
     ],
     "createAt": "2025-05-09 17:49:05.408",
     "updateAt": "2025-05-09 17:59:11.6",
-    "rarity": "Uncommon"
+    "rarity": "Bagus"
   },
   {
     "id": 63,
@@ -2435,7 +2435,7 @@
     ],
     "createAt": "2025-05-09 17:49:05.512",
     "updateAt": "2025-05-09 17:59:11.704",
-    "rarity": "Common"
+    "rarity": "Biasa"
   },
   {
     "id": 64,
@@ -2479,7 +2479,7 @@
     ],
     "createAt": "2025-05-09 17:49:05.614",
     "updateAt": "2025-05-09 17:59:11.808",
-    "rarity": "Rare"
+    "rarity": "Mahal"
   },
   {
     "id": 65,
@@ -2528,7 +2528,7 @@
     ],
     "createAt": "2025-05-09 17:49:05.729",
     "updateAt": "2025-05-09 17:59:11.912",
-    "rarity": "Uncommon"
+    "rarity": "Bagus"
   },
   {
     "id": 66,
@@ -2570,7 +2570,7 @@
     ],
     "createAt": "2025-05-09 17:49:05.833",
     "updateAt": "2025-05-09 17:59:12.016",
-    "rarity": "Rare"
+    "rarity": "Mahal"
   },
   {
     "id": 67,
@@ -2610,7 +2610,7 @@
     ],
     "createAt": "2025-05-09 17:49:05.944",
     "updateAt": "2025-05-09 17:59:12.118",
-    "rarity": "VeryRare"
+    "rarity": "Langka"
   },
   {
     "id": 68,
@@ -2659,7 +2659,7 @@
     ],
     "createAt": "2025-05-09 17:49:06.048",
     "updateAt": "2025-05-09 17:59:12.22",
-    "rarity": "Rare"
+    "rarity": "Mahal"
   },
   {
     "id": 69,
@@ -2703,7 +2703,7 @@
     ],
     "createAt": "2025-05-09 17:49:06.165",
     "updateAt": "2025-05-09 17:59:12.321",
-    "rarity": "Rare"
+    "rarity": "Mahal"
   },
   {
     "id": 70,
@@ -2738,7 +2738,7 @@
     ],
     "createAt": "2025-05-09 17:49:06.274",
     "updateAt": "2025-05-09 17:59:12.422",
-    "rarity": "Rare"
+    "rarity": "Mahal"
   },
   {
     "id": 71,
@@ -2773,7 +2773,7 @@
     ],
     "createAt": "2025-05-09 17:49:06.411",
     "updateAt": "2025-05-09 17:59:12.523",
-    "rarity": "Rare"
+    "rarity": "Mahal"
   },
   {
     "id": 72,
@@ -2808,7 +2808,7 @@
     ],
     "createAt": "2025-05-09 17:49:06.516",
     "updateAt": "2025-05-09 17:59:12.624",
-    "rarity": "Rare"
+    "rarity": "Mahal"
   },
   {
     "id": 73,
@@ -2843,7 +2843,7 @@
     ],
     "createAt": "2025-05-09 17:49:06.618",
     "updateAt": "2025-05-09 17:59:12.727",
-    "rarity": "Rare"
+    "rarity": "Mahal"
   },
   {
     "id": 74,
@@ -2878,7 +2878,7 @@
     ],
     "createAt": "2025-05-09 17:49:06.719",
     "updateAt": "2025-05-09 17:59:12.83",
-    "rarity": "Rare"
+    "rarity": "Mahal"
   },
   {
     "id": 75,
@@ -2913,7 +2913,7 @@
     ],
     "createAt": "2025-05-09 17:49:06.818",
     "updateAt": "2025-05-09 17:59:12.934",
-    "rarity": "VeryRare"
+    "rarity": "Langka"
   },
   {
     "id": 76,
@@ -2954,7 +2954,7 @@
     ],
     "createAt": "2025-05-09 17:49:06.918",
     "updateAt": "2025-05-09 17:59:13.04",
-    "rarity": "Rare"
+    "rarity": "Mahal"
   },
   {
     "id": 77,
@@ -2990,7 +2990,7 @@
     ],
     "createAt": "2025-05-09 17:49:07.022",
     "updateAt": "2025-05-09 17:59:13.145",
-    "rarity": "Uncommon"
+    "rarity": "Bagus"
   },
   {
     "id": 78,
@@ -3032,7 +3032,7 @@
     ],
     "createAt": "2025-05-09 17:49:07.123",
     "updateAt": "2025-05-09 17:59:13.25",
-    "rarity": "Rare"
+    "rarity": "Mahal"
   },
   {
     "id": 79,
@@ -3065,7 +3065,7 @@
     ],
     "createAt": "2025-05-09 17:49:07.236",
     "updateAt": "2025-05-09 17:59:13.356",
-    "rarity": "VeryRare"
+    "rarity": "Langka"
   },
   {
     "id": 80,
@@ -3114,6 +3114,6 @@
     ],
     "createAt": "2025-05-09 17:49:07.343",
     "updateAt": "2025-05-09 17:59:13.467",
-    "rarity": "VeryRare"
+    "rarity": "Langka"
   }
 ]

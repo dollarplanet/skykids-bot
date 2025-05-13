@@ -8,7 +8,13 @@ export async function accidentSeed() {
     "Wah, hujan lebat tiba - tiba, sebaiknya kita lupakan ikannya dan berteduh",
     "Aduh! Kamu tidak sadar ada ular disana? Lari dan lupakan ikannya!",
     "Ada pohon tumbang! Untung kamu baik - baik saja, sayang sekali ikannya harus lepas",
-    "Air sungai tiba - tiba naik, pertanda buruk! lupakan saja ikannya"
+    "Air sungai tiba - tiba naik, pertanda buruk! lupakan saja ikannya",
+    "Penyihir datang dan kamu dikutuk! Apakah kamu mau lupakan ikannya?",
+    "Lihat disana! Ada raksasa sedang mengamuk, cepat panggil ultraman dan lupakan ikannya!",
+    "Kamu terperosok ke lumpur hisap! Bertahanlah, bantuan akan segera datang!",
+    "Ikan yang kamu tangkap terpapar radiasi kuat! Cepat lepaskan!",
+    "Kamu terkena patil ikan, tangan kamu besar sebelah, lupakan ikannya dan bertahanlah",
+    "Aduh! Kamu terkena kail pancing, lupakan ikannya dan cepat lepaskan kailnya",
   ] 
 
   let index = 1;
@@ -27,7 +33,7 @@ export async function accidentSeed() {
         description: accident
       }
     })
-    
+
     index++;
   }
 }

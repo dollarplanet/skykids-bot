@@ -77,11 +77,11 @@ model triviaUserAnswer {
 }
 
 enum rarity {
-  Common
-  VeryCommon
-  Uncommon
-  Rare
-  VeryRare
+  Murahan
+  Biasa
+  Bagus
+  Mahal
+  Langka
 }
 
 model fish {
