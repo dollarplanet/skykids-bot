@@ -73,7 +73,7 @@ export class SellLimitAll extends CommandBase {
             increment: cost
           },
           all: {
-            increment: cost
+            decrement: cost
           }
         }
       });
