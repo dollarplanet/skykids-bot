@@ -66,7 +66,7 @@ export class BuyRodBuyListener extends InteractionCreateListener {
             inline: true,
           })
           .addFields({
-            name: "Peluang",
+            name: "Ikan Langka",
             value: rodState.rod!.possibilityPercentAdded === 0 ? "Basic" : `+ ${rodState.rod!.possibilityPercentAdded}%`,
             inline: true,
           }),
@@ -178,7 +178,7 @@ export class BuyRodBuyListener extends InteractionCreateListener {
           inline: true,
         })
         .addFields({
-          name: "Peluang",
+          name: "Ikan Langka",
           value: rod.possibilityPercentAdded === 0 ? "Basic" : `+ ${rod.possibilityPercentAdded}%`,
           inline: true,
         })

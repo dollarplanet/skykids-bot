@@ -70,7 +70,7 @@ export class FishNowCommand extends CommandBase {
             inline: true,
           })
           .addFields({
-            name: "Peluang",
+            name: "Ikan Langka",
             value: rodState.rod.possibilityPercentAdded === 0 ? "Basic" : `+ ${rodState.rod.possibilityPercentAdded}%`,
             inline: true,
           }),

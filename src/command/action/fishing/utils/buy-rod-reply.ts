@@ -59,7 +59,7 @@ export async function buyRodReply(interaction: RepliableInteraction<CacheType>, 
         inline: true,
       })
       .addFields({
-        name: "Peluang",
+        name: "Ikan Langka",
         value: rod.possibilityPercentAdded === 0 ? "Basic" : `+ ${rod.possibilityPercentAdded}%`,
         inline: true,
       })
