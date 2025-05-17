@@ -155,6 +155,23 @@ export class FishNowCommand extends CommandBase {
     // risk management
     const risk = new RiskManagement(wallet?.all ?? 0, currentCharm);
 
+    // additional embeds
+    const additionalEmbeds: EmbedBuilder[] = [];
+
+    if (rodState.energy === 1) {
+      additionalEmbeds.push(new EmbedBuilder()
+        .setDescription(`${rodState.rod.name} kamu rusak! Beli joran lagi dengan command /joran`)
+        .setColor("Red")
+      );
+    }
+
+    if (currentCharm && (charmState?.energy === 1)) {
+      additionalEmbeds.push(new EmbedBuilder()
+        .setDescription(`Jimat ${currentCharm.name} kamu rusak!`)
+        .setColor("Red")
+      );
+    }
+
     // apakah dapat sampah?
     if (risk.result === "Gagal") {
       await interaction.reply({
@@ -167,7 +184,8 @@ export class FishNowCommand extends CommandBase {
             name: "Harga",
             value: candleMoney(0),
             inline: true,
-          })
+          }),
+        ...additionalEmbeds
         ],
       });
       return;
@@ -216,7 +234,8 @@ export class FishNowCommand extends CommandBase {
             name: "Ikan",
             value: `${pickedFish.name} (${pickedFish.rarity})`,
             inline: true,
-          })
+          }),
+        ...additionalEmbeds
         ],
       })
       return;
@@ -292,7 +311,8 @@ export class FishNowCommand extends CommandBase {
           name: "Harga",
           value: candleMoney(pickedFish.price) + ` (${pickedFish.rarity})`,
           inline: true,
-        })
+        }),
+      ...additionalEmbeds
       ],
     });
   }
