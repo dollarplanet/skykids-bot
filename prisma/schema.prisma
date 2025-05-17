@@ -108,6 +108,8 @@ model bucket {
   updateAt    DateTime @default(now())
   rod         rod      @relation(fields: [rodId], references: [id])
   rodId       Int      @default(1)
+  charm       charm?   @relation(fields: [charmId], references: [id])
+  charmId     Int?
 }
 
 model wallet {
@@ -139,21 +141,19 @@ enum possibility {
 }
 
 model rod {
-  id                      Int           @id @default(autoincrement())
+  id                      Int        @id @default(autoincrement())
   name                    String
   image                   String
   price                   Int
-  defaultEnergy           Int           @default(5)
+  defaultEnergy           Int        @default(5)
   possibilityPercentAdded Int
-  risk0                   possibility[]
-  risk1000                possibility[]
-  risk5000                possibility[]
-  risk10000               possibility[]
-  risk70000               possibility[]
-  risk150000              possibility[]
-  risk200000              possibility[]
-  createAt                DateTime      @default(now())
-  updateAt                DateTime      @default(now())
+  murahan                 Int
+  biasa                   Int
+  bagus                   Int
+  mahal                   Int
+  langka                  Int
+  createAt                DateTime   @default(now())
+  updateAt                DateTime   @default(now())
   rodState                rodState[]
   bucket                  bucket[]
 }
@@ -167,6 +167,36 @@ model rodState {
   updateAt DateTime  @default(now())
   rod      rod?      @relation(fields: [rodId], references: [id])
   rodId    Int?
+}
+
+model charm {
+  id                Int           @id @default(autoincrement())
+  name              String
+  image             String
+  price             Int
+  defaultEnergy     Int           @default(5)
+  luckyPercentAdded Int
+  risk0             possibility[]
+  risk1000          possibility[]
+  risk5000          possibility[]
+  risk10000         possibility[]
+  risk70000         possibility[]
+  risk150000        possibility[]
+  risk200000        possibility[]
+  createAt          DateTime      @default(now())
+  updateAt          DateTime      @default(now())
+  bucket            bucket[]
+  charmState        charmState[]
+}
+
+model charmState {
+  id       Int      @id @default(autoincrement())
+  userId   String   @unique
+  energy   Int
+  createAt DateTime @default(now())
+  updateAt DateTime @default(now())
+  charm    charm?   @relation(fields: [charmId], references: [id])
+  charmId  Int?
 }
 
 model accident {

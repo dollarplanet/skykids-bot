@@ -3,12 +3,12 @@ import { CommandBase } from "../command-base";
 import { randomPicker } from "./utils/random-picker";
 import { candleMoney } from "./utils/candle-money";
 import { getCurrentFishes } from "./utils/get-current-fishes";
-import { rarity } from "@prisma/xxx-client"
 import { shuffle } from "../../../utils/shuffle";
 import { prisma } from "../../../singleton/prisma-singleton";
 import { getBucketFishes } from "./utils/get-bucket-fishes";
 import dayjs from "dayjs";
 import { RiskManagement } from "./utils/risk-management";
+import { RarityManagement } from "./utils/rarity-management";
 
 export class FishNowCommand extends CommandBase {
   protected name: string = "mancing";
@@ -115,9 +115,34 @@ export class FishNowCommand extends CommandBase {
       }
     })
 
-    // Garansi dapat ikan untuk candle dibawah 1000
-    const risk = new RiskManagement(wallet?.all ?? 0, rodState.rod);
+    // Dapatkan charm
+    const charmState = await prisma.charmState.findUnique({
+      where: {
+        userId: interaction.user.id
+      },
+      select: {
+        charm: true,
+        energy: true
+      }
+    })
 
+    // Kurangi energy charm
+    await prisma.charmState.update({
+      where: {
+        userId: interaction.user.id,
+      },
+      data: {
+        energy: {
+          decrement: 1
+        },
+        updateAt: new Date()
+      }
+    })
+
+    // risk management
+    const risk = new RiskManagement(wallet?.all ?? 0, charmState?.charm);
+
+    // apakah dapat sampah?
     if (risk.result === "Gagal") {
       await interaction.reply({
         content: `Yah, <@${interaction.user.id}> dapat sampah. Buang saja ya!`,
@@ -138,17 +163,12 @@ export class FishNowCommand extends CommandBase {
     // Dapatkan ikan
     const fishes = await getCurrentFishes();
 
-    // Shuffle ikan berdasarkan rarity
-    const multipleValue = new Map<rarity, number>();
-    multipleValue.set(rarity.Murahan, 10);
-    multipleValue.set(rarity.Biasa, 9);
-    multipleValue.set(rarity.Bagus, 6);
-    multipleValue.set(rarity.Mahal, 3);
-    multipleValue.set(rarity.Langka, 1);
+    // rarity management
+    const rarity = new RarityManagement(rodState.rod);
 
     const multipleFish = fishes.map(fish => {
       const temp = [fish];
-      const count = (multipleValue.get(fish.rarity) ?? 1) - 1;
+      const count = rarity.result(fish.rarity);
 
       for (let i = 1; i < count; i++) {
         temp.push(fish);

@@ -1,37 +1,69 @@
-import { possibility, rod } from "@prisma/xxx-client";
+import { possibility, charm } from "@prisma/xxx-client";
 import { shuffle } from "../../../../utils/shuffle";
 import { randomPicker } from "./random-picker";
 
 
 export class RiskManagement {
-  constructor(private readonly wallet: number, private readonly rod: rod) {}
+  constructor(private readonly wallet: number, private readonly charm: charm | null | undefined) { }
 
-  public get possibility(): possibility[] {
+  private get noCharmRisk(): possibility[] {
     if (this.wallet > 200_000) {
-      return shuffle(this.rod.risk200000);
+      return shuffle(["Ikan", "Ikan", "Ikan", "Gagal", "Gagal", "Gagal", "Gagal", "Gagal", "Gagal", "Gagal"]);
     }
 
     if (this.wallet > 150_000) {
-      return shuffle(this.rod.risk150000);
+      return shuffle(["Ikan", "Ikan", "Ikan", "Ikan", "Gagal", "Gagal", "Gagal", "Gagal", "Gagal", "Gagal"]);
     }
 
     if (this.wallet > 70_000) {
-      return shuffle(this.rod.risk70000);
+      return shuffle(["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Gagal", "Gagal", "Gagal", "Gagal", "Gagal"]);
     }
 
     if (this.wallet > 10_000) {
-      return shuffle(this.rod.risk10000);
+      return shuffle(["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Gagal", "Gagal", "Gagal", "Gagal"]);
     }
 
     if (this.wallet > 5_000) {
-      return shuffle(this.rod.risk5000);
+      return shuffle(["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Gagal", "Gagal", "Gagal"]);
     }
 
     if (this.wallet > 1_000) {
-      return shuffle(this.rod.risk1000);
+      return shuffle(["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Gagal", "Gagal"]);
     }
 
-    return shuffle(this.rod.risk0);
+    return shuffle(["Ikan"]);
+  }
+
+  public get possibility(): possibility[] {
+    if ((this.charm === null) || (this.charm === undefined)) {
+      return this.noCharmRisk;
+    };
+
+    if (this.wallet > 200_000) {
+      return shuffle(this.charm.risk200000);
+    }
+
+    if (this.wallet > 150_000) {
+      return shuffle(this.charm.risk150000);
+    }
+
+    if (this.wallet > 70_000) {
+      return shuffle(this.charm.risk70000);
+    }
+
+    if (this.wallet > 10_000) {
+      return shuffle(this.charm.risk10000);
+    }
+
+    if (this.wallet > 5_000) {
+      return shuffle(this.charm.risk5000);
+    }
+
+    if (this.wallet > 1_000) {
+      return shuffle(this.charm.risk1000);
+    }
+
+    return shuffle(this.charm.risk0);
   }
 
   public get result(): possibility {
@@ -39,7 +71,7 @@ export class RiskManagement {
       return "Ikan";
     }
 
-    return randomPicker<possibility>(["Ikan", "Ikan", "Ikan", "Ikan", "Ikan","Ikan", "Ikan", "Ikan", "Ikan", "Gagal"]);
+    return randomPicker<possibility>(["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Gagal"]);
   }
 
   public get luck(): possibility {

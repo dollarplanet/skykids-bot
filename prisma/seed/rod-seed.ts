@@ -1,5 +1,5 @@
 import { prisma } from "../../src/singleton/prisma-singleton";
-import { possibility } from "@prisma/xxx-client";
+
 
 export async function rodSeed() {
   const datas = [
@@ -10,13 +10,11 @@ export async function rodSeed() {
       defaultEnergy: 5,
       image: "https://dodo.ac/np/images/a/a1/Fishing_Rod_%28Blue%29_NH_Icon.png",
       possibilityPercentAdded: 0,
-      risk0: ["Ikan"] as possibility[],
-      risk1000: ["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Gagal", "Gagal"] as possibility[],
-      risk5000: ["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Gagal", "Gagal", "Gagal"] as possibility[],
-      risk10000: ["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Gagal", "Gagal", "Gagal", "Gagal"] as possibility[],
-      risk70000: ["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Gagal", "Gagal", "Gagal", "Gagal", "Gagal"] as possibility[],
-      risk150000: ["Ikan", "Ikan", "Ikan", "Ikan", "Gagal", "Gagal", "Gagal", "Gagal", "Gagal", "Gagal"] as possibility[],
-      risk200000: ["Ikan", "Ikan", "Ikan", "Gagal", "Gagal", "Gagal", "Gagal", "Gagal", "Gagal", "Gagal"] as possibility[],
+      murahan: 10,
+      biasa: 9,
+      bagus: 6,
+      mahal: 3,
+      langka: 1
     },
     {
       id: 2,
@@ -25,13 +23,11 @@ export async function rodSeed() {
       defaultEnergy: 5,
       image: "https://dodo.ac/np/images/6/6f/Fish_Fishing_Rod_%28Green%29_NH_Icon.png",
       possibilityPercentAdded: 10,
-      risk0: ["Ikan"] as possibility[],
-      risk1000: ["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Gagal"] as possibility[],
-      risk5000: ["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Gagal", "Gagal"] as possibility[],
-      risk10000: ["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Gagal", "Gagal", "Gagal"] as possibility[],
-      risk70000: ["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Gagal", "Gagal", "Gagal", "Gagal"] as possibility[],
-      risk150000: ["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Gagal", "Gagal", "Gagal", "Gagal", "Gagal"] as possibility[],
-      risk200000: ["Ikan", "Ikan", "Ikan", "Ikan", "Gagal", "Gagal", "Gagal", "Gagal", "Gagal", "Gagal"] as possibility[]
+      murahan: 8,
+      biasa: 6,
+      bagus: 4,
+      mahal: 3,
+      langka: 2
     },
 
     {
@@ -41,13 +37,11 @@ export async function rodSeed() {
       defaultEnergy: 5,
       image: "https://static.wikia.nocookie.net/animalcrossing/images/7/7d/NH-Tools-Fish_Fishing_Rod_%28blue%29.png",
       possibilityPercentAdded: 20,
-      risk0: ["Ikan"] as possibility[],
-      risk1000: ["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan"] as possibility[],
-      risk5000: ["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Gagal"] as possibility[],
-      risk10000: ["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Gagal", "Gagal"] as possibility[],
-      risk70000: ["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Gagal", "Gagal", "Gagal"] as possibility[],
-      risk150000: ["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Gagal", "Gagal", "Gagal", "Gagal"] as possibility[],
-      risk200000: ["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Gagal", "Gagal", "Gagal", "Gagal", "Gagal"] as possibility[]
+      murahan: 6,
+      biasa: 4,
+      bagus: 3,
+      mahal: 3,
+      langka: 3
     }
   ];
 
