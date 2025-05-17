@@ -243,6 +243,22 @@ export class FishNowCommand extends CommandBase {
 
 
     await prisma.$transaction(async prisma => {
+      // update charm
+      const updateData = (charmState !== null) ? {
+        quantity: {
+          increment: 1,
+        },
+        rodId: rodState.rod?.id ?? 1,
+        updateAt: new Date(),
+        charmId: currentCharm!.id,
+      } : {
+        quantity: {
+          increment: 1,
+        },
+        rodId: rodState.rod?.id ?? 1,
+        updateAt: new Date(),
+      }
+
       // Masukan ikan ke ember
       if (!interaction.member) return;
       const fingerprint = interaction.user.id + "-" + pickedFish.id.toString();
@@ -258,13 +274,7 @@ export class FishNowCommand extends CommandBase {
           rodId: rodState.rod?.id ?? 1,
           charmId: currentCharm?.id ?? null,
         },
-        update: {
-          quantity: {
-            increment: 1,
-          },
-          rodId: rodState.rod?.id ?? 1,
-          updateAt: new Date(),
-        }
+        update: updateData
       })
 
       // dapatkan current wallet
