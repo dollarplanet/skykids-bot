@@ -80,16 +80,16 @@ export class FishNowCommand extends CommandBase {
     }
 
     // Tunggu 1 menit
-    // if (rodState.lastFish) {
-    //   const diff = dayjs().diff(dayjs(rodState.lastFish), "seconds");
-    //   if (diff < 60) {
-    //     await interaction.reply({
-    //       content: `<@${interaction.user.id}> Umpannya lagi dipasang, tunggu sekitar ${60 - diff} detik lagi.`,
-    //       flags: MessageFlags.Ephemeral,
-    //     });
-    //     return;
-    //   }
-    // }
+    if (rodState.lastFish) {
+      const diff = dayjs().diff(dayjs(rodState.lastFish), "seconds");
+      if (diff < 60) {
+        await interaction.reply({
+          content: `<@${interaction.user.id}> Umpannya lagi dipasang, tunggu sekitar ${60 - diff} detik lagi.`,
+          flags: MessageFlags.Ephemeral,
+        });
+        return;
+      }
+    }
 
     // Kurangi energy joran
     await prisma.rodState.update({
