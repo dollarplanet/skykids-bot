@@ -80,16 +80,16 @@ export class FishNowCommand extends CommandBase {
     }
 
     // Tunggu 1 menit
-    if (rodState.lastFish) {
-      const diff = dayjs().diff(dayjs(rodState.lastFish), "seconds");
-      if (diff < 60) {
-        await interaction.reply({
-          content: `<@${interaction.user.id}> Umpannya lagi dipasang, tunggu sekitar ${60 - diff} detik lagi.`,
-          flags: MessageFlags.Ephemeral,
-        });
-        return;
-      }
-    }
+    // if (rodState.lastFish) {
+    //   const diff = dayjs().diff(dayjs(rodState.lastFish), "seconds");
+    //   if (diff < 60) {
+    //     await interaction.reply({
+    //       content: `<@${interaction.user.id}> Umpannya lagi dipasang, tunggu sekitar ${60 - diff} detik lagi.`,
+    //       flags: MessageFlags.Ephemeral,
+    //     });
+    //     return;
+    //   }
+    // }
 
     // Kurangi energy joran
     await prisma.rodState.update({
@@ -126,21 +126,34 @@ export class FishNowCommand extends CommandBase {
       }
     })
 
-    // Kurangi energy charm
-    await prisma.charmState.update({
-      where: {
-        userId: interaction.user.id,
-      },
-      data: {
-        energy: {
-          decrement: 1
-        },
-        updateAt: new Date()
+    const currentCharm = (charmState && (charmState.energy > 0)) ? charmState.charm : null;
+
+    if (currentCharm) {
+      if (charmState?.energy === 1) {
+        // hapus charm
+        await prisma.charmState.delete({
+          where: {
+            userId: interaction.user.id
+          }
+        })
+      } else {
+        // Kurangi energy charm
+        await prisma.charmState.update({
+          where: {
+            userId: interaction.user.id,
+          },
+          data: {
+            energy: {
+              decrement: 1
+            },
+            updateAt: new Date()
+          }
+        })
       }
-    })
+    }
 
     // risk management
-    const risk = new RiskManagement(wallet?.all ?? 0, charmState?.charm);
+    const risk = new RiskManagement(wallet?.all ?? 0, currentCharm);
 
     // apakah dapat sampah?
     if (risk.result === "Gagal") {
@@ -224,6 +237,7 @@ export class FishNowCommand extends CommandBase {
           fishId: pickedFish.id,
           quantity: 1,
           rodId: rodState.rod?.id ?? 1,
+          charmId: currentCharm?.id ?? null,
         },
         update: {
           quantity: {
@@ -271,7 +285,7 @@ export class FishNowCommand extends CommandBase {
       content: `<@${interaction.user.id}> mendapatkan ikan!`,
       embeds: [new EmbedBuilder()
         .setTitle(pickedFish.name)
-        .setDescription(`Menggunakan ${rodState.rod.name}`)
+        .setDescription(`Menggunakan ${rodState.rod.name} ${(currentCharm !== null) ? `dan Jimat ${currentCharm.name}` : ""}`)
         .setThumbnail(pickedFish.image)
         .setColor("#008000")
         .addFields({

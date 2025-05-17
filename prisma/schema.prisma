@@ -147,11 +147,11 @@ model rod {
   price                   Int
   defaultEnergy           Int        @default(5)
   possibilityPercentAdded Int
-  murahan                 Int
-  biasa                   Int
-  bagus                   Int
-  mahal                   Int
-  langka                  Int
+  murahan                 Int        @default(10)
+  biasa                   Int        @default(9)
+  bagus                   Int        @default(6)
+  mahal                   Int        @default(3)
+  langka                  Int        @default(1)
   createAt                DateTime   @default(now())
   updateAt                DateTime   @default(now())
   rodState                rodState[]

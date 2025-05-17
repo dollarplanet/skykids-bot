@@ -32,7 +32,8 @@ export class ShowoffCommand extends CommandBase {
       select: {
         fish: true,
         updateAt: true,
-        rod: true
+        rod: true,
+        charm: true
       },
       orderBy: {
         fish: {
@@ -58,7 +59,7 @@ export class ShowoffCommand extends CommandBase {
         const catchedAt = dayjs(data.updateAt).tz("Asia/Jakarta");
         return new EmbedBuilder()
           .setTitle(data.fish.name)
-          .setDescription(`Ditangkap pada ${getDayName(catchedAt.day())}, ${catchedAt.format(`DD ##### YYYY, HH:mm`).replace("#####", getMonthName(catchedAt.month()))} WIB, menggunakan ${data.rod.name}`)
+          .setDescription(`Ditangkap pada ${getDayName(catchedAt.day())}, ${catchedAt.format(`DD ##### YYYY, HH:mm`).replace("#####", getMonthName(catchedAt.month()))} WIB, menggunakan ${data.rod.name} ${data.charm ?  "dan Jimat " + (data.charm?.name ?? "") : ""}`)
           .setThumbnail(data.fish.image)
 
           .addFields({

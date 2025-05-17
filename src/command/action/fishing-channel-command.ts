@@ -68,7 +68,7 @@ export class FishingChannelCommand extends CommandBase {
         await interaction.deleteReply();
         await i.reply({
           content: 'Channel game mancing mania telah diatur',
-          ephemeral: true
+          flags: MessageFlags.Ephemeral
         });
       } catch {
         //

@@ -25,6 +25,9 @@ import { SellLimitListener } from "./command/action/fishing/sell-limit-listener"
 import { BuyRodNextListener } from "./command/action/fishing/buy-rod-next-listener";
 import { BuyRodBuyListener } from "./command/action/fishing/buy-rod-buy-listener";
 import { CurrentRodListener } from "./command/action/fishing/current-rod-listener";
+import { BuyCharmNextListener } from "./command/action/fishing/buy-charm-next-listener";
+import { BuyCharmBuyListener } from "./command/action/fishing/buy-charm-buy-listener";
+import { CurrentCharmListener } from "./command/action/fishing/current-charm-listener";
 
 // Load environment variables
 dotenv.config();
@@ -55,7 +58,13 @@ function featureInit() {
   new BuyRodNextListener();
   new BuyRodBuyListener();
   new CurrentRodListener();
+  new BuyCharmNextListener();
+  new BuyCharmBuyListener();
+  new CurrentCharmListener();
 }
+
+// Set max listener
+discord().setMaxListeners(15);
 
 // Register features
 featureInit();

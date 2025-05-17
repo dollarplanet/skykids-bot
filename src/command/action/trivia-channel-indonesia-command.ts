@@ -67,7 +67,7 @@ export class TriviaChannelIndonesiaCommand extends CommandBase {
         await interaction.deleteReply();
         await i.reply({
           content: 'Channel daily trivia telah diatur',
-          ephemeral: true
+          flags: MessageFlags.Ephemeral
         });
       } catch {
         //

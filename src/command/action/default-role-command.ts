@@ -45,7 +45,10 @@ export class DefaultRoleCommand extends CommandBase {
         })
 
         await interaction.deleteReply();
-        await inter.reply({ content: 'Role default berhasil diubah', ephemeral: true });
+        await inter.reply({
+          content: 'Role default berhasil diubah',
+          flags: MessageFlags.Ephemeral,
+        });
       } catch {
         //
       } finally {

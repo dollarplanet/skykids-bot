@@ -35,6 +35,9 @@ Beli joran untuk memancing.
 **/mancing**
 Lempar joran dan mulai memancing.
 
+**/jimat**
+Beli jimat untuk mengurangi kemungkinan kena musibah.
+
 **/ember**
 Lihat semua ikan hasil tangkapan kamu disini. Kamu juga bisa menjual ikan melalui menu ini.
 
