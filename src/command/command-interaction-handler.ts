@@ -22,6 +22,7 @@ import { PickCommmand } from "./action/fishing/pick-command";
 import { HelpCommand } from "./action/fishing/help-command";
 import { SellLimitAll } from "./action/fishing/sell-limit-all";
 import { BuyCharmCommand } from "./action/fishing/buy-charm-command";
+import { MovieEventCommand } from "./action/movie-event-command";
 
 export class CommandInteractionHandler extends InteractionCreateListener {
   static readonly commands: CommandBase[] = [
@@ -46,6 +47,7 @@ export class CommandInteractionHandler extends InteractionCreateListener {
     new HelpCommand(),
     new SellLimitAll(),
     new BuyCharmCommand(),
+    new MovieEventCommand(),
   ]
 
   public async action(interaction: Interaction) {
