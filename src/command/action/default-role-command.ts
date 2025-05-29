@@ -39,7 +39,7 @@ export class DefaultRoleCommand extends CommandBase {
 
     collector.on("collect", async inter => {
       try {
-        prisma.$transaction(async prisma => {
+        await prisma.$transaction(async prisma => {
           await prisma.defaultRole.deleteMany({});
           await prisma.defaultRole.createMany({ data: inter.values.map(roleId => ({ roleId })) });
         })
