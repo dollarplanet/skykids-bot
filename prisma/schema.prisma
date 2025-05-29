@@ -205,3 +205,11 @@ model accident {
   createAt    DateTime @default(now())
   updateAt    DateTime @default(now())
 }
+
+model userStatistic {
+  id                   Int     @id @default(autoincrement())
+  userId               String  @unique
+  triviaCorrectCount   Int     @default(0)
+  fishingBadgeObtained Boolean @default(false)
+  triviaBadgeObtained  Boolean @default(false)
+}

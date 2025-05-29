@@ -9,6 +9,7 @@ import { getBucketFishes } from "./utils/get-bucket-fishes";
 import dayjs from "dayjs";
 import { RiskManagement } from "./utils/risk-management";
 import { RarityManagement } from "./utils/rarity-management";
+import { nameBadgeUpdate } from "../../../utils/name-badge-update";
 
 export class FishNowCommand extends CommandBase {
   protected name: string = "mancing";
@@ -90,6 +91,9 @@ export class FishNowCommand extends CommandBase {
         return;
       }
     }
+
+    // Defer
+    await interaction.deferReply();
 
     // Kurangi energy joran
     await prisma.rodState.update({
@@ -174,7 +178,7 @@ export class FishNowCommand extends CommandBase {
 
     // apakah dapat sampah?
     if (risk.result === "Gagal") {
-      await interaction.reply({
+      await interaction.editReply({
         content: `Yah, <@${interaction.user.id}> dapat sampah. Buang saja ya!`,
         embeds: [new EmbedBuilder()
           .setTitle("Sampah")
@@ -223,7 +227,7 @@ export class FishNowCommand extends CommandBase {
 
       const accident = randomPicker(accidents);
 
-      await interaction.reply({
+      await interaction.editReply({
         content: `<@${interaction.user.id}> sayang sekali, kamu mengalami musibah`,
         embeds: [new EmbedBuilder()
           .setTitle("Musibah")
@@ -309,8 +313,14 @@ export class FishNowCommand extends CommandBase {
       });
     });
 
+    // update username
+    const guildMember = interaction.guild?.members.cache.get(interaction.user.id);
+    if (guildMember) {
+      await nameBadgeUpdate(guildMember);
+    }
+
     // Kirim ikan
-    await interaction.reply({
+    await interaction.editReply({
       content: `<@${interaction.user.id}> mendapatkan ikan!`,
       embeds: [new EmbedBuilder()
         .setTitle(pickedFish.name)

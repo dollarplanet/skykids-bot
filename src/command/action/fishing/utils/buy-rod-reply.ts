@@ -67,9 +67,9 @@ export async function buyRodReply(interaction: RepliableInteraction<CacheType>, 
   };
 
   if (interaction.isButton()) {
-    interaction.update(data);
+    await interaction.update(data);
   } else {
-    interaction.reply({
+    await interaction.reply({
       ...data,
       flags: MessageFlags.Ephemeral
     });

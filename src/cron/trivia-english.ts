@@ -56,7 +56,7 @@ export async function triviaEnglish() {
     channel.send({
       content: trivia.question + "\n" + trivia.id.toString(),
     });
-  } catch (err) {
-    console.log(err)
+  } catch {
+    // nothing
   }
 }

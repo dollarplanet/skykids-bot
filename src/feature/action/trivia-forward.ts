@@ -30,7 +30,6 @@ export class TriviaForward extends MessageCreateListener {
       // Update trivia
       const questionIndo = data.content.split("\n")[1].replace("> ", "");
       const triviaId = parseInt(data.content.split("\n")[2]);
-      console.log(triviaId, questionIndo);
       const trivia = await prisma.trivia.update({
         where: {
           id: triviaId,

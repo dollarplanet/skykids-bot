@@ -24,7 +24,7 @@ export class GetTriviaCommand extends CommandBase {
       // Generate trivia
       triviaEnglish();
 
-      interaction.reply({
+      await interaction.reply({
         content: "Trivia sedang diproses",
         flags: MessageFlags.Ephemeral
       })

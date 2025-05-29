@@ -1,6 +1,7 @@
 import { Interaction, MessageFlags } from "discord.js";
 import { InteractionCreateListener } from "../base/interaction-create-listener";
 import { prisma } from "../../singleton/prisma-singleton";
+import { nameBadgeUpdate } from "../../utils/name-badge-update";
 
 export class TriviaAnswerCheck extends InteractionCreateListener {
   public async action(interaction: Interaction) {
@@ -13,6 +14,12 @@ export class TriviaAnswerCheck extends InteractionCreateListener {
       if (!interaction.customId.startsWith('trivia-')) return;
 
       const triviaId = parseInt(interaction.customId.split('-')[1]);
+
+      // Defer
+      await interaction.deferReply({
+        flags: MessageFlags.Ephemeral
+      });
+
       // Sudah menjawab benar
       const isAnsweredCorrect = await prisma.triviaUserAnswer.count({
         where: {
@@ -22,9 +29,8 @@ export class TriviaAnswerCheck extends InteractionCreateListener {
         }
       });
       if (isAnsweredCorrect > 0) {
-        interaction.reply({
+        await interaction.editReply({
           content: 'Kamu udah menjawab benar, tidak perlu menjawab lagi 😎',
-          flags: MessageFlags.Ephemeral,
         })
         return;
       }
@@ -37,9 +43,8 @@ export class TriviaAnswerCheck extends InteractionCreateListener {
         }
       });
       if (isAnswered > 1) {
-        interaction.reply({
+        await interaction.editReply({
           content: 'Maaf nih, Kamu udah dikasih kesempatan 2 kali 😌',
-          flags: MessageFlags.Ephemeral,
         })
         return;
       }
@@ -52,7 +57,7 @@ export class TriviaAnswerCheck extends InteractionCreateListener {
         select: {
           correctAnswer: true,
           question: true,
-          questionIndo: true,          
+          questionIndo: true,
         }
       });
       if (!trivia) return;
@@ -64,27 +69,46 @@ export class TriviaAnswerCheck extends InteractionCreateListener {
 
       const isCorrect = value === trivia.correctAnswer;
       if (isCorrect) {
+        // Simpan state di DB
+        await prisma.userStatistic.upsert({
+          where: {
+            userId: interaction.user.id,
+          },
+          create: {
+            userId: interaction.user.id,
+            triviaCorrectCount: 1,
+          },
+          update: {
+            triviaCorrectCount: {
+              increment: 1,
+            }
+          }
+        });
+
+        // update username
+        const guildMember = interaction.guild?.members.cache.get(interaction.user.id);
+        if (guildMember) {
+          await nameBadgeUpdate(guildMember);
+        }
+
         // Kalo jawaban benar
         thread.send(`✅ Jawaban <@!${interaction.user.id}> benar! 🥳`);
-        interaction.reply({
+        await interaction.editReply({
           content: `✅ Jawaban kamu benar! 
           
 Sssst 🤫, jangan kasih tau yang lain ya 🤭`,
-          flags: MessageFlags.Ephemeral,
         })
       } else if (isAnswered === 0) {
         // Kalo jawaban salah 1x
         thread.send(`❌ Jawaban <@!${interaction.user.id}> salah 😝`);
-        interaction.reply({
+        await interaction.editReply({
           content: '❌ Jawabannya salah ya 😝. Kamu masih punya kesempatan 1 kali lagi!',
-          flags: MessageFlags.Ephemeral,
         })
       } else {
         // Kalo jawaban salah 2x
         thread.send(`❌ Jawaban <@!${interaction.user.id}> masih salah aja 🤣`);
-        interaction.reply({
+        await interaction.editReply({
           content: '❌ Sayang sekali, kamu gagal di kesempatan terakhir 🙃. Yaudah jawabannya aku kirim lewat DM ya, biar kamu gak penasaran. 😁',
-          flags: MessageFlags.Ephemeral,
         })
 
         // Kirim DM jawaban
