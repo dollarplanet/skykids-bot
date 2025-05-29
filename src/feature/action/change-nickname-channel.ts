@@ -3,7 +3,7 @@ import { provinceRoles } from "../../utils/nickname-role-list";
 import { MessageCreateListener } from "../base/message-create-listener";
 import { isFeatureDisabled } from "../../utils/is-feature-disabled";
 import { prisma } from "../../singleton/prisma-singleton";
-import { nameBadgeCheck } from "../../utils/name-badge-update";
+import { badgeClearSafety, nameBadgeCheck } from "../../utils/name-badge-update";
 
 export class ChangeNicknameChannel extends MessageCreateListener {
   public async action(data: OmitPartialGroupDMChannel<Message<boolean>>) {
@@ -56,7 +56,8 @@ export class ChangeNicknameChannel extends MessageCreateListener {
       // Ganti nickname
       try {
         const badges = await nameBadgeCheck(data.member, true);
-        await data.member.setNickname(`${provinceRole} ${content} ${badges}`);
+        const nickname = badgeClearSafety(`${provinceRole} ${content}`, badges);
+        await data.member.setNickname(`${nickname} ${badges}`);
         await data.reply("Yey, nickname kamu sudah diganti 😍");
         return;
       } catch {

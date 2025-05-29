@@ -2,7 +2,7 @@ import { GuildMember, PartialGuildMember } from "discord.js";
 import { provinceRoles } from "../../utils/nickname-role-list";
 import { GuildMemberUpdateListener } from "../base/guild-member-update-listener";
 import { isFeatureDisabled } from "../../utils/is-feature-disabled";
-import { nameBadgeCheck } from "../../utils/name-badge-update";
+import { badgeClearSafety, nameBadgeCheck } from "../../utils/name-badge-update";
 
 export class ProvinceRoleNicknameRemove extends GuildMemberUpdateListener {
   public async action(oldMember: GuildMember | PartialGuildMember, newMember: GuildMember) {
@@ -25,7 +25,8 @@ export class ProvinceRoleNicknameRemove extends GuildMemberUpdateListener {
 
       // Reset nickname
       const badges = await nameBadgeCheck(newMember, true);
-      await newMember.setNickname(`${newMember.user.globalName} ${badges}`);
+      const nickname = badgeClearSafety(newMember.user.globalName ?? newMember.user.username, badges);
+      await newMember.setNickname(`${nickname} ${badges}`);
     } catch {
       //
     }

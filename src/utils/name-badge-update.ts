@@ -66,12 +66,23 @@ export async function nameBadgeCheck(user: GuildMember, forceCheck: boolean = fa
   }
 }
 
+export function badgeClearSafety(providedNickname: string, badges: string) {
+  if (badges === "") return providedNickname;
+
+  let nickname = providedNickname;
+  for (const badge of badges) {
+    nickname = nickname.replace(badge, "");
+  }
+  return nickname;
+}
+
 export async function nameBadgeUpdate(user: GuildMember) {
   try {
     const badges = await nameBadgeCheck(user);
 
+    const nickname = badgeClearSafety(user.nickname ?? user.user.username, badges);
     // ganti nickname
-    await user.setNickname(`${user.nickname} ${badges}`);
+    await user.setNickname(`${nickname} ${badges}`);
   } catch {
     //
   }
