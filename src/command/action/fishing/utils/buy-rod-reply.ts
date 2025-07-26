@@ -1,4 +1,4 @@
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle, CacheType, EmbedBuilder, MessageFlags, RepliableInteraction } from "discord.js";
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, CacheType, EmbedBuilder, RepliableInteraction } from "discord.js";
 import { prisma } from "../../../../singleton/prisma-singleton";
 import { candleMoney } from "./candle-money";
 
@@ -32,10 +32,10 @@ export async function buyRodReply(interaction: RepliableInteraction<CacheType>, 
     .setLabel('Beli')
     .setStyle(ButtonStyle.Success);
 
-    const current = new ButtonBuilder()
-      .setCustomId("joran_current")
-      .setLabel('Joran Saya')
-      .setStyle(ButtonStyle.Secondary);
+  const current = new ButtonBuilder()
+    .setCustomId("joran_current")
+    .setLabel('Joran Saya')
+    .setStyle(ButtonStyle.Secondary);
 
   const row = new ActionRowBuilder();
   if (count > currentId) row.addComponents(next);
@@ -66,12 +66,5 @@ export async function buyRodReply(interaction: RepliableInteraction<CacheType>, 
     ],
   };
 
-  if (interaction.isButton()) {
-    await interaction.update(data);
-  } else {
-    await interaction.reply({
-      ...data,
-      flags: MessageFlags.Ephemeral
-    });
-  }
+  await interaction.editReply(data);
 }

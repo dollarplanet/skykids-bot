@@ -35,6 +35,9 @@ export class BuyRodBuyListener extends InteractionCreateListener {
     const customId = interaction.customId;
     if (!customId.startsWith('joran_buy-')) return;
 
+    // Defer
+    await interaction.deferReply();
+
     const currentId = parseInt(customId.split('-')[1]);
 
     // Cek apakah sudah punya joran
@@ -48,7 +51,7 @@ export class BuyRodBuyListener extends InteractionCreateListener {
     })
 
     if (rodState && rodState.energy > 0) {
-      await interaction.update({
+      await interaction.editReply({
         content: "Kamu sudah punya joran! Gunakan command /mancing untuk memancing! Gunakan command /bantuan untuk membaca cara bermain.",
         components: [],
         embeds: [new EmbedBuilder()
@@ -104,7 +107,7 @@ export class BuyRodBuyListener extends InteractionCreateListener {
 
     // Jika belum punya wallet
     if (!wallet) {
-      await interaction.update({
+      await interaction.editReply({
         content: "Dompet kamu masih kosong. Baca cara bermain dengan command /bantuan.",
         embeds: [],
         components: [],
@@ -114,7 +117,7 @@ export class BuyRodBuyListener extends InteractionCreateListener {
 
     // Jika uang kurang
     if (wallet.amount < rod.price) {
-      await interaction.update({
+      await interaction.editReply({
         content: "Candle kamu tidak cukup. Gunakan command /kerja atau /mulung untuk mendapatakan candle tamabahan. Kamu juga bisa menjual beberapa ikan di /ember.",
         embeds: [],
         components: [],
@@ -158,7 +161,6 @@ export class BuyRodBuyListener extends InteractionCreateListener {
     })
 
     // Reply
-    await interaction.deferUpdate();
     await interaction.deleteReply();
     if (!interaction.channel?.isSendable()) return;
     await interaction.channel.send({

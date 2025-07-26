@@ -35,6 +35,9 @@ export class BuyRodNextListener extends InteractionCreateListener {
     const customId = interaction.customId;
     if (!customId.startsWith('joran_next-')) return;
 
+    // Defer
+    await interaction.deferUpdate();
+
     const currentId = parseInt(customId.split('-')[1]);
 
     await buyRodReply(interaction, currentId, currentId + 1);
