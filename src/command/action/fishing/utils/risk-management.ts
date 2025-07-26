@@ -8,27 +8,27 @@ export class RiskManagement {
 
   private get noCharmRisk(): possibility[] {
     if (this.wallet > 200_000) {
-      return shuffle(["Ikan", "Ikan", "Ikan", "Gagal", "Gagal", "Gagal", "Gagal", "Gagal", "Gagal", "Gagal"]);
-    }
-
-    if (this.wallet > 150_000) {
-      return shuffle(["Ikan", "Ikan", "Ikan", "Ikan", "Gagal", "Gagal", "Gagal", "Gagal", "Gagal", "Gagal"]);
-    }
-
-    if (this.wallet > 70_000) {
-      return shuffle(["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Gagal", "Gagal", "Gagal", "Gagal", "Gagal"]);
-    }
-
-    if (this.wallet > 10_000) {
-      return shuffle(["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Gagal", "Gagal", "Gagal", "Gagal"]);
-    }
-
-    if (this.wallet > 5_000) {
       return shuffle(["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Gagal", "Gagal", "Gagal"]);
     }
 
-    if (this.wallet > 1_000) {
+    if (this.wallet > 150_000) {
+      return shuffle(["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Gagal", "Gagal", "Gagal"]);
+    }
+
+    if (this.wallet > 70_000) {
       return shuffle(["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Gagal", "Gagal"]);
+    }
+
+    if (this.wallet > 10_000) {
+      return shuffle(["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Gagal", "Gagal"]);
+    }
+
+    if (this.wallet > 5_000) {
+      return shuffle(["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Gagal", "Gagal"]);
+    }
+
+    if (this.wallet > 1_000) {
+      return shuffle(["Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Ikan", "Gagal"]);
     }
 
     return shuffle(["Ikan"]);
