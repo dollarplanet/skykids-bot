@@ -322,6 +322,8 @@ export class FishNowCommand extends CommandBase {
         await nameBadgeUpdate(guildMember);
       }
 
+      await interaction.deleteReply();
+
       // Kirim ikan
       await interaction.channel.send({
         content: `<@${interaction.user.id}> mendapatkan ikan!`,
