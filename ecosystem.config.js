@@ -2,7 +2,7 @@ module.exports = {
     apps: [
         {
             name: "skykids-bot",
-            script: "npm",
+            script: "bun",
             args: "start"
         }
     ]
