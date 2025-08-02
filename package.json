@@ -25,11 +25,10 @@
     "he": "^1.2.0"
   },
   "scripts": {
-    "build": "tsc && tsc-alias",
-    "start": "node .",
-    "prisma-push": "npx prisma db push",
-    "prisma-seed": "npx prisma db seed",
-    "prisma-generate": "npx prisma generate",
-    "register-command": "tsx src/command/register-command.ts"
+    "start": "bun run src/index.ts",
+    "prisma-push": "bunx prisma db push",
+    "prisma-seed": "bunx prisma db seed",
+    "prisma-generate": "bunx prisma generate",
+    "register-command": "bun run src/command/register-command.ts"
   }
 }
