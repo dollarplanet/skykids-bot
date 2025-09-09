@@ -11,6 +11,8 @@ export class RankCommand extends CommandBase {
     // Cek apakah bisa di reply
     if (!interaction.isRepliable()) return;
 
+    // TODO : Defer reply before any execution and change all reply with update
+
     // pastikan dari fishing channel
     const channel = await prisma.config.findUnique({
       where: {
