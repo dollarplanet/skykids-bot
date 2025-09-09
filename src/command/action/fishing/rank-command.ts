@@ -75,7 +75,7 @@ export class RankCommand extends CommandBase {
       embeds: [embed],
     });
   } catch (e: any) {
-    console.log(e);
+    console.log(e.message);
     await interaction.editReply('Terjadi kesalahan teknis');
   }
   }
