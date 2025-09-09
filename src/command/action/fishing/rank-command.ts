@@ -11,8 +11,6 @@ export class RankCommand extends CommandBase {
     // Cek apakah bisa di reply
     if (!interaction.isRepliable()) return;
 
-    // TODO : Defer reply before any execution and change all reply with update
-
     // pastikan dari fishing channel
     const channel = await prisma.config.findUnique({
       where: {
@@ -23,6 +21,10 @@ export class RankCommand extends CommandBase {
       }
     });
     if (interaction.channelId !== channel?.fishingChannel) return;
+
+    await interaction.deferReply();
+
+    try {
 
     // dapatkan user
     const ranked = await prisma.wallet.findMany({
@@ -68,9 +70,12 @@ export class RankCommand extends CommandBase {
     embed.setDescription(embedDescription);
 
     // Send
-    await interaction.reply({
+    await interaction.editReply({
       content: content,
       embeds: [embed],
     });
+  } catch {
+    await interaction.editReply('Terjadi kesalahan teknis')
+  }
   }
 }
